@@ -44,7 +44,7 @@ void Camera::Draw() {
 
 D3DXMATRIX Camera::GetViewMatrix() {
 	if (viewMatrix == nullptr) {
-		LogWriter::Log("繧ｫ繝｡繝ｩ縺後↑縺�縺ｮ縺ｫviewMatrix繧貞叙蠕励＠繧医≧縺ｨ縺励∪縺励◆縲ゅき繝｡繝ｩ縺ｮ險ｭ螳壹ｒ遒ｺ隱阪＠縺ｦ縺上□縺輔＞");
+		LogWriter::Log("カメラがないのにviewMatrixを取得しようとしました。カメラの設定を確認してください");
 		return D3DXMATRIX();
 	}
 	return viewMatrix;

@@ -5,7 +5,7 @@ enum Tag {
 	PLAYER,
 	BULLET,
 	ENEMY,
-	//縺薙％縺ｫ繧ｿ繧ｰ繧定ｿｽ蜉縲∵焚蟄励ｒ謖�螳壹＠縺ｪ縺�縺ｧ縺上□縺輔＞
+	//ここにタグを追加、数字を指定しないでください
 	TAG_LAST
 };
 class TagManager {

@@ -3,7 +3,7 @@
 #include <string>
 
 
-// ãƒãƒ†ãƒªã‚¢ãƒ«æ§‹é€ ä½“
+// ƒ}ƒeƒŠƒAƒ‹\‘¢‘Ì
 struct ModelMaterial {
 	char						Name[256];
 	Material					Material;
@@ -13,7 +13,7 @@ struct ModelMaterial {
 };
 
 
-// æç”»ã‚µãƒ–ã‚»ãƒƒãƒˆæ§‹é€ ä½“
+// •`‰æƒTƒuƒZƒbƒg\‘¢‘Ì
 struct Subset
 {
 	unsigned int	StartIndex;
@@ -22,7 +22,7 @@ struct Subset
 };
 
 
-// ãƒ¢ãƒ‡ãƒ«æ§‹é€ ä½“
+// ƒ‚ƒfƒ‹\‘¢‘Ì
 struct MODEL
 {
 	Vertex		*VertexArray;

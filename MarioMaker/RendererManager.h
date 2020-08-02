@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-// é ‚ç‚¹æ§‹é€ ä½“
+// ’¸“_\‘¢‘Ì
 struct Vertex {
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 normal;
@@ -11,19 +11,19 @@ struct Vertex {
 
 
 
-// ãƒãƒ†ãƒªã‚¢ãƒ«æ§‹é€ ä½“
+// ƒ}ƒeƒŠƒAƒ‹\‘¢‘Ì
 struct Material {
 	D3DXCOLOR	ambient;
 	D3DXCOLOR	diffuse;
 	D3DXCOLOR	specular;
 	D3DXCOLOR	emission;
 	float		shininess;
-	float		dummy[3];//16byteå¢ƒç•Œç”¨
+	float		dummy[3];//16byte‹«ŠE—p
 };
 
 struct Light {
 	BOOL		enable;
-	BOOL		dummy[3];//16byteå¢ƒç•Œç”¨
+	BOOL		dummy[3];//16byte‹«ŠE—p
 	D3DXVECTOR4	direction;
 	D3DXCOLOR	diffuse;
 	D3DXCOLOR	ambient;
@@ -73,7 +73,7 @@ public:
 	static void End();
 
 	static void SetDepthEnable(bool Enable);
-	//2Då¤‰æ›é–¢æ•°
+	//2D•ÏŠ·ŠÖ”
 	static void SetWorldViewProjection2D();
 	static void SetWorldMatrix(D3DXMATRIX * WorldMatrix);
 	static void SetViewMatrix(D3DXMATRIX * ViewMatrix);

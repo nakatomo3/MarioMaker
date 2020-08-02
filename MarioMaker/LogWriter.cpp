@@ -21,19 +21,19 @@ char path[PATH_LENGTH];
 void LogWriter::Init() {
 	
 	if (IS_CREATE_FILE) {
-		time_t timer = time(NULL); //æ™‚åˆ»ã‚’å–å¾—ã™ã‚‹
-		struct tm *local = localtime(&timer); //ç¾åœ¨åœ°æ™‚åˆ»ã«å¤‰æ›ã™ã‚‹
+		time_t timer = time(NULL); //‚ğæ“¾‚·‚é
+		struct tm *local = localtime(&timer); //Œ»İ’n‚É•ÏŠ·‚·‚é
 
-		_mkdir("Logs"); //Logãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹
+		_mkdir("Logs"); //LogƒtƒHƒ‹ƒ_‚ğì¬‚·‚é
 		char folder[FOLDER_NAME_LENGTH];
-		sprintf(folder, "Logs/%04d%02d%02d", local->tm_year + 1900, local->tm_mon+1, local->tm_mday); //ä½œæˆã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã®åå‰ã‚’å¹´æœˆæ—¥ã§æ±ºå®šã™ã‚‹
-		_mkdir(folder); //å¹´æœˆæ—¥ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹
-		sprintf(path, "Logs/%04d%02d%02d/%02d_%02d_%02d.txt", local->tm_year + 1900, local->tm_mon+1, local->tm_mday, local->tm_hour, local->tm_min, local->tm_sec); //ãƒ‘ã‚¹è¾¼ã¿ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®šã™ã‚‹
+		sprintf(folder, "Logs/%04d%02d%02d", local->tm_year + 1900, local->tm_mon+1, local->tm_mday); //ì¬‚·‚éƒtƒHƒ‹ƒ_‚Ì–¼‘O‚ğ”NŒ“ú‚ÅŒˆ’è‚·‚é
+		_mkdir(folder); //”NŒ“úƒtƒHƒ‹ƒ_‚ğì¬‚·‚é
+		sprintf(path, "Logs/%04d%02d%02d/%02d_%02d_%02d.txt", local->tm_year + 1900, local->tm_mon+1, local->tm_mday, local->tm_hour, local->tm_min, local->tm_sec); //ƒpƒX‚İ‚Ìƒtƒ@ƒCƒ‹–¼‚ğİ’è‚·‚é
 		file = fopen(path, "w");
 		if (file == NULL) {
 			return;
 		}
-		Log("ãƒ­ã‚°ãƒ©ã‚¤ã‚¿ãƒ¼ãŒæ­£å¸¸ã«åˆæœŸåŒ–ã•ã‚Œã¾ã—ãŸ");
+		Log("ƒƒOƒ‰ƒCƒ^[‚ª³í‚É‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 	}
 }
 
@@ -46,7 +46,7 @@ void LogWriter::Uninit() {
 
 void LogWriter::Log(const char* format, ...) {
 
-	//fileå‡ºåŠ›ç”¨
+	//fileo—Í—p
 	if (IS_CREATE_FILE) {
 		file = fopen(path,"a+");
 		if (file != NULL) {
@@ -60,7 +60,7 @@ void LogWriter::Log(const char* format, ...) {
 		}
 	}
 
-	//ãƒ“ãƒ«ãƒ‰ãƒ­ã‚°å‡ºåŠ›ç”¨
+	//ƒrƒ‹ƒhƒƒOo—Í—p
 	va_list	argp;
 	TCHAR pszBuf[256];
 	va_start(argp, format);
@@ -72,7 +72,7 @@ void LogWriter::Log(const char* format, ...) {
 }
 
 void LogWriter::LogWorning(const char* format, ...) {
-	//fileå‡ºåŠ›ç”¨
+	//fileo—Í—p
 	if (IS_CREATE_FILE) {
 		fopen(path, "a+");
 		fprintf(file, "[-] ");
@@ -84,7 +84,7 @@ void LogWriter::LogWorning(const char* format, ...) {
 		fclose(file);
 	}
 
-	//ãƒ“ãƒ«ãƒ‰ãƒ­ã‚°å‡ºåŠ›ç”¨
+	//ƒrƒ‹ƒhƒƒOo—Í—p
 	va_list	argp;
 	TCHAR pszBuf[256];
 	va_start(argp, format);
@@ -95,7 +95,7 @@ void LogWriter::LogWorning(const char* format, ...) {
 }
 
 void LogWriter::LogError(const char* format, ...) {
-	//fileå‡ºåŠ›ç”¨
+	//fileo—Í—p
 	if (IS_CREATE_FILE) {
 		file = fopen(path, "a+");
 		if (file != NULL) {
@@ -109,7 +109,7 @@ void LogWriter::LogError(const char* format, ...) {
 		}
 	}
 
-	//ãƒ“ãƒ«ãƒ‰ãƒ­ã‚°å‡ºåŠ›ç”¨
+	//ƒrƒ‹ƒhƒƒOo—Í—p
 	va_list	argp;
 	TCHAR pszBuf[256];
 	va_start(argp, format);

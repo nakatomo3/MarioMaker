@@ -34,10 +34,10 @@ void Component::SetActive(bool active) {
 void Component::Destroy() {
 	this->OnDestroy();
 	if (gameObject == nullptr) {
-		LogWriter::LogWorning("ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ãªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒDestroyã•ã‚Œã¾ã—ãŸã€‚é©åˆ‡ãªæŒ™å‹•ã‹ã©ã†ã‹ç¢ºèªã—ã¦ãã ã•ã„");
+		LogWriter::LogWorning("ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªDestroy‚³‚ê‚Ü‚µ‚½B“KØ‚È‹““®‚©‚Ç‚¤‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢");
 		delete this;
 	} else {
-		LogWriter::Log("ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯æ­£å¸¸ã«å‰Šé™¤ã•ã‚Œã¾ã—ãŸ");
+		LogWriter::Log("ƒRƒ“ƒ|[ƒlƒ“ƒg‚Í³í‚Éíœ‚³‚ê‚Ü‚µ‚½");
 		Collider* cast_c = dynamic_cast<Collider*>(this);
 		if (cast_c != NULL) {
 			CollisionManager::RemoveCollider(cast_c);

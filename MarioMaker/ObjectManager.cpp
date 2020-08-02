@@ -25,7 +25,7 @@ void ObjectManager::Destroy(GameObject* instance) {
 			return;
 		}
 	}
-	LogWriter::LogError("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒDestroyã•ã‚Œã¾ã—ãŸ");
+	LogWriter::LogError("ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[‚É“o˜^‚³‚ê‚Ä‚¢‚È‚¢ƒIƒuƒWƒFƒNƒg‚ªDestroy‚³‚ê‚Ü‚µ‚½");
 }
 
 bool ObjectManager::CheckInstance(GameObject* instance) {
@@ -116,7 +116,7 @@ void ObjectManager::Draw() {
 						camera = cast_camera;
 					} else {
 						if (camera != cast_camera) {
-							LogWriter::LogError("ã‚«ãƒ¡ãƒ©ã¯äºŒã¤ä»¥ä¸Šç½®ã‹ãªã„ã§ãã ã•ã„");
+							LogWriter::LogError("ƒJƒƒ‰‚Í“ñ‚ÂˆÈã’u‚©‚È‚¢‚Å‚­‚¾‚³‚¢");
 						}
 					}
 				}
@@ -125,7 +125,7 @@ void ObjectManager::Draw() {
 		}
 	}
 	if (camera == nullptr) {
-		LogWriter::LogError("ã‚«ãƒ¡ãƒ©ã¯ä¸€ã¤ä»¥ä¸Šç½®ã„ã¦ãã ã•ã„");
+		LogWriter::LogError("ƒJƒƒ‰‚Íˆê‚ÂˆÈã’u‚¢‚Ä‚­‚¾‚³‚¢");
 	}
 	
 }
@@ -145,7 +145,7 @@ void ObjectManager::LateDraw() {
 }
 
 void ObjectManager::Init() {
-	LogWriter::Log("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼ãŒåˆæœŸåŒ–ã•ã‚Œã¾ã—ãŸ");
+	LogWriter::Log("ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[‚ª‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 }
 
 void ObjectManager::UnLoad(Scene * scene) {

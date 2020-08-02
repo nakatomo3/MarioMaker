@@ -9,19 +9,19 @@ enum CLASS_ID {
 };
 
 SaveManager::SaveManager() {
-	LogWriter::Log("ã‚»ãƒ¼ãƒ–ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ãŒæ­£å¸¸ã«åˆæœŸåŒ–ã•ã‚Œã¾ã—ãŸ");
+	LogWriter::Log("ƒZ[ƒuƒ}ƒl[ƒWƒƒ[‚ª³í‚É‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 }
 
 SaveManager::~SaveManager() {
 
 }
 
-//ã‚»ãƒ¼ãƒ–ãŒæˆåŠŸã—ãŸã‹ã©ã†ã‹
+//ƒZ[ƒu‚ª¬Œ÷‚µ‚½‚©‚Ç‚¤‚©
 bool SaveManager::SaveAll(const char* fileName) {
 	bool isSuccess = true;
 	FILE* file = fopen(fileName, "wb");
 	if (file == NULL) {
-		LogWriter::LogWorning("ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã®ã§ã€æ–°è¦ä½œæˆã—ã¾ã—ãŸ\n");
+		LogWriter::LogWorning("ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½‚Ì‚ÅAV‹Kì¬‚µ‚Ü‚µ‚½\n");
 		file = fopen(fileName, "w");
 		file = fopen(fileName, "wb");
 	}
@@ -55,7 +55,7 @@ bool SaveManager::SaveAll(const char* fileName) {
 	
 
 	if (isSuccess == true) {
-		LogWriter::Log("ã‚»ãƒ¼ãƒ–ãŒæ­£å¸¸ã«å®Œäº†ã—ã¾ã—ãŸ\n");
+		LogWriter::Log("ƒZ[ƒu‚ª³í‚ÉŠ®—¹‚µ‚Ü‚µ‚½\n");
 	}
 
 	fclose(file);
@@ -67,7 +67,7 @@ bool SaveManager::LoadAll(const char* fileName) {
 
 	FILE* file = fopen(fileName, "rb");
 	if (file == NULL) {
-		LogWriter::LogWorning("ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã®ã§ã€æ–°è¦ä½œæˆã—ã¾ã—ãŸ\n");
+		LogWriter::LogWorning("ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½‚Ì‚ÅAV‹Kì¬‚µ‚Ü‚µ‚½\n");
 		file = fopen(fileName, "w");
 		file = fopen(fileName, "rb");
 		return false;
@@ -82,7 +82,7 @@ bool SaveManager::LoadAll(const char* fileName) {
 		string name;
 		switch (classID) {
 			default:
-				LogWriter::LogError("CLASS_IDã‚’ç™»éŒ²ã—ã¦ãã ã•ã„\n");
+				LogWriter::LogError("CLASS_ID‚ğ“o˜^‚µ‚Ä‚­‚¾‚³‚¢\n");
 				isSuccess = false;
 				break;
 			case INT:
@@ -115,9 +115,9 @@ bool SaveManager::LoadAll(const char* fileName) {
 
 
 	if (isSuccess == true) {
-		LogWriter::Log("ãƒ­ãƒ¼ãƒ‰ãŒæ­£å¸¸ã«å®Œäº†ã—ã¾ã—ãŸ\n");
+		LogWriter::Log("ƒ[ƒh‚ª³í‚ÉŠ®—¹‚µ‚Ü‚µ‚½\n");
 	} else {
-		LogWriter::LogWorning("ãƒ­ãƒ¼ãƒ‰ãŒæ­£å¸¸ã«å®Œäº†ã—ã¾ã›ã‚“ã§ã—ãŸ\n");
+		LogWriter::LogWorning("ƒ[ƒh‚ª³í‚ÉŠ®—¹‚µ‚Ü‚¹‚ñ‚Å‚µ‚½\n");
 	}
 	fclose(file);
 	return isSuccess;

@@ -2,7 +2,7 @@
 #include "RendererManager.h"
 #include "Component.h"
 
-//ãƒã‚¸ã‚·ãƒ§ãƒ³ã®åŸºæº–å€¤ã€‚åŸºæœ¬ã¯çœŸã‚“ä¸­ã ãŒå¤‰æ›´å¯èƒ½
+//ƒ|ƒWƒVƒ‡ƒ“‚ÌŠî€’lBŠî–{‚Í^‚ñ’†‚¾‚ª•ÏX‰Â”\
 typedef enum{
 	CENTER		= (0 + 0),
 	LEFT		= (0 + 1),
@@ -15,7 +15,7 @@ typedef enum{
 	DOWN_RIGHT	= (8 + 2),
 }Criterion;
 
-//ãƒ¬ã‚¤ãƒ¤ãƒ¼è¨­å®šã€‚å€¤é †ã«æç”»ã‚’ã—ã¦ã„ã
+//ƒŒƒCƒ„[İ’èB’l‡‚É•`‰æ‚ğ‚µ‚Ä‚¢‚­
 typedef enum {
 	CAMERA = 0,
 	DEFAULT = 1,
@@ -28,10 +28,10 @@ public:
 	VisualComponent();
 	~VisualComponent();
 
-	//æç”»ã«å¹²æ¸‰ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã§ã‚ã‚‹æ™‚ã“ã‚Œã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¦ä½¿ç”¨ã€‚
+	//•`‰æ‚ÉŠ±Â‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Å‚ ‚é‚±‚ê‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Äg—pB
 	virtual void Draw();
 
-	//æœ€å¾Œã«æç”»ã™ã‚‹ç”¨ã®é–¢æ•°ã€‚UIãªã©ã‚’æƒ³å®š
+	//ÅŒã‚É•`‰æ‚·‚é—p‚ÌŠÖ”BUI‚È‚Ç‚ğ‘z’è
 	virtual void LateDraw();
 
 	virtual Layer GetLayer() final;

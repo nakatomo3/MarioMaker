@@ -18,13 +18,13 @@ protected:
 
 	D3DXVECTOR4 color = D3DXVECTOR4(1, 1, 1, 1);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«å·¦ä¸Šåº§æ¨™(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹¶ãÀ•W(0~1)
 	float tx, ty;
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«ã®å¤§ãã•(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹‚Ì‘å‚«‚³(0~1)
 	float tw, th = 1;
 
-	//ã‚«ãƒªãƒ³ã‚°(è£é¢ã‚’æç”»ã—ãªã„è¨­å®šã®ã‚ªãƒ³ã‚ªãƒ•)
+	//ƒJƒŠƒ“ƒO(— –Ê‚ğ•`‰æ‚µ‚È‚¢İ’è‚ÌƒIƒ“ƒIƒt)
 	bool isCull = true;
 
 public:
@@ -46,7 +46,7 @@ public:
 	void SetTexturePosition(float _tx, float _ty);
 	void SetTextureScale(float _tw, float _th);
 
-	//ã‚«ãƒªãƒ³ã‚°(è£é¢ã‚’æç”»ã—ãªã„è¨­å®š)ã‚’å¤‰æ›´ã™ã‚‹
+	//ƒJƒŠƒ“ƒO(— –Ê‚ğ•`‰æ‚µ‚È‚¢İ’è)‚ğ•ÏX‚·‚é
 	void SetCull(bool isCull);
 	bool GetCull();
 

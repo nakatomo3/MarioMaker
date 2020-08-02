@@ -10,10 +10,10 @@ public:
 	}
 
 protected:
-	Singleton() {} // 外部でのインスタンス作成は禁止
+	Singleton() {} // �O���ł̃C���X�^���X�쐬�͋֎~
 	virtual ~Singleton() {}
 
 private:
-	void operator=(const Singleton& obj) {} // 代入演算子禁止
-	Singleton(const Singleton &obj) {} // コピーコンストラクタ禁止
+	void operator=(const Singleton& obj) {} // ������Z�q�֎~
+	Singleton(const Singleton &obj) {} // �R�s�[�R���X�g���N�^�֎~
 };

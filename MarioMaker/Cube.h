@@ -18,10 +18,10 @@ private:
 
 	D3DXVECTOR4 color = D3DXVECTOR4(1, 1, 1, 1);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«å·¦ä¸Šåº§æ¨™(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹¶ãÀ•W(0~1)
 	float tx, ty;
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«ã®å¤§ãã•(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹‚Ì‘å‚«‚³(0~1)
 	float tw, th = 1;
 
 public:

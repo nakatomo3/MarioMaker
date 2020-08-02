@@ -6,7 +6,7 @@ vector<Scene*> SceneManager::sceneList;
 bool SceneManager::wasWorning;
 
 void SceneManager::Init() {
-	LogWriter::Log("ã‚·ãƒ¼ãƒ³ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ãŒåˆæœŸåŒ–ã•ã‚Œã¾ã—ãŸ");
+	LogWriter::Log("ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚ª‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 	wasWorning = false;
 }
 
@@ -20,9 +20,9 @@ void SceneManager::Update() {
 	} else {
 		if (wasWorning == false) {
 #ifdef _DEBUG
-			MessageBox(NULL, TEXT("ãªã‚‹ã¹ãã‚·ãƒ¼ãƒ³çµŒç”±ã§ã‚²ãƒ¼ãƒ ã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„"),	TEXT("è­¦å‘Š"), MB_OK | MB_ICONWARNING | MB_TOPMOST);
+			MessageBox(NULL, TEXT("‚È‚é‚×‚­ƒV[ƒ“Œo—R‚ÅƒQ[ƒ€‚ğÀs‚µ‚Ä‚­‚¾‚³‚¢"),	TEXT("Œx"), MB_OK | MB_ICONWARNING | MB_TOPMOST);
 #endif // DEBUG
-			LogWriter::LogWorning("ãªã‚‹ã¹ãã‚·ãƒ¼ãƒ³çµŒç”±ã§ã‚²ãƒ¼ãƒ ã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„");
+			LogWriter::LogWorning("‚È‚é‚×‚­ƒV[ƒ“Œo—R‚ÅƒQ[ƒ€‚ğÀs‚µ‚Ä‚­‚¾‚³‚¢");
 		}
 		wasWorning = true;
 	}
@@ -41,22 +41,22 @@ void SceneManager::LoadScene(string name) {
 			sceneList[i]->Start();
 			if (nowScene != nullptr) {
 				nowScene->UnLoad();
-				LogWriter::Log("%sã¨ã„ã†ã‚·ãƒ¼ãƒ³ã‚’ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¾ã—ãŸ", nowScene->name.c_str());
+				LogWriter::Log("%s‚Æ‚¢‚¤ƒV[ƒ“‚ğƒAƒ“ƒ[ƒh‚µ‚Ü‚µ‚½", nowScene->name.c_str());
 			}
 			nowScene = sceneList[i];
-			LogWriter::Log("%sã¨ã„ã†ã‚·ãƒ¼ãƒ³ã‚’èª­ã¿è¾¼ã¿ã¾ã—ãŸ", name.c_str());
+			LogWriter::Log("%s‚Æ‚¢‚¤ƒV[ƒ“‚ğ“Ç‚İ‚İ‚Ü‚µ‚½", name.c_str());
 			ObjectManager::Awake();
 			ObjectManager::Start();
 			return;
 		}
 	}
-	LogWriter::LogWorning("%sã¨ã„ã†ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸ", name);
+	LogWriter::LogWorning("%s‚Æ‚¢‚¤ƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½", name);
 }
 
 void SceneManager::LoadScene(unsigned int num) {
 	if (sceneList.size() < num) {
-		//ã‚·ãƒ¼ãƒ³ãƒªã‚¹ãƒˆã®ã‚µã‚¤ã‚ºã‚ˆã‚Šã‚‚å¤§ãã„å ´åˆã‚¨ãƒ©ãƒ¼
-		LogWriter::LogWorning("%dç•ªç›®ã®ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚ã‚·ãƒ¼ãƒ³æ•°ã¯%dã§ã™", num, sceneList.size());
+		//ƒV[ƒ“ƒŠƒXƒg‚ÌƒTƒCƒY‚æ‚è‚à‘å‚«‚¢ê‡ƒGƒ‰[
+		LogWriter::LogWorning("%d”Ô–Ú‚ÌƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½BƒV[ƒ“”‚Í%d‚Å‚·", num, sceneList.size());
 		return;
 	}
 	sceneList[num]->Load();
@@ -74,13 +74,13 @@ void SceneManager::BackLoad(string name) {
 			sceneList[i]->Load();
 		}
 	}
-	LogWriter::LogWorning("%sã¨ã„ã†ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸ", name);
+	LogWriter::LogWorning("%s‚Æ‚¢‚¤ƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½", name);
 	return;
 }
 
 void SceneManager::BackLoad(unsigned int num) {
 	if (sceneList.size() < num) {
-		LogWriter::LogWorning("%dç•ªç›®ã®ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚ã‚·ãƒ¼ãƒ³æ•°ã¯%dã§ã™", num, sceneList.size());
+		LogWriter::LogWorning("%d”Ô–Ú‚ÌƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½BƒV[ƒ“”‚Í%d‚Å‚·", num, sceneList.size());
 		return;
 	}
 	sceneList[num]->Load();
@@ -92,7 +92,7 @@ void SceneManager::Unload(Scene* scene) {
 
 void SceneManager::Unload() {
 	if (nowScene == nullptr) {
-		LogWriter::LogError("ã‚·ãƒ¼ãƒ³ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ãªã„çŠ¶æ…‹ã§Unloadã—ã‚ˆã†ã¨ã—ã¾ã—ãŸã€‚é©åˆ‡ãªæŒ™å‹•ã‹ç¢ºèªã—ã¦ãã ã•ã„");
+		LogWriter::LogError("ƒV[ƒ“‚ªƒ[ƒh‚³‚ê‚Ä‚¢‚È‚¢ó‘Ô‚ÅUnload‚µ‚æ‚¤‚Æ‚µ‚Ü‚µ‚½B“KØ‚È‹““®‚©Šm”F‚µ‚Ä‚­‚¾‚³‚¢");
 	} else {
 		nowScene->UnLoad();
 		nowScene = nullptr;
@@ -101,7 +101,7 @@ void SceneManager::Unload() {
 
 Scene* SceneManager::GetScene(unsigned int num) {
 	if (sceneList.size() < num) {
-		LogWriter::LogWorning("%dç•ªç›®ã®ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚ã‚·ãƒ¼ãƒ³æ•°ã¯%dã§ã™", num, sceneList.size());
+		LogWriter::LogWorning("%d”Ô–Ú‚ÌƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½BƒV[ƒ“”‚Í%d‚Å‚·", num, sceneList.size());
 		return nullptr;
 	}
 	return sceneList[num];
@@ -113,7 +113,7 @@ Scene* SceneManager::GetScene(string name) {
 			return sceneList[i];
 		}
 	}
-	LogWriter::LogWorning("%sã¨ã„ã†ã‚·ãƒ¼ãƒ³ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸ", name);
+	LogWriter::LogWorning("%s‚Æ‚¢‚¤ƒV[ƒ“‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½", name);
 	return nullptr;
 }
 

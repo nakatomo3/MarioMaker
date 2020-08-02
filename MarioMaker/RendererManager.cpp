@@ -35,7 +35,7 @@ D3D11_RASTERIZER_DESC RendererManager::rd;
 void RendererManager::Init() {
 	HRESULT hr = S_OK;
 
-	// ãƒ‡ãƒã‚¤ã‚¹ã€ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ãƒ¼ãƒ³ã€ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆç”Ÿæˆ
+	// ƒfƒoƒCƒXAƒXƒƒbƒvƒ`ƒF[ƒ“AƒRƒ“ƒeƒLƒXƒg¶¬
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.BufferCount = 1;
@@ -64,7 +64,7 @@ void RendererManager::Init() {
 		&immediateContext);
 
 
-	// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ç”Ÿæˆã€è¨­å®š
+	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[¶¬Aİ’è
 	ID3D11Texture2D* pBackBuffer = NULL;
 	swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 	D3DDevice->CreateRenderTargetView(pBackBuffer, NULL, &renderTargetView);
@@ -72,7 +72,7 @@ void RendererManager::Init() {
 
 
 
-	//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼ä½œæˆ
+	//[“xƒXƒeƒ“ƒVƒ‹—pƒeƒNƒXƒ`ƒƒ[ì¬
 	ID3D11Texture2D* depthTexture = NULL;
 	D3D11_TEXTURE2D_DESC td;
 	ZeroMemory(&td, sizeof(td));
@@ -88,7 +88,7 @@ void RendererManager::Init() {
 	td.MiscFlags = 0;
 	D3DDevice->CreateTexture2D(&td, NULL, &depthTexture);
 
-	//æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆä½œæˆ
+	//[“xƒXƒeƒ“ƒVƒ‹ƒ^[ƒQƒbƒgì¬
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
 	ZeroMemory(&dsvd, sizeof(dsvd));
 	dsvd.Format = td.Format;
@@ -100,29 +100,29 @@ void RendererManager::Init() {
 	immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
 
-	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¨­å®š
+	// ƒrƒ…[ƒ|[ƒgİ’è
 	D3D11_VIEWPORT vp;
-	vp.Width = (FLOAT)SCREEN_WIDTH;		//ç”»é¢ã®è¡¨ç¤ºç¯„å›²(æ‹¡å¤§ç‡)
-	vp.Height = (FLOAT)SCREEN_HEIGHT;	//ç¸¦å¹…
+	vp.Width = (FLOAT)SCREEN_WIDTH;		//‰æ–Ê‚Ì•\¦”ÍˆÍ(Šg‘å—¦)
+	vp.Height = (FLOAT)SCREEN_HEIGHT;	//c•
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;					//å·¦ä¸Šã®åº§æ¨™X
-	vp.TopLeftY = 0;					//å³ä¸Šã®åº§æ¨™Y
+	vp.TopLeftX = 0;					//¶ã‚ÌÀ•WX
+	vp.TopLeftY = 0;					//‰Eã‚ÌÀ•WY
 	immediateContext->RSSetViewports(1, &vp);
 
 	UINT count = 1;
-	D3D11_RECT rect;	//ç”»é¢ã®è¡¨ç¤ºç¯„å›²(åˆ‡ã‚ŠæŠœã)
+	D3D11_RECT rect;	//‰æ–Ê‚Ì•\¦”ÍˆÍ(Ø‚è”²‚«)
 	rect.left = static_cast<LONG>(0);
 	rect.right = static_cast<LONG>(SCREEN_WIDTH);
 	rect.top = static_cast<LONG>(0);
 	rect.bottom = static_cast<LONG>(SCREEN_HEIGHT);
 	immediateContext->RSSetScissorRects(count, &rect);
 
-	// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
+	// ƒ‰ƒXƒ^ƒ‰ƒCƒUƒXƒe[ƒgİ’è
 	ZeroMemory(&rd, sizeof(rd));
-	rd.FillMode = D3D11_FILL_SOLID;	//ãƒ¯ã‚¤ãƒ¤ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã«ã—ãŸã„ã¨ãã¯D3D11_FILL_WIREFRAMEã«ã™ã‚‹
-	rd.CullMode = D3D11_CULL_BACK;	//è£é¢ã‚’æç”»ã—ãªã„ã€CULL_NONEã§ä¸¡é¢ã€_FRONTã§è¡¨é¢ã‚’æç”»ã—ãªã„
-	rd.DepthClipEnable = TRUE;		//æ™‚è¨ˆå›ã‚Šã§ãƒãƒªã‚´ãƒ³ã«ã™ã‚‹
+	rd.FillMode = D3D11_FILL_SOLID;	//ƒƒCƒ„[ƒtƒŒ[ƒ€‚É‚µ‚½‚¢‚Æ‚«‚ÍD3D11_FILL_WIREFRAME‚É‚·‚é
+	rd.CullMode = D3D11_CULL_BACK;	//— –Ê‚ğ•`‰æ‚µ‚È‚¢ACULL_NONE‚Å—¼–ÊA_FRONT‚Å•\–Ê‚ğ•`‰æ‚µ‚È‚¢
+	rd.DepthClipEnable = TRUE;		//Œv‰ñ‚è‚Åƒ|ƒŠƒSƒ“‚É‚·‚é
 	rd.MultisampleEnable = FALSE;
 	rd.ScissorEnable = TRUE;
 
@@ -134,10 +134,10 @@ void RendererManager::Init() {
 
 
 
-	// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
+	// ƒuƒŒƒ“ƒhƒXƒe[ƒgİ’è
 	D3D11_BLEND_DESC blendDesc;
 	ZeroMemory(&blendDesc, sizeof(blendDesc));
-	blendDesc.AlphaToCoverageEnable = TRUE;		//æç”»ã®å‰å¾Œã«é–¢ä¿‚ãªãé€éå‡¦ç†ã—ã¦ãã‚Œã‚‹ã‚„ã¤
+	blendDesc.AlphaToCoverageEnable = TRUE;		//•`‰æ‚Ì‘OŒã‚ÉŠÖŒW‚È‚­“§‰ßˆ—‚µ‚Ä‚­‚ê‚é‚â‚Â
 	blendDesc.IndependentBlendEnable = FALSE;
 	blendDesc.RenderTarget[0].BlendEnable = TRUE;
 	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
@@ -155,7 +155,7 @@ void RendererManager::Init() {
 
 
 
-	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
+	// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgİ’è
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
 	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
 	depthStencilDesc.DepthEnable = TRUE;
@@ -163,18 +163,18 @@ void RendererManager::Init() {
 	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
 	depthStencilDesc.StencilEnable = FALSE;
 
-	D3DDevice->CreateDepthStencilState(&depthStencilDesc, &depthStateEnable);//æ·±åº¦æœ‰åŠ¹ã‚¹ãƒ†ãƒ¼ãƒˆ
+	D3DDevice->CreateDepthStencilState(&depthStencilDesc, &depthStateEnable);//[“x—LŒøƒXƒe[ƒg
 
 	//depthStencilDesc.DepthEnable = FALSE;
 	//depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-	//D3DDevice->CreateDepthStencilState(&depthStencilDesc, &depthStateDisable);//æ·±åº¦ç„¡åŠ¹ã‚¹ãƒ†ãƒ¼ãƒˆ
+	//D3DDevice->CreateDepthStencilState(&depthStencilDesc, &depthStateDisable);//[“x–³ŒøƒXƒe[ƒg
 
 	immediateContext->OMSetDepthStencilState(depthStateEnable, NULL);
 
 
 
 
-	// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®š
+	// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’è
 	D3D11_SAMPLER_DESC samplerDesc;
 	ZeroMemory(&samplerDesc, sizeof(samplerDesc));
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;//D3D11_FILTER_ANISOTROPIC;
@@ -195,7 +195,7 @@ void RendererManager::Init() {
 
 
 
-	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ç”Ÿæˆ
+	// ’¸“_ƒVƒF[ƒ_¶¬
 	{
 		FILE* file;
 		long int fsize;
@@ -209,7 +209,7 @@ void RendererManager::Init() {
 		D3DDevice->CreateVertexShader(buffer, fsize, NULL, &vertexShader);
 
 
-		// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”Ÿæˆ
+		// “ü—ÍƒŒƒCƒAƒEƒg¶¬
 		D3D11_INPUT_ELEMENT_DESC layout[] =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -230,7 +230,7 @@ void RendererManager::Init() {
 
 
 
-	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ç”Ÿæˆ
+	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_¶¬
 	{
 		FILE* file;
 		long int fsize;
@@ -249,7 +249,7 @@ void RendererManager::Init() {
 
 
 
-	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”Ÿæˆ
+	// ’è”ƒoƒbƒtƒ@¶¬
 	D3D11_BUFFER_DESC hBufferDesc;
 	hBufferDesc.ByteWidth = sizeof(D3DXMATRIX);
 	hBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -283,23 +283,23 @@ void RendererManager::Init() {
 
 
 
-	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
+	// “ü—ÍƒŒƒCƒAƒEƒgİ’è
 	immediateContext->IASetInputLayout(vertexLayout);
 
-	// ã‚·ã‚§ãƒ¼ãƒ€è¨­å®š
+	// ƒVƒF[ƒ_İ’è
 	immediateContext->VSSetShader(vertexShader, NULL, 0);
 	immediateContext->PSSetShader(pixelShader, NULL, 0);
 
 
 
-	// ãƒ©ã‚¤ãƒˆç„¡åŠ¹åŒ–
+	// ƒ‰ƒCƒg–³Œø‰»
 	Light light;
 	light.enable = false;
 	SetLight(light);
 
 
 
-	// ãƒãƒ†ãƒªã‚¢ãƒ«åˆæœŸåŒ–
+	// ƒ}ƒeƒŠƒAƒ‹‰Šú‰»
 	Material material;
 	ZeroMemory(&material, sizeof(material));
 	material.diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
@@ -314,7 +314,7 @@ void RendererManager::Init() {
 
 
 void RendererManager::Uninit() {
-	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè§£æ”¾
+	// ƒIƒuƒWƒFƒNƒg‰ğ•ú
 	worldBuffer->Release();
 	viewBuffer->Release();
 	projectionBuffer->Release();
@@ -336,7 +336,7 @@ void RendererManager::Uninit() {
 
 
 void RendererManager::Begin() {
-	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚¯ãƒªã‚¢
+	// ƒoƒbƒNƒoƒbƒtƒ@ƒNƒŠƒA
 	float ClearColor[4] = { 0.5f, 0.9f, 0.5f, 1.0f };
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
@@ -413,7 +413,7 @@ void RendererManager::SetLight(Light Light) {
 }
 
 void RendererManager::SetFillMode(D3D11_FILL_MODE mode) {
-	rd.FillMode = mode;	//ãƒ¯ã‚¤ãƒ¤ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã«ã—ãŸã„ã¨ãã¯D3D11_FILL_WIREFRAMEã«ã™ã‚‹
+	rd.FillMode = mode;	//ƒƒCƒ„[ƒtƒŒ[ƒ€‚É‚µ‚½‚¢‚Æ‚«‚ÍD3D11_FILL_WIREFRAME‚É‚·‚é
 
 	ID3D11RasterizerState *rs;
 	D3DDevice->CreateRasterizerState(&rd, &rs);
@@ -422,7 +422,7 @@ void RendererManager::SetFillMode(D3D11_FILL_MODE mode) {
 }
 
 void RendererManager::SetCullMode(D3D11_CULL_MODE mode) {
-	rd.CullMode = mode;	//è£é¢ã‚’æç”»ã—ãªã„ã€CULL_NONEã§ä¸¡é¢ã€_FRONTã§è¡¨é¢ã‚’æç”»ã—ãªã„
+	rd.CullMode = mode;	//— –Ê‚ğ•`‰æ‚µ‚È‚¢ACULL_NONE‚Å—¼–ÊA_FRONT‚Å•\–Ê‚ğ•`‰æ‚µ‚È‚¢
 
 	ID3D11RasterizerState *rs;
 	D3DDevice->CreateRasterizerState(&rd, &rs);

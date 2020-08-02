@@ -3,12 +3,12 @@
 class Vector2 {
 public:
 
-	//x,yæˆåˆ†ã‚’0ã«ã™ã‚‹åˆæœŸåŒ–
+	//x,y¬•ª‚ğ0‚É‚·‚é‰Šú‰»
 	Vector2() {
 		x, y = 0;
 	}
 
-	//x,yæˆåˆ†ã‚’æŒ‡å®šã™ã‚‹åˆæœŸåŒ–
+	//x,y¬•ª‚ğw’è‚·‚é‰Šú‰»
 	Vector2(float X,float Y) {
 		x = X;
 		y = Y;
@@ -24,7 +24,7 @@ public:
 
 	//-------------------------operator-----------------------
 
-	//è¶³ã—ç®—
+	//‘«‚µZ
 	Vector2 operator+(Vector2 vector) {
 		return Vector2(x + vector.x, y + vector.y);
 	};
@@ -35,7 +35,7 @@ public:
 	};
 
 
-	//å¼•ãç®—
+	//ˆø‚«Z
 	Vector2 operator-(Vector2 vector) {
 		return Vector2(x - vector.x, y - vector.y);
 	};
@@ -45,7 +45,7 @@ public:
 		return Vector2(x, y);
 	};
 
-	//æ›ã‘ç®—
+	//Š|‚¯Z
 	Vector2 operator*(float value) {
 		return Vector2(x * value, y * value);
 	}
@@ -56,17 +56,17 @@ public:
 	}
 
 
-	//å†…ç©
+	//“àÏ
 	float operator*(Vector2 vector) {
 		return x * vector.x + y * vector.y;
 	}
 
-	//å¤–ç©
+	//ŠOÏ
 	float operator^(Vector2 vector) {
 		return float(x*vector.y-y*vector.x);
 	}
 
-	//å‰²ã‚Šç®—
+	//Š„‚èZ
 	Vector2 operator/(float num) {
 		return Vector2(x / num, y / num);
 	}
@@ -90,12 +90,12 @@ public:
 		return true;
 	}
 
-	//é•·ã•ã‚’è¿”ã™é–¢æ•°
+	//’·‚³‚ğ•Ô‚·ŠÖ”
 	float Magnitude() {
 		return (float)sqrt(x * x + y * y);
 	}
 
-	//å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™é–¢æ•°
+	//’PˆÊƒxƒNƒgƒ‹‚ğ•Ô‚·ŠÖ”
 	Vector2 UnitVector() {
 		return Vector2(x / Magnitude(), y / Magnitude());
 	}

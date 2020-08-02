@@ -4,7 +4,7 @@ void Button::OnClick() {
 	if (gameObject != nullptr) {
 		gameObject->OnClick();
 	} else {
-		LogWriter::Log("GameObjectãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ãªã„ãƒœã‚¿ãƒ³ã®OnClickãŒå‘¼ã°ã‚Œã¾ã—ãŸ");
+		LogWriter::Log("GameObject‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚È‚¢ƒ{ƒ^ƒ“‚ÌOnClick‚ªŒÄ‚Î‚ê‚Ü‚µ‚½");
 	}
 }
 
@@ -27,7 +27,7 @@ void Button::Init() {
 	tw = 1;
 	th = 1;
 
-	//ä½•ã‹ã‚ã£ã¦ã‚‚åˆ†ã‹ã‚‹ã‚ˆã†ã«ã€ä»®ã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œã¦ãŠã
+	//‰½‚©‚ ‚Á‚Ä‚à•ª‚©‚é‚æ‚¤‚ÉA‰¼‚Ìƒf[ƒ^‚ð“ü‚ê‚Ä‚¨‚­
 
 	Vertex vertex[4];
 
@@ -77,7 +77,7 @@ void Button::Draw() {
 	if (wasChange == true) {
 		Vector3 pos = Vector3(0, 0, 0);
 		if (gameObject == nullptr) {
-			LogWriter::Log("ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒGameObjectã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œãšã«ä½¿ç”¨ã•ã‚Œã¾ã—ãŸã€‚GameObjectã«ã‚¢ã‚¿ãƒƒãƒã—ãŸã†ãˆã§ä½¿ç”¨ã—ã¦ãã ã•ã„");
+			LogWriter::Log("ƒXƒvƒ‰ƒCƒg‚ªGameObject‚ÉƒAƒ^ƒbƒ`‚³‚ê‚¸‚ÉŽg—p‚³‚ê‚Ü‚µ‚½BGameObject‚ÉƒAƒ^ƒbƒ`‚µ‚½‚¤‚¦‚ÅŽg—p‚µ‚Ä‚­‚¾‚³‚¢");
 			return;
 		} else {
 			pos = gameObject->GetPosition();
@@ -131,42 +131,42 @@ void Button::Draw() {
 		RendererManager::GetDevice()->CreateBuffer(&bd, &sd, &vertexBuffer);
 
 		//texture->Release();
-		//ãƒžãƒˆãƒªã‚¯ã‚¹è¨­å®š
+		//ƒ}ƒgƒŠƒNƒXÝ’è
 		RendererManager::SetWorldViewProjection2D();
 
-		//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
+		//’¸“_ƒoƒbƒtƒ@Ý’è
 		UINT stride = sizeof(Vertex);
 		UINT offset = 0;
 		RendererManager::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 
-		//ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
+		//ƒeƒNƒXƒ`ƒƒÝ’è
 		RendererManager::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
 
-		//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
+		//ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
 		RendererManager::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-		//ãƒãƒªã‚´ãƒ³æç”»
+		//ƒ|ƒŠƒSƒ“•`‰æ
 		RendererManager::GetDeviceContext()->Draw(4, 0);
 
 		wasChange = false;
 
 	} else {
 
-		//ãƒžãƒˆãƒªã‚¯ã‚¹è¨­å®š
+		//ƒ}ƒgƒŠƒNƒXÝ’è
 		RendererManager::SetWorldViewProjection2D();
 
-		//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
+		//’¸“_ƒoƒbƒtƒ@Ý’è
 		UINT stride = sizeof(Vertex);
 		UINT offset = 0;
 		RendererManager::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 
-		//ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
+		//ƒeƒNƒXƒ`ƒƒÝ’è
 		RendererManager::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
 
-		//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
+		//ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
 		RendererManager::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-		//ãƒãƒªã‚´ãƒ³æç”»
+		//ƒ|ƒŠƒSƒ“•`‰æ
 		RendererManager::GetDeviceContext()->Draw(4, 0);
 
 		wasChange = false;

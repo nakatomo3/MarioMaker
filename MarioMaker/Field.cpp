@@ -55,7 +55,7 @@ void Field::Update() {
 }
 
 void Field::Draw() {
-	//ãƒžãƒˆãƒªã‚¯ã‚¹è¨­å®š
+	//ƒ}ƒgƒŠƒNƒXÝ’è
 	D3DXMATRIX world, mScale, mRot, mTrans;
 	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
 	D3DXMatrixRotationYawPitchRoll(&mRot, rotation.y, rotation.x, rotation.z);
@@ -63,17 +63,17 @@ void Field::Draw() {
 	world = mScale * mRot * mTrans;
 	CRenderer::SetWorldMatrix(&world);
 
-	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
+	//’¸“_ƒoƒbƒtƒ@Ý’è
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
+	//ƒeƒNƒXƒ`ƒƒÝ’è
 	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
 
-	//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
+	//ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	//ãƒãƒªã‚´ãƒ³æç”»
+	//ƒ|ƒŠƒSƒ“•`‰æ
 	CRenderer::GetDeviceContext()->Draw(4, 0);
 }

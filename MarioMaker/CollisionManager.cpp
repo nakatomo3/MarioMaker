@@ -11,7 +11,7 @@ void CollisionManager::AddCollider(Collider* collider) {
 void CollisionManager::RemoveCollider(Collider * collider) {
 	for (unsigned int i = 0; i < colliders.size(); i++) {
 		if (colliders[i] == collider) {
-			//ÂÂ³ÂÃ­â€šÃ‰Å’Â©â€šÃ‚â€šÂ©â€šÃâ€šÂ½
+			//³í‚ÉŒ©‚Â‚©‚Á‚½
 			Component* cacheComponent = colliders[i];
 			colliders[i] = colliders[colliders.size() - 1];
 			colliders.pop_back();

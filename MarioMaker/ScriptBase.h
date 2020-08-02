@@ -7,20 +7,20 @@ public:
 	ScriptBase(GameObject* gameObject);
 	~ScriptBase();
 
-	//生成されたときに一番最初に呼び出されます。Start関数よりも先に呼び出されます
+	//�������ꂽ�Ƃ��Ɉ�ԍŏ��ɌĂяo����܂��BStart�֐�������ɌĂяo����܂�
 	virtual void Awake();
-	//生成されたときに呼び出されます。Awake関数よりも後に呼び出されます。
+	//�������ꂽ�Ƃ��ɌĂяo����܂��BAwake�֐�������ɌĂяo����܂��B
 	virtual void Start();
-	//最初に呼び出されるUpdateです。
+	//�ŏ��ɌĂяo�����Update�ł��B
 	virtual void FirstUpdate();
-	//通常呼び出されるUpdateです。
+	//�ʏ�Ăяo�����Update�ł��B
 	virtual void Update();
-	//最後に呼び出されるUpdateです。
+	//�Ō�ɌĂяo�����Update�ł��B
 	virtual void LateUpdate();
 
-	//Colliderがアタッチされている時に、Collider同士が接触したときに呼ばれる関数です。
+	//Collider���A�^�b�`����Ă��鎞�ɁACollider���m���ڐG�����Ƃ��ɌĂ΂��֐��ł��B
 	virtual void OnCollisionStay(Collision* collision);
-	//ボタンがアタッチされている場合、ボタンがクリックされたときに呼ばれる関数です。
+	//�{�^�����A�^�b�`����Ă���ꍇ�A�{�^�����N���b�N���ꂽ�Ƃ��ɌĂ΂��֐��ł��B
 	virtual void OnClick();
 
 protected:

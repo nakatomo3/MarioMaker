@@ -28,7 +28,7 @@ void GameObject::Destroy() {
 
 void GameObject::Destroy(float time) {
 	if (time < 0) {
-		LogWriter::Log("Destroyã«è² ã®å€¤ã‚’å…¥ã‚Œãªã„ã§ãã ã•ã„");
+		LogWriter::Log("Destroy‚É•‰‚Ì’l‚ð“ü‚ê‚È‚¢‚Å‚­‚¾‚³‚¢");
 	}
 	destroyTimer = time;
 }
@@ -41,7 +41,7 @@ GameObject::GameObject() {
 	rotation		= Vector3(0, 0, 0);
 	velocity		= Vector3(0, 0, 0);
 	name			= "New GameObject";
-	LogWriter::Log("ç„¡åã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç”Ÿæˆã•ã‚Œã¾ã—ãŸ");
+	LogWriter::Log("–³–¼‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ª¶¬‚³‚ê‚Ü‚µ‚½");
 }
 
 GameObject::GameObject(string _name) {
@@ -52,7 +52,7 @@ GameObject::GameObject(string _name) {
 	rotation		= Vector3(0, 0, 0);
 	velocity		= Vector3(0, 0, 0);
 	name			= _name;
-	LogWriter::Log("%sã¨ã„ã†ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç”Ÿæˆã•ã‚Œã¾ã—ãŸ", name.c_str());
+	LogWriter::Log("%s‚Æ‚¢‚¤ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ª¶¬‚³‚ê‚Ü‚µ‚½", name.c_str());
 }
 
 void GameObject::Update() {
@@ -113,11 +113,11 @@ bool GameObject::GetDestroyOnload() {
 
 GameObject::~GameObject() {
 	unsigned int childSize = children.size();
-	LogWriter::Log("å­ä¾›ã®æ•°ï¼š%d\n", childSize);
+	LogWriter::Log("Žq‹Ÿ‚Ì”F%d\n", childSize);
 	for (unsigned int i = 0; i < childSize; i++) {
 		delete children[i];
 	}
-	LogWriter::Log("ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰Šé™¤ã—ã¾ã—ãŸ\n");
+	LogWriter::Log("ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ðíœ‚µ‚Ü‚µ‚½\n");
 }
 
 Vector3 GameObject::GetPosition() {
@@ -252,7 +252,7 @@ void GameObject::Rotate(float x, float y, float z) {
 
 //void GameObject::LookAt(Vector3 _target) {
 //	if (position == _target) {
-//		LogWriter::Log("ç¾åœ¨ã®åº§æ¨™ã¨ç›®æ¨™ãŒåŒã˜ã ã£ãŸã®ã§å›žè»¢ã¯ã—ã¾ã›ã‚“ã§ã—ãŸ\n");
+//		LogWriter::Log("Œ»Ý‚ÌÀ•W‚Æ–Ú•W‚ª“¯‚¶‚¾‚Á‚½‚Ì‚Å‰ñ“]‚Í‚µ‚Ü‚¹‚ñ‚Å‚µ‚½\n");
 //		return;
 //	}
 //
@@ -282,7 +282,7 @@ void GameObject::Move(float x, float y, float z) {
 
 Component* GameObject::GetComponent(unsigned int num) {
 	if (num >= components.size() || num < 0) {
-		LogWriter::LogWorning("ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåï¼š%s\nã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆå¼•æ•°ï¼š%d", name, num);
+		LogWriter::LogWorning("ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌŽæ“¾‚ÉŽ¸”s‚µ‚Ü‚µ‚½B\nƒQ[ƒ€ƒIƒuƒWƒFƒNƒg–¼F%s\nƒRƒ“ƒ|[ƒlƒ“ƒgˆø”F%d", name, num);
 		return nullptr;
 	}
 	return components[num];

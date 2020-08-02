@@ -9,7 +9,7 @@ using namespace std;
 
 class Text : public VisualComponent {
 public:
-	//å®Ÿè¡Œæ™‚é–“ï¼šæ–‡å­—æ•°ã«æ¯”ä¾‹ã€10æ–‡å­—ã§1msä»¥ä¸‹
+	//ÀsŠÔF•¶š”‚É”ä—áA10•¶š‚Å1msˆÈ‰º
 	void Draw();
 
 	void SetPosition(Vector3 newPos);
@@ -44,10 +44,10 @@ private:
 
 	D3DXVECTOR4 color = D3DXVECTOR4(1, 1, 1, 1);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«å·¦ä¸Šåº§æ¨™(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹¶ãÀ•W(0~1)
 	float tx, ty;
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«ã®å¤§ãã•(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹‚Ì‘å‚«‚³(0~1)
 	float tw, th;
 
 	bool wasChange = false;
@@ -56,7 +56,7 @@ private:
 
 	TCHAR* c = (TCHAR*)"";
 
-	//fontã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œã‚‹ã€‚hogeã§2msã€‚çµæ§‹é‡ã„
+	//font‚ÌƒeƒNƒXƒ`ƒƒ‚ğì‚éBhoge‚Å2msBŒ‹\d‚¢
 	void CreateTexture();
 };
 

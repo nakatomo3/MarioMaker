@@ -28,7 +28,7 @@ void Time::Init() {
 	QueryPerformanceCounter(&m_Counter);
 	beforeFrameClock = m_Counter.QuadPart;
 	startFrameClock = m_Counter.QuadPart;
-	LogWriter::Log("TimeãŒåˆæœŸåŒ–ã•ã‚Œã¾ã—ãŸ");
+	LogWriter::Log("Time‚ª‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 }
 
 
@@ -53,16 +53,16 @@ int Time::GetFrameFromStart() {
 }
 
 double Time::GetTimeFromStart() {
-	LONGLONG LongDef = m_Counter.QuadPart - startFrameClock;    // å·®åˆ†ã‚«ã‚¦ãƒ³ãƒˆæ•°ã‚’ç®—å‡ºã™ã‚‹ã€‚
+	LONGLONG LongDef = m_Counter.QuadPart - startFrameClock;    // ·•ªƒJƒEƒ“ƒg”‚ğZo‚·‚éB
 	double dDef = (double)LongDef;
 	return dDef / clocksPerSecond;
 }
 
 bool Time::IsUpdate() {
-	QueryPerformanceCounter(&m_Counter);                     // ç¾åœ¨ã®æ™‚åˆ»ã‚’å–å¾—ã—ã€
-	LONGLONG LongDef = m_Counter.QuadPart - beforeFrameClock;    // å·®åˆ†ã‚«ã‚¦ãƒ³ãƒˆæ•°ã‚’ç®—å‡ºã™ã‚‹ã€‚
-	double dDef = (double)LongDef;                             // å€ç²¾åº¦æµ®å‹•å°æ•°ç‚¹ã«å¤‰æ›
-	beforeFrameClock = m_Counter.QuadPart;                       // ç¾åœ¨ã®æ™‚åˆ»ã‚’ä¿æŒ
+	QueryPerformanceCounter(&m_Counter);                     // Œ»İ‚Ì‚ğæ“¾‚µA
+	LONGLONG LongDef = m_Counter.QuadPart - beforeFrameClock;    // ·•ªƒJƒEƒ“ƒg”‚ğZo‚·‚éB
+	double dDef = (double)LongDef;                             // ”{¸“x•‚“®¬”“_‚É•ÏŠ·
+	beforeFrameClock = m_Counter.QuadPart;                       // Œ»İ‚Ì‚ğ•Û
 
 	interval += dDef / clocksPerSecond;
 
@@ -79,7 +79,7 @@ bool Time::IsUpdate() {
 
 void Time::SetTimeSpeed(float speed) {
 	if (speed < 0) {
-		LogWriter::LogError("ChangeTimeSpeedã§%fã‚’è¨­å®šã—ã¾ã—ãŸã€‚ãƒã‚¤ãƒŠã‚¹ã®æ•°å­—ã¯å…¥åŠ›ã—ãªã„ã§ãã ã•ã„",speed);
+		LogWriter::LogError("ChangeTimeSpeed‚Å%f‚ğİ’è‚µ‚Ü‚µ‚½Bƒ}ƒCƒiƒX‚Ì”š‚Í“ü—Í‚µ‚È‚¢‚Å‚­‚¾‚³‚¢",speed);
 		return;
 	}
 	timeScale = speed;
@@ -89,11 +89,11 @@ float Time::GetTimeSpeed() {
 	return timeScale;
 }
 
-double Time::GetNowDeltaTime() {                    // ç¾åœ¨ã®æ™‚åˆ»ã‚’å–å¾—ã—ã€
-	QueryPerformanceCounter(&m_Counter);                     // ç¾åœ¨ã®æ™‚åˆ»ã‚’å–å¾—ã—ã€
-	LONGLONG LongDef = m_Counter.QuadPart - beforeFrameClock;    // å·®åˆ†ã‚«ã‚¦ãƒ³ãƒˆæ•°ã‚’ç®—å‡ºã™ã‚‹ã€‚
-	double dDef = (double)LongDef;                             // å€ç²¾åº¦æµ®å‹•å°æ•°ç‚¹ã«å¤‰æ›
-	beforeFrameClock = m_Counter.QuadPart;                       // ç¾åœ¨ã®æ™‚åˆ»ã‚’ä¿æŒ
+double Time::GetNowDeltaTime() {                    // Œ»İ‚Ì‚ğæ“¾‚µA
+	QueryPerformanceCounter(&m_Counter);                     // Œ»İ‚Ì‚ğæ“¾‚µA
+	LONGLONG LongDef = m_Counter.QuadPart - beforeFrameClock;    // ·•ªƒJƒEƒ“ƒg”‚ğZo‚·‚éB
+	double dDef = (double)LongDef;                             // ”{¸“x•‚“®¬”“_‚É•ÏŠ·
+	beforeFrameClock = m_Counter.QuadPart;                       // Œ»İ‚Ì‚ğ•Û
 
 	interval += dDef / clocksPerSecond;
 															   

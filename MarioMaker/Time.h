@@ -8,31 +8,31 @@ public:
 	
 	static void Init();
 
-	//現在のFPSを取得します
+	//���݂�FPS���擾���܂�
 	static int GetFPS();
-	//今現在アップデート出来るかを取得します(設定FPSを超えないようにしています)
+	//�����݃A�b�v�f�[�g�o���邩���擾���܂�(�ݒ�FPS�𒴂��Ȃ��悤�ɂ��Ă��܂�)
 	static bool IsUpdate();
 
-	//1フレーム前との時間の差を取得します
+	//1�t���[���O�Ƃ̎��Ԃ̍����擾���܂�
 	static double GetDeltaTime();
 
-	//1フレーム前との時間の差(TimeScaleによらない)を取得します
+	//1�t���[���O�Ƃ̎��Ԃ̍�(TimeScale�ɂ��Ȃ�)���擾���܂�
 	static double GetUnscaledDeltaTime();
 
-	//スタートしてからのフレーム数を取得します
+	//�X�^�[�g���Ă���̃t���[�������擾���܂�
 	static int GetFrameFromStart();
 
-	//スタートしてからの時間を取得します
+	//�X�^�[�g���Ă���̎��Ԃ��擾���܂�
 	static double GetTimeFromStart();
 
-	//時間が流れる速さを変更します
+	//���Ԃ�����鑬����ύX���܂�
 	static void SetTimeSpeed(float speed);
-	//時間が流れる速さを取得します
+	//���Ԃ�����鑬�����擾���܂�
 	static float GetTimeSpeed();
 
-	//現在のDeltaTimeを取得します
-	//もしこれが1/DEFAULT_FPSを大きく超えていた場合処理を中断することをお勧めします
-	//一回の実行で使用する時間はほぼ0msです
+	//���݂�DeltaTime���擾���܂�
+	//�������ꂪ1/DEFAULT_FPS��傫�������Ă����ꍇ�����𒆒f���邱�Ƃ������߂��܂�
+	//���̎��s�Ŏg�p���鎞�Ԃ͂ق�0ms�ł�
 	static double GetNowDeltaTime();
 
 private :

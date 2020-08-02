@@ -11,10 +11,10 @@ class ObjectManager{
 	friend class GameObject;
 public:
 
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«ç™»éŒ²ã™ã‚‹ã€‚ç®¡ç†å¯¾è±¡ã§ãªã„ã¨è‡ªå‹•çš„ã«Startã‚‚Updateã‚‚å‘¼ã°ã‚Œãªã„ã€‚
+	//ƒIƒuƒWƒFƒNƒgƒ}ƒl[ƒWƒƒ[‚É“o˜^‚·‚éBŠÇ—‘ÎÛ‚Å‚È‚¢‚Æ©“®“I‚ÉStart‚àUpdate‚àŒÄ‚Î‚ê‚È‚¢B
 	static GameObject* Instantiate(GameObject* instance);
 
-	//instanceãŒç®¡ç†å¯¾è±¡ã«å…¥ã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã®ç¢ºèª
+	//instance‚ªŠÇ—‘ÎÛ‚É“ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ÌŠm”F
 	static bool CheckInstance(GameObject* instance);
 
 	static void Awake();
@@ -32,7 +32,7 @@ public:
 
 private:
 	
-	//ç®¡ç†å¯¾è±¡ã‹ã‚‰å¤–ã—deleteã™ã‚‹ã€‚
+	//ŠÇ—‘ÎÛ‚©‚çŠO‚µdelete‚·‚éB
 	static void Destroy(GameObject* instance);
 
 	static vector<GameObject*> objects;

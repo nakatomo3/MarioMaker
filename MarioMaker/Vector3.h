@@ -5,19 +5,19 @@
 class Vector3 {
 public:
 
-	//x,y,zæˆåˆ†ã‚’0ã«ã™ã‚‹åˆæœŸåŒ–
+	//x,y,z¬•ª‚ğ0‚É‚·‚é‰Šú‰»
 	Vector3() {
 		x, y, z = 0;
 	}
 
-	//x,yæˆåˆ†ã‚’æŒ‡å®šã™ã‚‹åˆæœŸåŒ–
+	//x,y¬•ª‚ğw’è‚·‚é‰Šú‰»
 	Vector3(float X, float Y) {
 		x = X;
 		y = Y;
 		z = 0;
 	}
 
-	//x,y,zæˆåˆ†ã‚’æŒ‡å®šã™ã‚‹åˆæœŸåŒ–
+	//x,y,z¬•ª‚ğw’è‚·‚é‰Šú‰»
 	Vector3(float X, float Y, float Z) {
 		x = X;
 		y = Y;
@@ -32,7 +32,7 @@ public:
 
 	//-------------------------operator-----------------------
 
-	//è¶³ã—ç®—
+	//‘«‚µZ
 	Vector3 operator+(Vector3 vector) {
 		return Vector3(x + vector.x, y + vector.y, z + vector.z);
 	};
@@ -43,7 +43,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//å¼•ãç®—
+	//ˆø‚«Z
 	Vector3 operator-(Vector3 vector) {
 		return Vector3(x - vector.x, y - vector.y, z - vector.z);
 	};
@@ -54,7 +54,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//æ›ã‘ç®—
+	//Š|‚¯Z
 	Vector3 operator* (float value) {
 		return Vector3(x * value, y * value, z * value);
 	};
@@ -65,7 +65,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//å‰²ã‚Šç®—
+	//Š„‚èZ
 	Vector3 operator/ (float value) {
 		return Vector3(x / value, y / value, z / value);
 	};
@@ -76,9 +76,9 @@ public:
 		return Vector3(x, y, z);
 	};
 
-#pragma region D3DXVECTORã¨ã®è¨ˆç®—
+#pragma region D3DXVECTOR‚Æ‚ÌŒvZ
 
-	//è¶³ã—ç®—
+	//‘«‚µZ
 	Vector3 operator+(D3DXVECTOR3 vector) {
 		return Vector3(x + vector.x, y + vector.y, z + vector.z);
 	};
@@ -89,7 +89,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//å¼•ãç®—
+	//ˆø‚«Z
 	Vector3 operator-(D3DXVECTOR3 vector) {
 		return Vector3(x - vector.x, y - vector.y, z - vector.z);
 	};
@@ -100,7 +100,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//æ›ã‘ç®—
+	//Š|‚¯Z
 	Vector3 operator*=(D3DXVECTOR3 vector) {
 		x *= vector.x;
 		y *= vector.y;
@@ -108,7 +108,7 @@ public:
 		return Vector3(x, y, z);
 	};
 
-	//å‰²ã‚Šç®—
+	//Š„‚èZ
 	Vector3 operator/=(D3DXVECTOR3 vector) {
 		x /= vector.x;
 		y /= vector.y;
@@ -117,12 +117,12 @@ public:
 	};
 #pragma endregion
 
-	//å†…ç©
+	//“àÏ
 	float operator*(Vector3 vector) {
 		return x * vector.x + y * vector.y + z * vector.z;
 	}
 
-	//å¤–ç©
+	//ŠOÏ
 	Vector3 operator^(Vector3 vector) {
 		return Vector3(
 			y*vector.z - z * vector.y,
@@ -146,12 +146,12 @@ public:
 	}
 
 
-	//é•·ã•ã‚’è¿”ã™é–¢æ•°
+	//’·‚³‚ğ•Ô‚·ŠÖ”
 	float Magnitude() {
 		return sqrt(x * x + y * y + z * z);
 	}
 
-	//å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿”ã™é–¢æ•°
+	//’PˆÊƒxƒNƒgƒ‹‚ğ•Ô‚·ŠÖ”
 	Vector3 UnitVector() {
 		return Vector3(x / Magnitude(), y / Magnitude(), z / Magnitude());
 	}

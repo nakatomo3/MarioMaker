@@ -41,7 +41,7 @@ int APIENTRY WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR lpCmdLine
 
 
 //=============================================================================
-// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
+// ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
 //=============================================================================
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wparam, LPARAM lparam) {
 
@@ -86,10 +86,10 @@ void Init(HINSTANCE instance, int cmdShow) {
 		NULL
 	};
 
-	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
+	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
 	RegisterClassEx(&wcex);
 
-	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
+	// ƒEƒBƒ“ƒhƒE‚Ìì¬
 	window = CreateWindowEx(0,
 		CLASS_NAME,
 		WINDOW_NAME,
@@ -104,7 +104,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 		NULL);
 
 
-	// åˆæœŸåŒ–å‡¦ç†(ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã—ã¦ã‹ã‚‰è¡Œã†)
+	// ‰Šú‰»ˆ—(ƒEƒBƒ“ƒhƒE‚ğì¬‚µ‚Ä‚©‚çs‚¤)
 	LogWriter::Init();
 	RendererManager::Init();
 	TagManager::Init();
@@ -114,11 +114,11 @@ void Init(HINSTANCE instance, int cmdShow) {
 	Input::Init(_hWnd);
 
 
-	//ã‚·ãƒ¼ãƒ³ã®ä½œæˆãªã©
+	//ƒV[ƒ“‚Ìì¬‚È‚Ç
 	Scene* scene = new Scene("hoge");
 	//SceneManager::LoadScene("hoge");
 
-	camera = new GameObject("ã‚«ãƒ¡ãƒ©");
+	camera = new GameObject("ƒJƒƒ‰");
 	camera->AddComponent<Camera>();
 	ObjectManager::Instantiate(camera);
 	camera->SetPosition(Vector3(0, 2, 0));
@@ -129,7 +129,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 	ObjectManager::Instantiate(ui);
 	ui->SetPosition(Vector3(SCREEN_CENTER_X, SCREEN_CENTER_Y, 0));
 	auto text = ui->AddComponent<Text>();
-	text->SetText("ãƒ‡ãƒãƒƒã‚°æƒ…å ±");
+	text->SetText("ƒfƒoƒbƒOî•ñ");
 	text->SetFontSize(18);
 	text->SetColor(D3DXVECTOR4(1, 1, 1, 1));
 	text->SetPosition(Vector3(-90, -9));
@@ -171,7 +171,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 	ObjectManager::Instantiate(imageObj);
 	
 
-	player = new GameObject("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼");
+	player = new GameObject("ƒvƒŒƒCƒ„[");
 	//player->AddComponent<Player>();
 	player->AddComponent<SphereCollider>();
 	player->AddComponent<Quad>()->SetTexture(tex);
@@ -182,7 +182,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 	player->SetScale(Vector3(10, 10, 0));
 
 	for (int i = 0; i < 5; i++) {
-		auto target = new GameObject("ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ" + to_string(i));
+		auto target = new GameObject("ƒ^[ƒQƒbƒg" + to_string(i));
 		target->AddComponent<SphereCollider>();
 		target->AddComponent<Billboard>();
 		target->SetTag(ENEMY);
@@ -191,7 +191,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 
 	}
 
-	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤º(åˆæœŸåŒ–å‡¦ç†ã®å¾Œã«è¡Œã†)
+	// ƒEƒCƒ“ƒhƒE‚Ì•\¦(‰Šú‰»ˆ—‚ÌŒã‚És‚¤)
 	ShowWindow(window, cmdShow);
 	UpdateWindow(window);
 }
@@ -202,28 +202,28 @@ void Uninit() {
 	Input::Uninit();
 	LogWriter::Uninit();
 
-	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²ã‚’è§£é™¤
+	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^‚ğ‰ğœ
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
-	// çµ‚äº†å‡¦ç†
+	// I—¹ˆ—
 }
 
 void Update() {
 
-	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
+	// ƒƒbƒZ[ƒWƒ‹[ƒv
 	while (1) {
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-			if (msg.message == WM_QUIT) {// PostQuitMessage()ãŒå‘¼ã°ã‚ŒãŸã‚‰ãƒ«ãƒ¼ãƒ—çµ‚äº†
+			if (msg.message == WM_QUIT) {// PostQuitMessage()‚ªŒÄ‚Î‚ê‚½‚çƒ‹[ƒvI—¹
 				break;
 			} else {
-				// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ç¿»è¨³ã¨ãƒ‡ã‚£ã‚¹ãƒ‘ãƒƒãƒ
+				// ƒƒbƒZ[ƒW‚Ì–|–ó‚ÆƒfƒBƒXƒpƒbƒ`
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
 		} else {
 			if (Time::IsUpdate()) {
 
-				// æ›´æ–°å‡¦ç†
+				// XVˆ—
 				Input::Update();
 				CollisionManager::Update();
 				SceneManager::Update();
@@ -253,7 +253,7 @@ void Update() {
 				}
 				fps->SetText(1 / Time::GetDeltaTime());
 
-				// æç”»å‡¦ç†
+				// •`‰æˆ—
 				RendererManager::Begin();
 				ObjectManager::Draw();
 				RendererManager::End();

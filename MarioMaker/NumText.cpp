@@ -20,30 +20,30 @@ void NumText::CreateTexture() {
 	unsigned int charCount = 0;
 	while (existDrawChar == true) {
 
-		// フォントの生成
+		// �t�H���g�̐���
 		LOGFONT lf = { fontSize, 0, 0, 0, 0, 0, 0, 0, SHIFTJIS_CHARSET, OUT_TT_ONLY_PRECIS,
-		CLIP_DEFAULT_PRECIS, PROOF_QUALITY, FIXED_PITCH | FF_MODERN, _T("ＭＳ ゴシック") };
+		CLIP_DEFAULT_PRECIS, PROOF_QUALITY, FIXED_PITCH | FF_MODERN, _T("�l�r �S�V�b�N") };
 		HFONT hFont;
 		if (!(hFont = CreateFontIndirect(&lf))) {
-			LogWriter::Log("フォントを正常に作成できませんでした");
+			LogWriter::Log("�t�H���g�𐳏�ɍ쐬�ł��܂���ł���");
 			return;
 		}
 
-		// デバイスコンテキスト取得
-		// デバイスにフォントを持たせないとGetGlyphOutline関数はエラーとなる
+		// �f�o�C�X�R���e�L�X�g�擾
+		// �f�o�C�X�Ƀt�H���g���������Ȃ���GetGlyphOutline�֐��̓G���[�ƂȂ�
 		HDC hdc = GetDC(NULL);
 		HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
 
-		// 文字コード取得
+		// �����R�[�h�擾
 		UINT code = 0;
 		TCHAR* readChar = c + charCount;
 #if _UNICODE
-		// unicodeの場合、文字コードは単純にワイド文字のUINT変換です
+		// unicode�̏ꍇ�A�����R�[�h�͒P���Ƀ��C�h������UINT�ϊ��ł�
 		code = (UINT)*c;
 #else
-		// マルチバイト文字の場合、
-		// 1バイト文字のコードは1バイト目のUINT変換、
-		// 2バイト文字のコードは[先導コード]*256 + [文字コード]です
+		// �}���`�o�C�g�����̏ꍇ�A
+		// 1�o�C�g�����̃R�[�h��1�o�C�g�ڂ�UINT�ϊ��A
+		// 2�o�C�g�����̃R�[�h��[�擱�R�[�h]*256 + [�����R�[�h]�ł�
 		if (IsDBCSLeadByte(*readChar)) {
 			code = (BYTE)readChar[0] << 8 | (BYTE)readChar[1];
 			charCount += 2;
@@ -59,7 +59,7 @@ void NumText::CreateTexture() {
 			return;
 		}
 
-		// フォントビットマップ取得
+		// �t�H���g�r�b�g�}�b�v�擾
 		TEXTMETRIC TM;
 		GetTextMetrics(hdc, &TM);
 		GLYPHMETRICS GM;
@@ -68,30 +68,30 @@ void NumText::CreateTexture() {
 		BYTE* ptr = new BYTE[size];
 		GetGlyphOutline(hdc, code, GGO_GRAY4_BITMAP, &GM, size, ptr, &Mat);
 
-		// デバイスコンテキストとフォントハンドルの開放
+		// �f�o�C�X�R���e�L�X�g�ƃt�H���g�n���h���̊J��
 		SelectObject(hdc, oldFont);
 		DeleteObject(hFont);
 		ReleaseDC(NULL, hdc);
 
 		//--------------------------------
-		// 書き込み可能テクスチャ作成
+		// �������݉\�e�N�X�`���쐬
 		//--------------------------------
 
-		// CPUで書き込みができるテクスチャを作成します。
-		// 自前でテクスチャに色をつけたい場合に使えます。
+		// CPU�ŏ������݂��ł���e�N�X�`�����쐬���܂��B
+		// ���O�Ńe�N�X�`���ɐF���������ꍇ�Ɏg���܂��B
 
-		// テクスチャ作成
+		// �e�N�X�`���쐬
 		D3D11_TEXTURE2D_DESC desc;
 		memset(&desc, 0, sizeof(desc));
 		desc.Width = GM.gmCellIncX;
 		desc.Height = TM.tmHeight;
 		desc.MipLevels = 1;
 		desc.ArraySize = 1;
-		desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	// RGBA(255,255,255,255)タイプ
+		desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;	// RGBA(255,255,255,255)�^�C�v
 		desc.SampleDesc.Count = 1;
-		desc.Usage = D3D11_USAGE_DYNAMIC;			// 動的（書き込みするための必須条件）
-		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;	// シェーダリソースとして使う
-		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	// CPUからアクセスして書き込みOK
+		desc.Usage = D3D11_USAGE_DYNAMIC;			// ���I�i�������݂��邽�߂̕K�{�����j
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;	// �V�F�[�_���\�[�X�Ƃ��Ďg��
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	// CPU����A�N�Z�X���ď�������OK
 
 		ID3D11Texture2D** ppTexture = 0;
 
@@ -103,9 +103,9 @@ void NumText::CreateTexture() {
 		/*wh->x = (float)desc.Width;
 		wh->y = (float)desc.Height;*/
 
-		// テクスチャに書き込み
-		// テクスチャをマップ（＝ロック）すると、
-		// メモリにアクセスするための情報がD3D10_MAPPED_TEXTURE2Dに格納されます。
+		// �e�N�X�`���ɏ�������
+		// �e�N�X�`�����}�b�v�i�����b�N�j����ƁA
+		// �������ɃA�N�Z�X���邽�߂̏��D3D10_MAPPED_TEXTURE2D�Ɋi�[����܂��B
 		D3D11_MAPPED_SUBRESOURCE mapped;
 		ID3D11Texture2D* fontTexture = 0;
 		RendererManager::GetDevice()->CreateTexture2D(&desc, NULL, &fontTexture);
@@ -118,10 +118,10 @@ void NumText::CreateTexture() {
 
 		BYTE* pBits = (BYTE*)mapped.pData;
 
-		// フォント情報の書き込み
-		// iOfs_x, iOfs_y : 書き出し位置(左上)
-		// iBmp_w, iBmp_h : フォントビットマップの幅高
-		// Level : α値の段階 (GGO_GRAY4_BITMAPなので17段階)
+		// �t�H���g���̏�������
+		// iOfs_x, iOfs_y : �����o���ʒu(����)
+		// iBmp_w, iBmp_h : �t�H���g�r�b�g�}�b�v�̕���
+		// Level : ���l�̒i�K (GGO_GRAY4_BITMAP�Ȃ̂�17�i�K)
 		int iOfs_x = GM.gmptGlyphOrigin.x;
 		int iOfs_y = TM.tmAscent - GM.gmptGlyphOrigin.y;
 		int iBmp_w = GM.gmBlackBoxX + (4 - (GM.gmBlackBoxX % 4)) % 4;
@@ -141,7 +141,7 @@ void NumText::CreateTexture() {
 
 		delete[] ptr;
 
-		// ShaderResourceViewの情報を作成する
+		// ShaderResourceView�̏����쐬����
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
 		ZeroMemory(&srvDesc, sizeof(srvDesc));
 		srvDesc.Format = desc.Format;
@@ -154,7 +154,7 @@ void NumText::CreateTexture() {
 		RendererManager::GetDevice()->CreateShaderResourceView(fontTexture, &srvDesc, &texture);
 		textures.emplace_back(texture);
 
-		// シェーダ用にサンプラを作成する
+		// �V�F�[�_�p�ɃT���v�����쐬����
 		D3D11_SAMPLER_DESC samDesc;
 		ZeroMemory(&samDesc, sizeof(samDesc));
 		samDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -182,12 +182,12 @@ void NumText::Draw() {
 	while (existDrawChar == true) {
 
 #if _UNICODE
-		// unicodeの場合、文字コードは単純にワイド文字のUINT変換です
+		// unicode�̏ꍇ�A�����R�[�h�͒P���Ƀ��C�h������UINT�ϊ��ł�
 		code = (UINT)*c;
 #else
-		// マルチバイト文字の場合、
-		// 1バイト文字のコードは1バイト目のUINT変換、
-		// 2バイト文字のコードは[先導コード]*256 + [文字コード]です
+		// �}���`�o�C�g�����̏ꍇ�A
+		// 1�o�C�g�����̃R�[�h��1�o�C�g�ڂ�UINT�ϊ��A
+		// 2�o�C�g�����̃R�[�h��[�擱�R�[�h]*256 + [�����R�[�h]�ł�
 		
 #endif
 
@@ -197,7 +197,7 @@ void NumText::Draw() {
 			return;
 		}
 
-		//何かあっても分かるように、仮のデータを入れておく
+		//���������Ă�������悤�ɁA���̃f�[�^�����Ă���
 
 		switch (to_string(number).c_str()[charIndex]) {
 		case '0':
@@ -242,7 +242,7 @@ void NumText::Draw() {
 		}
 
 		if ((charIndex * 2 == strlen(to_string(number).c_str()) || charIndex == digit) && charCount == 10) {
-			//ラストの桁が.だったら何もしない
+			//���X�g�̌���.�������牽�����Ȃ�
 			position = firstPos;
 			return;
 		}
@@ -287,7 +287,7 @@ void NumText::Draw() {
 
 		RendererManager::SetWorldViewProjection2D();
 
-		//頂点バッファ設定
+		//���_�o�b�t�@�ݒ�
 		UINT stride = sizeof(Vertex);
 		UINT offset = 0;
 		RendererManager::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
@@ -296,10 +296,10 @@ void NumText::Draw() {
 		ID3D11ShaderResourceView* texture = textures[charCount];
 		RendererManager::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
 
-		//プリミティブトポロジ設定
+		//�v���~�e�B�u�g�|���W�ݒ�
 		RendererManager::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-		//ポリゴン描画
+		//�|���S���`��
 		RendererManager::GetDeviceContext()->Draw(4, 0);
 
 		wasChange = false;

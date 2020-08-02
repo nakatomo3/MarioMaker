@@ -7,7 +7,7 @@
 #include "Vector2.h"
 using namespace std;
 
-#define	NUM_KEY_MAX	(256)	// ã‚­ãƒ¼ã®æœ€å¤§æ•°
+#define	NUM_KEY_MAX	(256)	// ƒL[‚ÌÅ‘å”
 
 #pragma comment (lib, "xinput.lib")
 
@@ -45,21 +45,21 @@ public:
 
 	static Vector2 GetCursorPosition();
 
-	//ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã®å›è»¢é‡
+	//ƒ}ƒEƒXƒzƒC[ƒ‹‚Ì‰ñ“]—Ê
 	static int GetMouseWheel();
-	//windowsã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‹ã‚‰å–å¾—ã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã€ä½¿ç”¨ç¦æ­¢
+	//windows‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”‚©‚çæ“¾‚·‚é‚½‚ß‚Ég—pAg—p‹Ö~
 	static void SetMouseWheel(int value);
 
-	//pathã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿å§‹ã‚ã¾ã™
+	//path‚Ìƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İn‚ß‚Ü‚·
 	static bool StartLogRead(string path);
-	//folder/pathã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿å§‹ã‚ã¾ã™
+	//folder/path‚Ìƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İn‚ß‚Ü‚·
 	static bool StartLogRead(string folder, string path);
-	//å…¥åŠ›ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãè¾¼ã¿å§‹ã‚ã¾ã™
+	//“ü—ÍƒƒOƒtƒ@ƒCƒ‹‚ğ‘‚«‚İn‚ß‚Ü‚·
 	static bool StartLogWrite();
-	//pathã®ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãè¾¼ã¿å§‹ã‚ã¾ã™
+	//path‚ÌƒƒOƒtƒ@ƒCƒ‹‚ğ‘‚«‚İn‚ß‚Ü‚·
 	static bool StartLogWrite(string path);
-	//folder/pathã®ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ›¸ãè¾¼ã¿å§‹ã‚ã¾ã™
-	//folderã¯ç„¡ã‹ã£ãŸã‚‰è‡ªå‹•ã§ä½œã‚Šã¾ã™ãŒã€ç„¡ã„çŠ¶æ…‹ã§éšå±¤æ§‹é€ ã§æŒ‡å®šã™ã‚‹ã¨å¤±æ•—ã—ã¾ã™
+	//folder/path‚ÌƒƒOƒtƒ@ƒCƒ‹‚ğ‘‚«‚İn‚ß‚Ü‚·
+	//folder‚Í–³‚©‚Á‚½‚ç©“®‚Åì‚è‚Ü‚·‚ªA–³‚¢ó‘Ô‚ÅŠK‘w\‘¢‚Åw’è‚·‚é‚Æ¸”s‚µ‚Ü‚·
 	static bool StartLogWrite(string folder, string path);
 
 	static void EndLogReadWrite();

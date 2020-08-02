@@ -17,89 +17,89 @@ public:
 	void Destroy() override final;
 	void Destroy(float time);
 
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’å–å¾—ã—ã¾ã™
+	//ƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetPosition();
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™ã‚’è¨­å®šã—ã¾ã™
+	//ƒIƒuƒWƒFƒNƒg‚ÌÀ•W‚ğİ’è‚µ‚Ü‚·
 	void SetPosition(Vector3 newPos);
 
-	//è¦ªã¨ã®ç›¸å¯¾åº§æ¨™ã‚’å–å¾—ã—ã¾ã™
+	//e‚Æ‚Ì‘Š‘ÎÀ•W‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetLocalPosition();
-	//è¦ªã¨ã®ç›¸å¯¾åº§æ¨™ã‚’è¨­å®šã—ã¾ã™
+	//e‚Æ‚Ì‘Š‘ÎÀ•W‚ğİ’è‚µ‚Ü‚·
 	void SetLocalPosition(Vector3 newPos);
 
-	//ç¾åœ¨ã®å¤§ãã•ã‚’å–å¾—ã—ã¾ã™
+	//Œ»İ‚Ì‘å‚«‚³‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetScale();
-	//å¤§ãã•ã‚’è¨­å®šã—ã¾ã™
+	//‘å‚«‚³‚ğİ’è‚µ‚Ü‚·
 	void SetScale(Vector3 newScale);
 
-	//ç¾åœ¨ã®å›è»¢ã‚’å–å¾—ã—ã¾ã™
+	//Œ»İ‚Ì‰ñ“]‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetRotation();
-	//å›è»¢è§’åº¦ã‚’è¨­å®šã—ã¾ã™
+	//‰ñ“]Šp“x‚ğİ’è‚µ‚Ü‚·
 	void SetRotation(Vector3 newRotation);
 
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè‡ªä½“ã®æ‹¡å¤§ç‡ã‚’å–å¾—ã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg©‘Ì‚ÌŠg‘å—¦‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetLocalScale();
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè‡ªä½“ã®æ‹¡å¤§ç‡ã‚’è¨­å®šã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg©‘Ì‚ÌŠg‘å—¦‚ğİ’è‚µ‚Ü‚·
 	void SetLocalScale(Vector3 newScale);
 
-	//ç¾åœ¨ã®é€Ÿåº¦ã‚’å–å¾—ã—ã¾ã™
+	//Œ»İ‚Ì‘¬“x‚ğæ“¾‚µ‚Ü‚·
 	Vector3 GetVelocity();
-	//é€Ÿåº¦ã‚’è¨­å®šã—ã¾ã™
+	//‘¬“x‚ğİ’è‚µ‚Ü‚·
 	void SetVelocity(Vector3 newVelocity);
 
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ã‚’å–å¾—ã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚ğæ“¾‚µ‚Ü‚·
 	string GetName();
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ã‚’è¨­å®šã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚ğİ’è‚µ‚Ü‚·
 	void SetName(string newName);
 
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚°ã‚’å–å¾—ã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ^ƒO‚ğæ“¾‚µ‚Ü‚·
 	Tag GetTag();
-	//ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¿ã‚°ã‚’è¨­å®šã—ã¾ã™
+	//‚±‚ÌƒIƒuƒWƒFƒNƒg‚Éƒ^ƒO‚ğİ’è‚µ‚Ü‚·
 	void SetTag(Tag _tag);
-	//ã‚¿ã‚°ã¨targetãŒä¸€è‡´ã—ã¦ã„ã‚‹ã‹ã‚’è¿”ã—ã¾ã™
+	//ƒ^ƒO‚Ætarget‚ªˆê’v‚µ‚Ä‚¢‚é‚©‚ğ•Ô‚µ‚Ü‚·
 	bool CompareTag(Tag target);
 
-	//è¦ªã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã—ã¾ã™
+	//e‚ÌƒIƒuƒWƒFƒNƒg‚ğæ“¾‚µ‚Ü‚·
 	GameObject* GetParent();
-	//è¦ªã‚’è¨­å®šã—ã¾ã™
+	//e‚ğİ’è‚µ‚Ü‚·
 	void SetParent(GameObject* parent);
 
-	//indexç•ªç›®ã®å­ä¾›ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã—ã¾ã™
+	//index”Ô–Ú‚Ìq‹ŸƒIƒuƒWƒFƒNƒg‚ğæ“¾‚µ‚Ü‚·
 	GameObject* GetChild(int index);
-	//å­ä¾›ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ•°ã‚’å–å¾—ã—ã¾ã™
+	//q‹ŸƒIƒuƒWƒFƒNƒg‚Ì”‚ğæ“¾‚µ‚Ü‚·
 	unsigned int GetChildCount();
-	//å­ä¾›ã‚’è¿½åŠ ã—ã¾ã™
+	//q‹Ÿ‚ğ’Ç‰Á‚µ‚Ü‚·
 	void AddChild(GameObject* child);
 
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å›è»¢ã•ã›ã¾ã™
+	//ƒIƒuƒWƒFƒNƒg‚ğ‰ñ“]‚³‚¹‚Ü‚·
 	void Rotate(Vector3 angle);
 	void Rotate(float x, float y, float z);
 
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãã®æ–¹å‘ã«å‘ã‹ã›ã¾ã™
-	//ã‚„ã‚ŠãŸã‹ã£ãŸã‘ã©æ„å‘³åˆ†ã‹ã‚‰ã‚“ã®ã§ä¸€æ—¦ä¿ç•™
+	//ƒIƒuƒWƒFƒNƒg‚ğ‚»‚Ì•ûŒü‚ÉŒü‚©‚¹‚Ü‚·
+	//‚â‚è‚½‚©‚Á‚½‚¯‚ÇˆÓ–¡•ª‚©‚ç‚ñ‚Ì‚Åˆê’U•Û—¯
 	//void LookAt(Vector3 target);
 
-	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç§»å‹•ã•ã›ã¾ã™
+	//ƒIƒuƒWƒFƒNƒg‚ğˆÚ“®‚³‚¹‚Ü‚·
 	void Move(Vector3 range);
 	void Move(float x, float y, float z);
 
 	template<typename T>
 	Component* GetComponent(T* t) {
-		//ãã‚‚ãã‚‚Componentå‹ãªã®ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹
+		//‚»‚à‚»‚àComponentŒ^‚È‚Ì‚©‚ğƒ`ƒFƒbƒN‚·‚é
 		Component* cast_t = dynamic_cast<Component*>(t);
-		//å¼•æ•°ã¯ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã§ã‚ã‚‹
+		//ˆø”‚ÍƒRƒ“ƒ|[ƒlƒ“ƒg‚Å‚ ‚é
 		if (cast_t != NULL) {
 			for (unsigned int i = 0; i < components.size(); i++) {
 				Component* checkComponent = dynamic_cast<T*>(components[i]);
 				if (checkComponent != NULL) {
-					//æ­£å¸¸ã«è¦‹ã¤ã‹ã£ãŸ
+					//³í‚ÉŒ©‚Â‚©‚Á‚½
 					return components[i];
 				}
 			}
-			//å¼•æ•°ã¯ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã ã£ãŸãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
+			//ˆø”‚ÍƒRƒ“ƒ|[ƒlƒ“ƒg‚¾‚Á‚½‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½
 			return nullptr;
 		} else {
-			//å¼•æ•°ãŒã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã˜ã‚ƒãªã‹ã£ãŸ
+			//ˆø”‚ªƒRƒ“ƒ|[ƒlƒ“ƒg‚¶‚á‚È‚©‚Á‚½
 			return nullptr;
 		}
 	}
@@ -109,29 +109,29 @@ public:
 		for (unsigned int i = 0; i < components.size(); i++) {
 			Component* checkComponent = dynamic_cast<T*>(components[i]);
 			if (checkComponent != NULL) {
-				//æ­£å¸¸ã«è¦‹ã¤ã‹ã£ãŸ
+				//³í‚ÉŒ©‚Â‚©‚Á‚½
 				return components[i];
 			}
 		}
 		return nullptr;
 	}
 
-	//éæ¨å¥¨
-	//åŒç¨®é¡ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¤‡æ•°ã‚ã‚‹å ´åˆã«ä½¿ç”¨ã€countç•ªç›®ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿”ã™
+	//”ñ„§
+	//“¯í—Ş‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ª•¡”‚ ‚éê‡‚Ég—pAcount”Ô–Ú‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ•Ô‚·
 	template<typename T>
 	T* GetComponent(int count) {
 		vector<T> returnComponents;
 		for (unsigned int i = 0; i < components.size(); i++) {
 			Component* checkComponent = dynamic_cast<T*>(components[i]);
 			if (checkComponent != NULL) {
-				//æ­£å¸¸ã«è¦‹ã¤ã‹ã£ãŸ
+				//³í‚ÉŒ©‚Â‚©‚Á‚½
 				returnComponents.emplace_back(components[i]);
 			}
 		}
 		if (returnComponents.size() > count) {
 			return returnComponents[count];
 		} else {
-			LogWriter::Log("GetComponentã®%dç•ªç›®ã¯è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ", count);
+			LogWriter::Log("GetComponent‚Ì%d”Ô–Ú‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½", count);
 			return nullptr;
 		}
 	}
@@ -142,17 +142,17 @@ public:
 		for (unsigned int i = 0; i < components.size(); i++) {
 			Component* checkComponent = dynamic_cast<T*>(components[i]);
 			if (checkComponent != NULL) {
-				//æ­£å¸¸ã«è¦‹ã¤ã‹ã£ãŸ
+				//³í‚ÉŒ©‚Â‚©‚Á‚½
 				returnComponents.emplace_back(components[i]);
 			}
 		}
 		return returnComponents;
 	}
 
-	//[éæ¨å¥¨]ã€€ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—ã—ã¾ã™ã€‚num=ä¸Šã‹ã‚‰æ•°ãˆãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ•°ã€‚
+	//[”ñ„§]@ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾‚µ‚Ü‚·Bnum=ã‚©‚ç”‚¦‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì”B
 	Component* GetComponent(unsigned int num);
 
-	//ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã©ã‚Œã ã‘ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ã‹ã‚’ã‚«ã‚¦ãƒ³ãƒˆã—ã¾ã™ã€‚
+	//ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚Ç‚ê‚¾‚¯ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚©‚ğƒJƒEƒ“ƒg‚µ‚Ü‚·B
 	unsigned int GetComponentCount();
 
 	void AddComponent(Component* component);
@@ -169,7 +169,7 @@ public:
 			for (unsigned int i = 0; i < components.size(); i++) {
 				Component* checkComponent = dynamic_cast<T*>(components[i]);
 				if (checkComponent != NULL) {
-					//æ­£å¸¸ã«è¦‹ã¤ã‹ã£ãŸ
+					//³í‚ÉŒ©‚Â‚©‚Á‚½
 					Component* cacheComponent = components[i];
 					components[i] = components[components.size() - 1];
 					components.pop_back();
@@ -177,10 +177,10 @@ public:
 					return;
 				}
 			}
-			//å¼•æ•°ã¯ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã ã£ãŸãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
+			//ˆø”‚ÍƒRƒ“ƒ|[ƒlƒ“ƒg‚¾‚Á‚½‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½
 			return;
 		} else {
-			//å¼•æ•°ãŒã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã˜ã‚ƒãªã‹ã£ãŸ
+			//ˆø”‚ªƒRƒ“ƒ|[ƒlƒ“ƒg‚¶‚á‚È‚©‚Á‚½
 			return;
 		}
 	}

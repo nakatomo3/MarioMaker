@@ -74,7 +74,7 @@ void Cube::Init() {
 	vertex[12].diffuse = D3DXVECTOR4(1, 1, 1, 1);
 	vertex[12].texUV = D3DXVECTOR2(1, 1);
 
-	//ç¸®é€€
+	//k‘Þ
 	vertex[13].position = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 	vertex[13].normal = D3DXVECTOR3(0, 0, 0);
 	vertex[13].diffuse = D3DXVECTOR4(1, 1, 1, 1);
@@ -129,7 +129,7 @@ void Cube::Draw() {
 	RendererManager::SetCullMode(D3D11_CULL_NONE);
 	Vector3 pos = Vector3(0, 0, 0);
 	if (gameObject == nullptr) {
-		LogWriter::Log("ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒGameObjectã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œãšã«ä½¿ç”¨ã•ã‚Œã¾ã—ãŸã€‚GameObjectã«ã‚¢ã‚¿ãƒƒãƒã—ãŸã†ãˆã§ä½¿ç”¨ã—ã¦ãã ã•ã„");
+		LogWriter::Log("ƒXƒvƒ‰ƒCƒg‚ªGameObject‚ÉƒAƒ^ƒbƒ`‚³‚ê‚¸‚ÉŽg—p‚³‚ê‚Ü‚µ‚½BGameObject‚ÉƒAƒ^ƒbƒ`‚µ‚½‚¤‚¦‚ÅŽg—p‚µ‚Ä‚­‚¾‚³‚¢");
 		return;
 	} else {
 		pos = gameObject->GetPosition() - gameObject->GetLocalPosition();
@@ -137,7 +137,7 @@ void Cube::Draw() {
 
 	D3DXMATRIX world, mScale, mRot, mTrans, localPos;
 
-	//ãƒžãƒˆãƒªã‚¯ã‚¹è¨­å®š
+	//ƒ}ƒgƒŠƒNƒXÝ’è
 	D3DXMatrixScaling(&mScale, gameObject->GetScale().GetX() * scale.GetX(), gameObject->GetScale().GetY() * scale.GetY(), gameObject->GetScale().GetZ());
 	D3DXMatrixRotationYawPitchRoll(&mRot, gameObject->GetRotation().GetY(), gameObject->GetRotation().GetX(), gameObject->GetRotation().GetZ());
 	D3DXMatrixTranslation(&mTrans, pos.GetX(), pos.GetY(), pos.GetZ());
@@ -145,18 +145,18 @@ void Cube::Draw() {
 	world = localPos * mScale * mRot * mTrans;
 	RendererManager::SetWorldMatrix(&world);
 
-	//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®š
+	//’¸“_ƒoƒbƒtƒ@Ý’è
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	RendererManager::GetDeviceContext()->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®š
+	//ƒeƒNƒXƒ`ƒƒÝ’è
 	RendererManager::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
 
-	//ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒˆãƒãƒ­ã‚¸è¨­å®š
+	//ƒvƒŠƒ~ƒeƒBƒuƒgƒ|ƒƒWÝ’è
 	RendererManager::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	//ãƒãƒªã‚´ãƒ³æç”»
+	//ƒ|ƒŠƒSƒ“•`‰æ
 	RendererManager::GetDeviceContext()->Draw(18, 0);
 	RendererManager::SetCullMode(D3D11_CULL_BACK);
 }

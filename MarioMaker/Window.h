@@ -7,8 +7,8 @@
 #include "GameObject.h"
 using namespace std;
 
-//Windowクラス自体は一番上のバー部分とボタン各種のみ
-//これ以外の子供オブジェクトをまとめて表示非表示するための親用コンポーネント
+//Window�N���X���͈̂�ԏ�̃o�[�����ƃ{�^���e��̂�
+//����ȊO�̎q���I�u�W�F�N�g���܂Ƃ߂ĕ\����\�����邽�߂̐e�p�R���|�[�l���g
 class Window : public VisualComponent {
 public:
 	Window();

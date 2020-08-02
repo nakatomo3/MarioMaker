@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define SCREEN_WIDTH	(960)			// ウインドウの幅
 #define SCREEN_HEIGHT	(540)			// ウインドウの高さ
 

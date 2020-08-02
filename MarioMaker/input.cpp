@@ -56,7 +56,7 @@ void Input::Init(HWND _hwnd) {
 
 	InitInput();
 
-	//ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ãªã©ã®åˆæœŸåŒ–ã‚‚è¿½åŠ äºˆå®š
+	//ƒQ[ƒ€ƒpƒbƒh‚È‚Ç‚Ì‰Šú‰»‚à’Ç‰Á—\’è
 	for (int i = 0; i < 4; i++) {
 		XINPUT_STATE state;
 		controllers.emplace_back(state);
@@ -68,7 +68,7 @@ void Input::Uninit() {
 	if (inputFile != nullptr) {
 		fclose(inputFile);
 	}
-	LogWriter::Log("InputãŒæ­£å¸¸ã«çµ‚äº†ã—ã¾ã—ãŸ");
+	LogWriter::Log("Input‚ª³í‚ÉI—¹‚µ‚Ü‚µ‚½");
 }
 
 void Input::Update() {
@@ -136,7 +136,7 @@ void Input::Update() {
 				timer = 0;
 			}
 		} else {
-			LogWriter::Log("inputFileãŒnullã§ã™");
+			LogWriter::Log("inputFile‚ªnull‚Å‚·");
 		}
 	} else if (logFileState == READ && (strlen(logFilePath.c_str()) > 0)) {
 
@@ -163,7 +163,7 @@ void Input::Update() {
 			}
 			while (true) {
 				if (num > 0) {
-					//å…¥åŠ›åæ˜ 
+					//“ü—Í”½‰f
 					//LogWriter::Log("%x", readChar);
 					keyState[readChar] = 0x80;
 					readPos++;
@@ -181,17 +181,17 @@ void Input::Update() {
 	}
 }
 
-//å…¥åŠ›å€¤ï¼šVK_HOGE or 'A' or '0'ãªã©
+//“ü—Í’lFVK_HOGE or 'A' or '0'‚È‚Ç
 bool Input::GetKey(BYTE key) {
 	return (keyState[key] & 0x80);
 }
 
-//å…¥åŠ›å€¤ï¼šVK_HOGE or 'A' or '0'ãªã©
+//“ü—Í’lFVK_HOGE or 'A' or '0'‚È‚Ç
 bool Input::GetKeyDown(BYTE key) {
 	return (keyState[key] & 0x80 && !(oldKeyState[key] & 0x80));
 }
 
-//å…¥åŠ›å€¤ï¼šVK_HOGE or 'A' or '0'ãªã©
+//“ü—Í’lFVK_HOGE or 'A' or '0'‚È‚Ç
 bool Input::GetKeyUp(BYTE key) {
 	return (!(keyState[key] & 0x80) && oldKeyState[key] & 0x80);
 }
@@ -202,10 +202,10 @@ bool Input::GetMouse(MouseButton button) {
 
 bool Input::GetMouse(int button) {
 	if (button < 0) {
-		LogWriter::Log("GetMouseã¯0ä»¥ä¸Šã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í0ˆÈã‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	if (button > 2) {
-		LogWriter::Log("GetMouseã¯2ä»¥ä¸‹ã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í2ˆÈ‰º‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	return mouseState[button];
 }
@@ -216,10 +216,10 @@ bool Input::GetMouseDown(MouseButton button) {
 
 bool Input::GetMouseDown(int button) {
 	if (button < 0) {
-		LogWriter::Log("GetMouseã¯0ä»¥ä¸Šã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í0ˆÈã‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	if (button > 2) {
-		LogWriter::Log("GetMouseã¯2ä»¥ä¸‹ã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í2ˆÈ‰º‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	return mouseState[button] == true && mouseOldState[button] == false;;
 }
@@ -230,10 +230,10 @@ bool Input::GetMouseUp(MouseButton button) {
 
 bool Input::GetMouseUp(int button) {
 	if (button < 0) {
-		LogWriter::Log("GetMouseã¯0ä»¥ä¸Šã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í0ˆÈã‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	if (button > 2) {
-		LogWriter::Log("GetMouseã¯2ä»¥ä¸‹ã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("GetMouse‚Í2ˆÈ‰º‚É‚µ‚Ä‚­‚¾‚³‚¢");
 	}
 	return mouseState[button] == false && mouseOldState[button] == true;
 }
@@ -266,7 +266,7 @@ bool Input::StartLogRead(string path) {
 		inputFile = fopen(logFilePath.c_str(), "rb");
 		logFileState = READ;
 	} else {
-		LogWriter::Log("StartLogReadã®pathã¯1æ–‡å­—ä»¥ä¸Šã«ã—ã¦ãã ã•ã„");
+		LogWriter::Log("StartLogRead‚Ìpath‚Í1•¶šˆÈã‚É‚µ‚Ä‚­‚¾‚³‚¢");
 		logFileState = NONE;
 	}
 	return true;
@@ -278,27 +278,28 @@ bool Input::StartLogRead(string folder, string path) {
 
 bool Input::StartLogWrite() {
 	logFileState = WRITE;
-	time_t timer = time(NULL); //æ™‚åˆ»ã‚’å–å¾—ã™ã‚‹
-	struct tm *local = localtime(&timer); //ç¾åœ¨åœ°æ™‚åˆ»ã«å¤‰æ›ã™ã‚‹
+	time_t timer = time(NULL); //‚ğæ“¾‚·‚é
+	struct tm *local = localtime(&timer); //Œ»İ’n‚É•ÏŠ·‚·‚é
 
-	_mkdir("InputLogs"); //Logãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹
+	_mkdir("InputLogs"); //LogƒtƒHƒ‹ƒ_‚ğì¬‚·‚é
 	char folder[FOLDER_NAME_LENGTH];
-	sprintf(folder, "InputLogs/%04d%02d%02d", local->tm_year + 1900, local->tm_mon + 1, local->tm_mday); //ä½œæˆã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã®åå‰ã‚’å¹´æœˆæ—¥ã§æ±ºå®šã™ã‚‹
-	_mkdir(folder); //å¹´æœˆæ—¥ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã™ã‚‹
-	sprintf(inputPath, "InputLogs/%04d%02d%02d/%02d_%02d_%02d.log", local->tm_year + 1900, local->tm_mon + 1, local->tm_mday, local->tm_hour, local->tm_min, local->tm_sec); //ãƒ‘ã‚¹è¾¼ã¿ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®šã™ã‚‹
+	sprintf(folder, "InputLogs/%04d%02d%02d", local->tm_year + 1900, local->tm_mon + 1, local->tm_mday); //ì¬‚·‚éƒtƒHƒ‹ƒ_‚Ì–¼‘O‚ğ”NŒ“ú‚ÅŒˆ’è‚·‚é
+	_mkdir(folder); //”NŒ“úƒtƒHƒ‹ƒ_‚ğì¬‚·‚é
+	sprintf(inputPath, "InputLogs/%04d%02d%02d/%02d_%02d_%02d.log", local->tm_year + 1900, local->tm_mon + 1, local->tm_mday, local->tm_hour, local->tm_min, local->tm_sec); //ƒpƒX‚İ‚Ìƒtƒ@ƒCƒ‹–¼‚ğİ’è‚·‚é
 	inputFile = fopen(inputPath, "ab");
 	if (inputFile == NULL) {
 		return false;
 	}
-	LogWriter::Log("å…¥åŠ›ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ã¾ã—ãŸ");
+	LogWriter::Log("“ü—ÍƒƒOƒtƒ@ƒCƒ‹‚ğì¬‚µ‚Ü‚µ‚½");
 	return true;
 }
 
 bool Input::StartLogWrite(string path) {
-
+	return false;
 }
 
 bool Input::StartLogWrite(string folder, string path) {
+	return false;
 }
 
 void Input::EndLogReadWrite() {
@@ -314,7 +315,7 @@ void Input::EndLogReadWrite() {
 		logFileState = NONE;
 		break;
 	default:
-		LogWriter::Log("Inputã®ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿æ›¸ãã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãŒä¸æ­£ã§ã—ãŸã€‚é©æ­£ã‹ã©ã†ã‹ç¢ºã‹ã‚ã¦ãã ã•ã„");
+		LogWriter::Log("Input‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‘‚«ƒXƒe[ƒ^ƒX‚ª•s³‚Å‚µ‚½B“K³‚©‚Ç‚¤‚©Šm‚©‚ß‚Ä‚­‚¾‚³‚¢");
 		logFileState = NONE;
 		break;
 	}

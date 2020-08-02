@@ -7,28 +7,28 @@ class Component : public Object {
 public:
 	Component();
 
-	//コンポーネント(またはこれが入っているゲームオブジェクト)のActiveがオンになったら
+	//�R���|�[�l���g(�܂��͂��ꂪ�����Ă���Q�[���I�u�W�F�N�g)��Active���I���ɂȂ�����
 	virtual void OnEnabled() {}
 
-	//コンポーネント(またはこれが入っているゲームオブジェクト)のActiveがオフになったら
+	//�R���|�[�l���g(�܂��͂��ꂪ�����Ă���Q�[���I�u�W�F�N�g)��Active���I�t�ɂȂ�����
 	virtual void OnDisabled() {}
 
-	//初期化の一番最初に使用。
+	//�������̈�ԍŏ��Ɏg�p�B
 	virtual void Awake() {}
 
-	//一般的な初期化に使用。
+	//��ʓI�ȏ������Ɏg�p�B
 	virtual void Start() {}
 
-	//一番最初の毎フレームごとの更新に使用。
+	//��ԍŏ��̖��t���[�����Ƃ̍X�V�Ɏg�p�B
 	virtual void FirstUpdate() {}
 
-	//一般的な毎フレームごとの更新に使用。
+	//��ʓI�Ȗ��t���[�����Ƃ̍X�V�Ɏg�p�B
 	virtual void Update() {}
 
-	//一番最後の毎フレームごとの更新に使用。
+	//��ԍŌ�̖��t���[�����Ƃ̍X�V�Ɏg�p�B
 	virtual void LateUpdate() {}
 
-	//コンポーネント(またはこれが入っているゲームオブジェクト)が削除されたら
+	//�R���|�[�l���g(�܂��͂��ꂪ�����Ă���Q�[���I�u�W�F�N�g)���폜���ꂽ��
 	virtual void OnDestroy() {}
 
 	void SetActive(bool active) override;
@@ -41,6 +41,6 @@ protected :
 	~Component();
 
 private:
-	//使用禁止。gameObject.RemoveComponent(this)をすること
+	//�g�p�֎~�BgameObject.RemoveComponent(this)�����邱��
 	void Destroy() override final;
 };

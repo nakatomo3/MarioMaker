@@ -16,16 +16,16 @@ Texture::Texture(string _path) {
 Texture::~Texture() {
 }
 
-//0.5ms~(çµæ§‹é‡ã„ã€1920px:1080pxã®pngã§100ms)
+//0.5ms~(Œ‹\d‚¢A1920px:1080px‚Ìpng‚Å100ms)
 bool Texture::LoadTexture(string _path) {
 	if (path.size() == 0) {
 		return false;
 	}
 	D3DX11CreateShaderResourceViewFromFile(RendererManager::GetDevice(), path.c_str(), NULL, NULL, &texture, NULL);
 	if (texture == NULL) {
-		LogWriter::LogError("ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚ãƒ‘ã‚¹ï¼š%s", path.c_str());
+		LogWriter::LogError("ƒeƒNƒXƒ`ƒƒ‚Ì¶¬‚É¸”s‚µ‚Ü‚µ‚½BƒpƒXF%s", path.c_str());
 	} else {
-		LogWriter::Log("ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç”Ÿæˆã«æˆåŠŸã—ã¾ã—ãŸã€‚ãƒ‘ã‚¹ï¼š%s", path.c_str());
+		LogWriter::Log("ƒeƒNƒXƒ`ƒƒ‚Ì¶¬‚É¬Œ÷‚µ‚Ü‚µ‚½BƒpƒXF%s", path.c_str());
 	}
 	return true;
 }

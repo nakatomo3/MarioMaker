@@ -5,7 +5,7 @@
 using namespace std;
 class NumText :	public VisualComponent {
 public:
-	//å®Ÿè¡Œæ™‚é–“ï¼šæ–‡å­—æ•°ã«æ¯”ä¾‹ã€10æ–‡å­—ã§1msä»¥ä¸‹
+	//ÀsŠÔF•¶š”‚É”ä—áA10•¶š‚Å1msˆÈ‰º
 	void Draw();
 
 	void SetPosition(Vector3 newPos);
@@ -20,7 +20,7 @@ public:
 	void SetFontSize(int _size);
 	int GetFontSize();
 
-	//æœ‰åŠ¹æ¡æ•°ã®è¨­å®š
+	//—LŒøŒ…”‚Ìİ’è
 	void SetMinDigit(int maxDigit);
 	int GetMinDigit();
 
@@ -42,10 +42,10 @@ private:
 
 	D3DXVECTOR4 color = D3DXVECTOR4(1, 1, 1, 1);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«å·¦ä¸Šåº§æ¨™(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹¶ãÀ•W(0~1)
 	float tx, ty;
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚µãƒ³ãƒ—ãƒ«ã®å¤§ãã•(0~1)
+	//ƒeƒNƒXƒ`ƒƒƒTƒ“ƒvƒ‹‚Ì‘å‚«‚³(0~1)
 	float tw, th;
 
 	bool wasChange = false;

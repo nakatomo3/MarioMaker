@@ -14,13 +14,13 @@ public:
 
 	Texture(string _path);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
+	//ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
 	bool LoadTexture(string _path);
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒªãƒªãƒ¼ã‚¹
+	//ƒeƒNƒXƒ`ƒƒ‚ÌƒŠƒŠ[ƒX
 	void Release();
 
-	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®ç¿’å¾—
+	//ƒeƒNƒXƒ`ƒƒƒCƒ“ƒ^[ƒtƒF[ƒX‚ÌK“¾
 	ID3D11ShaderResourceView* GetTexture();
 	void SetTexture(ID3D11ShaderResourceView* _texture);
 

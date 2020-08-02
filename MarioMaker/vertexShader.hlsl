@@ -1,10 +1,10 @@
 
 
 //*****************************************************************************
-// å®šæ•°ãƒãƒƒãƒ•ã‚¡
+// ’è”ƒoƒbƒtƒ@
 //*****************************************************************************
 
-// ãƒãƒˆãƒªã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
+// ƒ}ƒgƒŠƒNƒXƒoƒbƒtƒ@
 cbuffer WorldBuffer : register( b0 )
 {
 	matrix World;
@@ -18,7 +18,7 @@ cbuffer ProjectionBuffer : register( b2 )
 	matrix Projection;
 }
 
-// ãƒãƒ†ãƒªã‚¢ãƒ«ãƒãƒƒãƒ•ã‚¡
+// ƒ}ƒeƒŠƒAƒ‹ƒoƒbƒtƒ@
 struct MATERIAL
 {
 	float4		Ambient;
@@ -26,7 +26,7 @@ struct MATERIAL
 	float4		Specular;
 	float4		Emission;
 	float		Shininess;
-	float3		Dummy;//16bitå¢ƒç•Œç”¨
+	float3		Dummy;//16bit‹«ŠE—p
 };
 
 cbuffer MaterialBuffer : register( b3 )
@@ -35,11 +35,11 @@ cbuffer MaterialBuffer : register( b3 )
 }
 
 
-// ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ•ã‚¡
+// ƒ‰ƒCƒgƒoƒbƒtƒ@
 struct LIGHT
 {
 	bool		Enable;
-	bool3		Dummy;//16bitå¢ƒç•Œç”¨
+	bool3		Dummy;//16bit‹«ŠE—p
 	float4		Direction;
 	float4		Diffuse;
 	float4		Ambient;
@@ -53,7 +53,7 @@ cbuffer LightBuffer : register( b4 )
 
 
 //=============================================================================
-// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
+// ’¸“_ƒVƒF[ƒ_
 //=============================================================================
 void main( in  float4 inPosition		: POSITION0,
 						  in  float4 inNormal		: NORMAL0,
