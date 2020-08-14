@@ -172,7 +172,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Billboard.cpp" />
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -190,7 +189,6 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="RendererManager.cpp" />
     <ClCompile Include="SaveManager.cpp" />
@@ -202,13 +200,14 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleScelectIcon.cpp" />
     <ClCompile Include="VariableManager.cpp" />
     <ClCompile Include="VisualComponent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Billboard.h" />
-    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
@@ -227,7 +226,6 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="RendererManager.h" />
     <ClInclude Include="SaveManager.h" />
@@ -241,6 +239,8 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleScelectIcon.h" />
     <ClInclude Include="VariableManager.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />

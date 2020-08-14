@@ -46,11 +46,23 @@
     <Filter Include="ソース ファイル\Components\DXEngine">
       <UniqueIdentifier>{79348f30-cec7-475e-909f-69a76c26b927}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Kadai">
-      <UniqueIdentifier>{5e059e3e-6813-452d-af14-3f4f131e3285}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\MarioMaker">
+      <UniqueIdentifier>{8c4931dd-c869-44fb-ad39-eb9dffbac3a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Kadai">
-      <UniqueIdentifier>{355348c7-811c-4e2b-aa76-c595e907aa58}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\MarioMaker">
+      <UniqueIdentifier>{0a062119-5f10-4f9f-9b8b-f0ffb60f4dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Scenes">
+      <UniqueIdentifier>{e6062f57-0afe-46b6-9e23-b8e9fc52ff85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Scenes">
+      <UniqueIdentifier>{96f97796-d628-49d5-8f04-b70b7be829b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Title">
+      <UniqueIdentifier>{8ad1af12-29c2-4f2b-a1d1-caf9016f4ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Title">
+      <UniqueIdentifier>{25ebf055-0ca4-4c78-9582-ae53cf487508}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,12 +147,6 @@
     <ClCompile Include="Billboard.cpp">
       <Filter>ソース ファイル\Components\DXEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ソース ファイル\Kadai</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Kadai</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>ソース ファイル\Components\DXEngine</Filter>
     </ClCompile>
@@ -155,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>ソース ファイル\Components\DXEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScelectIcon.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,12 +266,6 @@
     <ClInclude Include="Billboard.h">
       <Filter>ヘッダー ファイル\Components\DXEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ヘッダー ファイル\Kadai</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Kadai</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>ヘッダー ファイル\Components\DXEngine</Filter>
     </ClInclude>
@@ -274,6 +280,12 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>ヘッダー ファイル\Components\DXEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScelectIcon.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

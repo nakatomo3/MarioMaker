@@ -1,7 +1,7 @@
 #include "main.h"
 #include "DXEngine.h"
 
-#include "Player.h"
+#include "Title.h"
 
 #include <string>
 using namespace std;
@@ -15,11 +15,6 @@ void Update();
 HWND window;
 WNDCLASSEX wcex;
 MSG msg;
-
-GameObject* player;
-GameObject* camera;
-GameObject* ui;
-NumText* fps;
 
 HWND _hWnd;
 
@@ -115,10 +110,10 @@ void Init(HINSTANCE instance, int cmdShow) {
 
 
 	//シーンの作成など
-	Scene* scene = new Scene("hoge");
-	//SceneManager::LoadScene("hoge");
+	Scene* title = new Title("タイトル");
+	SceneManager::LoadScene(title);
 
-	camera = new GameObject("カメラ");
+	/*camera = new GameObject("カメラ");
 	camera->AddComponent<Camera>();
 	ObjectManager::Instantiate(camera);
 	camera->SetPosition(Vector3(0, 2, 0));
@@ -132,13 +127,13 @@ void Init(HINSTANCE instance, int cmdShow) {
 	text->SetText("デバッグ情報");
 	text->SetFontSize(18);
 	text->SetColor(D3DXVECTOR4(1, 1, 1, 1));
-	text->SetPosition(Vector3(-90, -9));
+	text->SetPosition(Vector3(-90, -9));*/
 
 	
 	/*image->SetTexture(tex);
 	image->SetPosition(Vector3(SCREEN_WIDTH - image->GetScale().GetX() / 2, image->GetScale().GetY() / 2, 0));
 	*/
-	auto imageObj = new GameObject("WindowContent");
+	/*auto imageObj = new GameObject("WindowContent");
 	auto image = imageObj->AddComponent<Image>();
 	image->SetPosition(Vector3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 60, 1));
 	image->SetScale(Vector2(200,120));
@@ -168,28 +163,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 	screenSizeY->SetColor(D3DXVECTOR4(0, 0, 0, 1));
 	screenSizeY->SetFontSize(20);
 	screenSizeY->SetPosition(Vector3(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2 + 80, 0));
-	ObjectManager::Instantiate(imageObj);
-	
-
-	player = new GameObject("プレイヤー");
-	//player->AddComponent<Player>();
-	player->AddComponent<SphereCollider>();
-	player->AddComponent<Quad>()->SetTexture(tex);
-	player->SetTag(PLAYER);
-	ObjectManager::Instantiate(player);
-
-	player->Rotate(Vector3(1.57f,0,0));
-	player->SetScale(Vector3(10, 10, 0));
-
-	for (int i = 0; i < 5; i++) {
-		auto target = new GameObject("ターゲット" + to_string(i));
-		target->AddComponent<SphereCollider>();
-		target->AddComponent<Billboard>();
-		target->SetTag(ENEMY);
-		target->SetPosition(Vector3(i * 2 - 4, 0, 5));
-		ObjectManager::Instantiate(target);
-
-	}
+	ObjectManager::Instantiate(imageObj);*/
 
 	// ウインドウの表示(初期化処理の後に行う)
 	ShowWindow(window, cmdShow);
@@ -231,27 +205,6 @@ void Update() {
 				ObjectManager::FirstUpdate();
 				ObjectManager::Update();
 				ObjectManager::LateUpdate();
-
-				camera->Move(Vector3(0, Input::GetMouseWheel() * 0.001f, 0));
-				if (Input::GetKey('Q')) {
-					camera->Rotate(0, 0.1f, 0);
-				}
-				if (Input::GetKey('E')) {
-					camera->Rotate(0, -0.1f, 0);
-				}
-				if (Input::GetKey('W')) {
-					camera->Move(0, 0, 0.1f);
-				}
-				if (Input::GetKey('A')) {
-					camera->Move(-0.1f, 0, 0);
-				}
-				if (Input::GetKey('S')) {
-					camera->Move(0, 0, -0.1f);
-				}
-				if (Input::GetKey('D')) {
-					camera->Move(0.1f, 0, 0);
-				}
-				fps->SetText(1 / Time::GetDeltaTime());
 
 				// 描画処理
 				RendererManager::Begin();
