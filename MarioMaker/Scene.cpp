@@ -18,10 +18,6 @@ void Scene::Load() {
 
 }
 
-void Scene::UnLoad() {
-	delete this;
-}
-
 void Scene::Update() {
 }
 

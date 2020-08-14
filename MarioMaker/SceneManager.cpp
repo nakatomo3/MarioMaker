@@ -40,7 +40,7 @@ void SceneManager::LoadScene(string name) {
 			sceneList[i]->Load();
 			sceneList[i]->Start();
 			if (nowScene != nullptr) {
-				nowScene->UnLoad();
+				nowScene->Unload();
 				LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
 			}
 			nowScene = sceneList[i];
@@ -88,13 +88,16 @@ void SceneManager::BackLoad(unsigned int num) {
 
 void SceneManager::Unload(Scene* scene) {
 	scene->Unload();
+	if (nowScene == scene) {
+		nowScene = nullptr;
+	}
 }
 
 void SceneManager::Unload() {
 	if (nowScene == nullptr) {
 		LogWriter::LogError("シーンがロードされていない状態でUnloadしようとしました。適切な挙動か確認してください");
 	} else {
-		nowScene->UnLoad();
+		nowScene->Unload();
 		nowScene = nullptr;
 	}
 }

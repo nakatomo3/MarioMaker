@@ -21,8 +21,6 @@ public:
 
 	void Destroy();
 
-	void Unload();
-
 protected:
 
 	~Scene();
@@ -40,7 +38,7 @@ private:
 	virtual void Start();
 
 	virtual void Load();
-	virtual void UnLoad();
+	virtual void Unload();
 
 	virtual void Update();
 
