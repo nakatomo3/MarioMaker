@@ -14,7 +14,12 @@ private:
 	bool isPlayMode = false;
 
 	SHORT beforeInputLY;
+	bool beforeInputB;
 
 	Texture* texture;
 	Image* image;
+
+	void Input();
+
+	void MovePosition();
 };
