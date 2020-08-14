@@ -13,6 +13,7 @@ GameObject* ObjectManager::Instantiate(GameObject* instance) {
 	if (SceneManager::GetNowScene() != nullptr) {
 		instance->scene = SceneManager::GetNowScene();
 	}
+	instance->Start();
 	return instance;
 }
 

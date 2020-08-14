@@ -188,6 +188,8 @@ public:
 	GameObject();
 	GameObject(string name);
 
+	void Start();
+
 	void Update();
 
 	void OnCollisionEnter(Collision* collision);

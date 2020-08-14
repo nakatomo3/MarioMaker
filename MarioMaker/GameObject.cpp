@@ -55,6 +55,14 @@ GameObject::GameObject(string _name) {
 	LogWriter::Log("%sというゲームオブジェクトが生成されました", name.c_str());
 }
 
+void GameObject::Start() {
+	for (unsigned int i = 0; i < GetComponentCount(); i++) {
+		if (GetComponent(i)->GetActive() == true) {
+			GetComponent(i)->Start();
+		}
+	}
+}
+
 void GameObject::Update() {
 	for (unsigned int j = 0; j < GetComponentCount(); j++) {
 		if (destroyTimer > 0) {
