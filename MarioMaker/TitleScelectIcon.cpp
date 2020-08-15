@@ -28,7 +28,25 @@ void TitleScelectIcon::Input() {
 	}
 
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && beforeInputB == false) {
-		LogWriter::Log("input");
+		//シーン移動
+		if (isPlayMode == true) {
+
+		} else {
+
+		}
+	}
+
+	if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.34f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.675f) {
+		if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.6f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.615f) {
+			if (Input::GetMouseDown(0)) {
+				//シーン移動
+			}
+		}
+		if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.6f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.615f) {
+			if (Input::GetMouseDown(0)) {
+				//シーン移動
+			}
+		}
 	}
 
 	beforeInputB = Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B;
