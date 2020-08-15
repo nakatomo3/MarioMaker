@@ -28,3 +28,4 @@
 #include "NumText.h"
 #include "Window.h"
 #include "Cube.h"
+#include "QuadCollider.h"

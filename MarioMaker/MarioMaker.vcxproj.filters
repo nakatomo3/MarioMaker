@@ -168,6 +168,9 @@
     <ClCompile Include="TitleScelectIcon.cpp">
       <Filter>ソース ファイル\MarioMaker\Title</Filter>
     </ClCompile>
+    <ClCompile Include="QuadCollider.cpp">
+      <Filter>ソース ファイル\Components\DXEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="TitleScelectIcon.h">
       <Filter>ヘッダー ファイル\MarioMaker\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadCollider.h">
+      <Filter>ヘッダー ファイル\Components\DXEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
