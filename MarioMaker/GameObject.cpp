@@ -12,9 +12,11 @@ void GameObject::Destroy() {
 	auto componentCount = components.size();
 	auto childCount = children.size();
 
-	for (unsigned int i = 0; i < componentCount; i++) {
-		Component* removeComponent = components[i];
-		RemoveComponent(removeComponent);
+	if (componentCount > 0) {
+		for (unsigned int i = 0; i < componentCount; i++) {
+			Component* removeComponent = components[0];
+			RemoveComponent(removeComponent);
+		}
 	}
 	if (childCount >= 1) {
 		for (unsigned int i = 0; i < childCount - 1; i++) {
@@ -120,12 +122,7 @@ bool GameObject::GetDestroyOnload() {
 }
 
 GameObject::~GameObject() {
-	unsigned int childSize = children.size();
-	LogWriter::Log("子供の数：%d\n", childSize);
-	for (unsigned int i = 0; i < childSize; i++) {
-		delete children[i];
-	}
-	LogWriter::Log("ゲームオブジェクトを削除しました\n");
+	LogWriter::Log("%sというオブジェクトを削除しました", name.c_str());
 }
 
 Vector3 GameObject::GetPosition() {

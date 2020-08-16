@@ -166,9 +166,10 @@ public:
 	void RemoveComponent(T* t) {
 		Component* cast_t = dynamic_cast<Component*>(t);
 		if (cast_t != NULL) {
-			for (unsigned int i = 0; i < components.size(); i++) {
+			auto componentCount = components.size();
+			for (unsigned int i = 0; i < componentCount; i++) {
 				Component* checkComponent = dynamic_cast<T*>(components[i]);
-				if (checkComponent != NULL) {
+				if (t == components[i]) {
 					//ê≥èÌÇ…å©Ç¬Ç©Ç¡ÇΩ
 					Component* cacheComponent = components[i];
 					components[i] = components[components.size() - 1];

@@ -40,6 +40,7 @@ void SceneManager::LoadScene(string name) {
 			sceneList[i]->Load();
 			sceneList[i]->Start();
 			if (nowScene != nullptr) {
+				ObjectManager::UnLoad(sceneList[i]);
 				nowScene->Unload();
 				LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
 			}
@@ -129,6 +130,7 @@ string SceneManager::GetSceneName(unsigned int number) {
 }
 
 void SceneManager::AddScene(Scene * scene) {
+	LogWriter::Log("%sというシーンを追加しました", scene->name.c_str());
 	sceneList.push_back(scene);
 }
 
