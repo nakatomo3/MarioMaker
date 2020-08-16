@@ -17,7 +17,7 @@ void TitleScelectIcon::Update() {
 }
 
 void TitleScelectIcon::OnDestroy() {
-	gameObject->RemoveComponent(image);
+	texture->Release();
 }
 
 void TitleScelectIcon::Input() {
@@ -30,9 +30,9 @@ void TitleScelectIcon::Input() {
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && beforeInputB == false) {
 		//シーン移動
 		if (isPlayMode == true) {
-
+			SceneManager::LoadScene("選択シーン");
 		} else {
-
+			SceneManager::LoadScene("編集シーン");
 		}
 	}
 
@@ -59,4 +59,5 @@ void TitleScelectIcon::MovePosition() {
 	} else {
 		image->SetPosition(Vector3(SCREEN_WIDTH * 0.35f, SCREEN_HEIGHT * 0.7f, 0));
 	}
+
 }

@@ -2,6 +2,8 @@
 #include "DXEngine.h"
 
 #include "Title.h"
+#include "EditScene.h"
+#include "SelectStageScene.h"
 
 #include <string>
 using namespace std;
@@ -112,6 +114,9 @@ void Init(HINSTANCE instance, int cmdShow) {
 	//シーンの作成など
 	Scene* title = new Title("タイトル");
 	SceneManager::LoadScene(title);
+
+	Scene* editScene = new EditScene("編集シーン");
+	Scene* selectScene = new SelectStageScene("選択シーン");
 
 	/*camera = new GameObject("カメラ");
 	camera->AddComponent<Camera>();

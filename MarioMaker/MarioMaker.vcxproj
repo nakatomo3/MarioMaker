@@ -178,6 +178,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EditScene.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScriptBase.cpp" />
+    <ClCompile Include="SelectStageScene.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="TagManager.cpp" />
     <ClCompile Include="Text.cpp" />
@@ -215,6 +217,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="EditScene.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DXEngine.h" />
     <ClInclude Include="GameObject.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScriptBase.h" />
+    <ClInclude Include="SelectStageScene.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SphereCollider.h" />

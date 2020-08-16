@@ -24,7 +24,7 @@ void Title::Load() {
 	selectIcon = new GameObject("選択アイコン");
 	selectIcon->AddComponent<TitleScelectIcon>();
 
-	modeObject = new GameObject();
+	modeObject = new GameObject("タイトル文字");
 	auto create = modeObject->AddComponent<Image>();
 	create->SetTexture(createTexture);
 	create->SetPosition(Vector3(SCREEN_CENTER_X * 0.9f, SCREEN_HEIGHT * 0.6f, 0));
@@ -51,9 +51,10 @@ void Title::Start() {
 }
 
 void Title::Unload() {
-	titleTexture->Release();
-
 	titleBackGround->Destroy();
 	selectIcon->Destroy();
 	camera->Destroy();
+	modeObject->Destroy();
+
+	titleTexture->Release();
 }

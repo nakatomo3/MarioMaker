@@ -171,6 +171,12 @@
     <ClCompile Include="QuadCollider.cpp">
       <Filter>ソース ファイル\Components\DXEngine</Filter>
     </ClCompile>
+    <ClCompile Include="EditScene.cpp">
+      <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectStageScene.cpp">
+      <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -292,6 +298,12 @@
     </ClInclude>
     <ClInclude Include="QuadCollider.h">
       <Filter>ヘッダー ファイル\Components\DXEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="EditScene.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectStageScene.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
