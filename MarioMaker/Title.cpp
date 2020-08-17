@@ -27,19 +27,19 @@ void Title::Load() {
 	modeObject = new GameObject("ƒ^ƒCƒgƒ‹•¶Žš");
 	auto create = modeObject->AddComponent<Image>();
 	create->SetTexture(createTexture);
-	create->SetPosition(Vector3(SCREEN_CENTER_X * 0.9f, SCREEN_HEIGHT * 0.6f, 0));
+	create->SetPosition(Vector3(SCREEN_HEIGHT * 0.8f, SCREEN_HEIGHT * 0.6f, 0));
 	create->SetScale(Vector2(SCREEN_HEIGHT * 0.21f, SCREEN_HEIGHT * 0.03f));
 	auto modeA = modeObject->AddComponent<Image>();
 	modeA->SetTexture(modeTexture);
-	modeA->SetPosition(Vector3(SCREEN_CENTER_X * 1.2f, SCREEN_HEIGHT * 0.6f, 0));
+	modeA->SetPosition(Vector3(SCREEN_HEIGHT * 1.2f, SCREEN_HEIGHT * 0.6f, 0));
 	modeA->SetScale(Vector2(SCREEN_HEIGHT * 0.15f, SCREEN_HEIGHT * 0.03f));
 	auto play = modeObject->AddComponent<Image>();
 	play->SetTexture(playTexture);
-	play->SetPosition(Vector3(SCREEN_CENTER_X * 0.9f, SCREEN_HEIGHT * 0.7f, 0));
+	play->SetPosition(Vector3(SCREEN_HEIGHT * 0.8f, SCREEN_HEIGHT * 0.7f, 0));
 	play->SetScale(Vector2(SCREEN_HEIGHT * 0.43f, SCREEN_HEIGHT * 0.03f));
 	auto modeB = modeObject->AddComponent<Image>();
 	modeB->SetTexture(modeTexture);
-	modeB->SetPosition(Vector3(SCREEN_CENTER_X * 1.2f, SCREEN_HEIGHT * 0.7f, 0));
+	modeB->SetPosition(Vector3(SCREEN_HEIGHT * 1.2f, SCREEN_HEIGHT * 0.7f, 0));
 	modeB->SetScale(Vector2(SCREEN_HEIGHT * 0.15f, SCREEN_HEIGHT * 0.03f));
 }
 
