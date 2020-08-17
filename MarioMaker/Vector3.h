@@ -58,6 +58,12 @@ public:
 	Vector3 operator* (float value) {
 		return Vector3(x * value, y * value, z * value);
 	};
+	Vector3 operator*= (float value) {
+		x *= value;
+		y *= value;
+		z *= value;
+		return Vector3(x, y, z);
+	}
 	Vector3 operator*=(Vector3 vector) {
 		x *= vector.x;
 		y *= vector.y;
