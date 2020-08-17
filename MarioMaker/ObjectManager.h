@@ -6,9 +6,11 @@ using namespace std;
 class GameObject;
 class Camera;
 class Scene;
+class SceneManager;
 
 class ObjectManager{
 	friend class GameObject;
+	friend class SceneManager;
 public:
 
 	//オブジェクトマネージャーに登録する。管理対象でないと自動的にStartもUpdateも呼ばれない。
@@ -36,5 +38,7 @@ private:
 	static void Destroy(GameObject* instance);
 
 	static vector<GameObject*> objects;
+
+	static bool isEndUpdate;
 	
 };

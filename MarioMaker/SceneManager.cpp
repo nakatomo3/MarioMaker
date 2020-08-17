@@ -4,6 +4,8 @@
 Scene* SceneManager::nowScene;
 vector<Scene*> SceneManager::sceneList;
 bool SceneManager::wasWorning;
+bool SceneManager::willLoadScene;
+Scene* SceneManager::loadScene;
 
 void SceneManager::Init() {
 	LogWriter::Log("シーンマネージャーが初期化されました");
@@ -37,17 +39,9 @@ void SceneManager::LoadScene(Scene* scene) {
 void SceneManager::LoadScene(string name) {
 	for (unsigned int i = 0; i < sceneList.size(); i++) {
 		if (sceneList[i]->name == name) {
-			sceneList[i]->Load();
-			sceneList[i]->Start();
-			if (nowScene != nullptr) {
-				ObjectManager::UnLoad(sceneList[i]);
-				nowScene->Unload();
-				LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
-			}
-			nowScene = sceneList[i];
-			LogWriter::Log("%sというシーンを読み込みました", name.c_str());
-			ObjectManager::Awake();
-			ObjectManager::Start();
+			loadScene = sceneList[i];
+			willLoadScene = true;
+			ObjectManager::isEndUpdate = true;
 			return;
 		}
 	}
@@ -60,9 +54,9 @@ void SceneManager::LoadScene(unsigned int num) {
 		LogWriter::LogWorning("%d番目のシーンは存在しませんでした。シーン数は%dです", num, sceneList.size());
 		return;
 	}
-	sceneList[num]->Load();
-	sceneList[num]->Start();
-	nowScene = sceneList[num];
+	loadScene = sceneList[num];
+	willLoadScene = true;
+	ObjectManager::isEndUpdate = true;
 }
 
 void SceneManager::BackLoad(Scene * scene) {
@@ -132,6 +126,23 @@ string SceneManager::GetSceneName(unsigned int number) {
 void SceneManager::AddScene(Scene * scene) {
 	LogWriter::Log("%sというシーンを追加しました", scene->name.c_str());
 	sceneList.push_back(scene);
+}
+
+void SceneManager::Load() {
+	if (nowScene != nullptr) {
+		ObjectManager::UnLoad(nowScene);
+		nowScene->Unload();
+		LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
+	}
+	loadScene->Load();
+	loadScene->Start();
+	ObjectManager::Awake();
+	ObjectManager::Start();
+	LogWriter::Log("%sというシーンを読み込みました", loadScene->name.c_str());
+	nowScene = loadScene;
+
+	willLoadScene = false;
+	loadScene = nullptr;
 }
 
 Scene * SceneManager::GetNowScene() {

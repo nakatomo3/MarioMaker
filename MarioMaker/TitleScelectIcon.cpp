@@ -34,6 +34,7 @@ void TitleScelectIcon::Input() {
 		} else {
 			SceneManager::LoadScene("•ÒWƒV[ƒ“");
 		}
+		return;
 	}
 
 	if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.34f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.675f) {

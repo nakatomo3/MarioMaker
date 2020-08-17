@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 
 vector<GameObject*> ObjectManager::objects;
+bool ObjectManager::isEndUpdate;
 
 GameObject* ObjectManager::Instantiate(GameObject* instance) {
 	objects.emplace_back(instance);
@@ -79,10 +80,17 @@ void ObjectManager::FirstUpdate() {
 
 void ObjectManager::Update() {
 	for (unsigned int i = 0; i < objects.size(); i++) {
+		if (isEndUpdate == true) {
+			isEndUpdate = false;
+			break;
+		}
 		if (objects[i]->GetActive() == false) {
 			continue;
 		}
 		objects[i]->Update();
+	}
+	if (SceneManager::willLoadScene == true) {
+		SceneManager::Load();
 	}
 }
 

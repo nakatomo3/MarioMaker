@@ -6,8 +6,11 @@
 
 using namespace std;
 
+class ObjectManager;
+
 class SceneManager{
 	friend class Scene;
+	friend class ObjectManager;
 public :
 
 	static void LoadScene(Scene* scene);
@@ -44,4 +47,9 @@ private:
 	static bool wasWorning;
 
 	static void AddScene(Scene* scene);
+
+	static bool willLoadScene;
+
+	static Scene* loadScene;
+	static void Load();
 };
