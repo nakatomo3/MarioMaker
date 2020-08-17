@@ -13,6 +13,7 @@ void EditScene::Start() {
 
 void EditScene::Load() {
 	playerTexture = new Texture("assets/textures/MarioMaker/mario.png");
+	auto blockTexture = new Texture("assets/textures/MarioMaker/groundBlock.png");
 
 	camera = new GameObject("カメラ");
 	camera->AddComponent<Camera>();
@@ -24,6 +25,16 @@ void EditScene::Load() {
 	playerQuad->SetCull(false);
 	auto playerScript = player->AddComponent<Player>();
 	playerScript->SetQuad(playerQuad);
+	player->AddComponent<QuadCollider>();
+
+	int width = 20;
+	for (int i = 0; i < width; i++) {
+		auto block = new GameObject("ブロック");
+		block->SetPosition(Vector3(i - width / 2, -7, 0));
+		block->AddComponent<Quad>()->SetTexture(blockTexture);
+		block->AddComponent<QuadCollider>();
+		ObjectManager::Instantiate(block);
+	}
 
 }
 
