@@ -48,10 +48,10 @@ void CollisionManager::Update() {
 			if (cast_c != NULL && cast_d != NULL) {
 				auto distance = (cast_c->GetGameObject()->GetPosition() - cast_d->GetGameObject()->GetPosition()).Magnitude();
 				if (cast_c->GetGameObject()->GetScale().Magnitude() + cast_d->GetGameObject()->GetScale().Magnitude() >= distance) {
-					if (cast_c->GetGameObject()->GetPosition().GetX() + cast_c->GetGameObject()->GetScale().GetX() / 2 >= cast_d->GetGameObject()->GetPosition().GetX() - cast_d->GetGameObject()->GetScale().GetX() / 2 ||
-						cast_c->GetGameObject()->GetPosition().GetX() - cast_c->GetGameObject()->GetScale().GetX() / 2 <= cast_d->GetGameObject()->GetPosition().GetX() + cast_d->GetGameObject()->GetScale().GetX() / 2) {
-						if (cast_c->GetGameObject()->GetPosition().GetY() + cast_c->GetGameObject()->GetScale().GetY() / 2 >= cast_d->GetGameObject()->GetPosition().GetY() - cast_d->GetGameObject()->GetScale().GetY() / 2 ||
-							cast_c->GetGameObject()->GetPosition().GetY() - cast_c->GetGameObject()->GetScale().GetY() / 2 <= cast_d->GetGameObject()->GetPosition().GetY() + cast_d->GetGameObject()->GetScale().GetY() / 2) {
+					if ((cast_c->GetGameObject()->GetPosition().GetX() - cast_c->GetGameObject()->GetScale().GetX() / 2 >= cast_d->GetGameObject()->GetPosition().GetX() - cast_d->GetGameObject()->GetScale().GetX() / 2 && cast_c->GetGameObject()->GetPosition().GetX() - cast_c->GetGameObject()->GetScale().GetX() / 2 <= cast_d->GetGameObject()->GetPosition().GetX() + cast_d->GetGameObject()->GetScale().GetX() / 2) ||
+						(cast_c->GetGameObject()->GetPosition().GetX() + cast_c->GetGameObject()->GetScale().GetX() / 2 >= cast_d->GetGameObject()->GetPosition().GetX() - cast_d->GetGameObject()->GetScale().GetX() / 2 && cast_c->GetGameObject()->GetPosition().GetX() + cast_c->GetGameObject()->GetScale().GetX() / 2 <= cast_d->GetGameObject()->GetPosition().GetX() + cast_d->GetGameObject()->GetScale().GetX() / 2)) {
+						if ((cast_c->GetGameObject()->GetPosition().GetY() - cast_c->GetGameObject()->GetScale().GetY() / 2 >= cast_d->GetGameObject()->GetPosition().GetY() - cast_d->GetGameObject()->GetScale().GetY() / 2 && cast_c->GetGameObject()->GetPosition().GetY() - cast_c->GetGameObject()->GetScale().GetY() / 2 <= cast_d->GetGameObject()->GetPosition().GetY() + cast_d->GetGameObject()->GetScale().GetY() / 2) ||
+							(cast_c->GetGameObject()->GetPosition().GetY() + cast_c->GetGameObject()->GetScale().GetY() / 2 >= cast_d->GetGameObject()->GetPosition().GetY() - cast_d->GetGameObject()->GetScale().GetY() / 2 && cast_c->GetGameObject()->GetPosition().GetY() + cast_c->GetGameObject()->GetScale().GetY() / 2 <= cast_d->GetGameObject()->GetPosition().GetY() + cast_d->GetGameObject()->GetScale().GetY() / 2)) {
 							auto colA = new Collision(cast_d, Vector3(0, 0, 0), cast_d->GetGameObject());
 							auto colB = new Collision(cast_c, Vector3(0, 0, 0), cast_c->GetGameObject());
 							cast_c->GetGameObject()->OnCollisionStay(colA);
