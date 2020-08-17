@@ -10,9 +10,15 @@ public:
 
 	void KeyboardInput();
 	void ControllerInput();
+
+	void OnCollisionStay(Collision* collision);
 private:
 	float moveSpeed = 1;
 	float groundBrekeRate = 0.9f;
+
+	const float gravity = 2;
+
+	bool isStand = false;
 
 	Vector3 velocity;
 
