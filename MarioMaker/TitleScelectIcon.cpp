@@ -37,15 +37,17 @@ void TitleScelectIcon::Input() {
 		return;
 	}
 
-	if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.34f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.675f) {
-		if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.6f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.615f) {
+	if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.7f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.9f) {
+		if (Input::GetCursorPosition().GetY() > SCREEN_HEIGHT * 0.585f && Input::GetCursorPosition().GetY() < SCREEN_HEIGHT * 0.615f) {
 			if (Input::GetMouseDown(0)) {
 				//シーン移動
+				SceneManager::LoadScene("編集シーン");
 			}
 		}
-		if (Input::GetCursorPosition().GetX() > SCREEN_HEIGHT * 0.6f && Input::GetCursorPosition().GetX() < SCREEN_HEIGHT * 0.615f) {
+		if (Input::GetCursorPosition().GetY() > SCREEN_HEIGHT * 0.685f && Input::GetCursorPosition().GetY() < SCREEN_HEIGHT * 0.715f) {
 			if (Input::GetMouseDown(0)) {
 				//シーン移動
+				SceneManager::LoadScene("選択シーン");
 			}
 		}
 	}
