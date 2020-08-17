@@ -64,6 +64,12 @@
     <Filter Include="ソース ファイル\MarioMaker\Title">
       <UniqueIdentifier>{25ebf055-0ca4-4c78-9582-ae53cf487508}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Game">
+      <UniqueIdentifier>{b05601d4-e102-41cc-8fbe-27b0d2a6fd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Game">
+      <UniqueIdentifier>{ed158b83-8a68-4761-b535-5f43e2241a0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -176,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="SelectStageScene.cpp">
       <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="SelectStageScene.h">
       <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

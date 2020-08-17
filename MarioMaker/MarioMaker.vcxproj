@@ -190,6 +190,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="QuadCollider.cpp" />
     <ClCompile Include="RendererManager.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadCollider.h" />
     <ClInclude Include="RendererManager.h" />

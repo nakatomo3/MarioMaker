@@ -1,32 +1,35 @@
 #include "Player.h"
-#include "input.h"
-#include "Bullet.h"
-#include "Quad.h"
-#include "ObjectManager.h"
-#include "SphereCollider.h"
-#include "Time.h"
+#include "DXEngine.h"
 
 void Player::Update() {
-	if (Input::GetKey('A')) {
-		gameObject->Move(Vector3::Left() * Time::GetDeltaTime() * speed);
-	}
-	if (Input::GetKey('D')) {
-		gameObject->Move(Vector3::Right() * Time::GetDeltaTime() * speed);
-	}
-	if (Input::GetKey('W')) {
-		gameObject->Move(Vector3::Forward() * Time::GetDeltaTime() * speed);
-	}
-	if (Input::GetKey('S')) {
-		gameObject->Move(Vector3::Back() * Time::GetDeltaTime() * speed);
+
+	KeyboardInput();
+	ControllerInput();
+
+	if (velocity.GetX() >= 0) {
+		gameObject->SetRotation(Vector3(0, 0, 0));
+	} else {
+		gameObject->SetRotation(Vector3(0, 3.14f, 0));
 	}
 
-	if (Input::GetKeyDown(VK_RETURN)) {
-		auto bullet = new GameObject();
-		bullet->AddComponent<Bullet>();
-		auto quad = bullet->AddComponent<Quad>();
-		bullet->AddComponent<SphereCollider>();
-		bullet->SetScale(Vector3(0.3f, 0.3f, 1));
-		bullet->SetPosition(gameObject->GetPosition());
-		ObjectManager::Instantiate(bullet);
+	velocity *= groundBrekeRate;
+	gameObject->Move(velocity);
+}
+
+void Player::SetQuad(Quad * _quad) {
+	quad = _quad;
+}
+
+void Player::KeyboardInput() {
+	//ç∂âEà⁄ìÆ
+	if (Input::GetKey('A')) {
+		velocity += Vector3::Left() * moveSpeed * Time::GetDeltaTime();
 	}
+	if (Input::GetKey('D')) {
+		velocity += Vector3::Right() * moveSpeed * Time::GetDeltaTime();
+	}
+}
+
+void Player::ControllerInput() {
+	velocity += Vector3::Right() * Input::GetController(0).Gamepad.sThumbLX * Time::GetDeltaTime() / 32768 * moveSpeed;
 }
