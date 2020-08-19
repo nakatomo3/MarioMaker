@@ -5,11 +5,11 @@
 #include <vector>
 using namespace std;
 
-typedef enum EndAction {
+typedef enum{
 	NONE,
 	DESTROY,
 	DISABLE
-};
+}EndAction;
 
 class ParticleSystem : public VisualComponent {
 public:
