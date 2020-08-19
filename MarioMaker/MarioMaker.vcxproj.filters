@@ -70,6 +70,12 @@
     <Filter Include="ヘッダー ファイル\MarioMaker\Game">
       <UniqueIdentifier>{ed158b83-8a68-4761-b535-5f43e2241a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Editor">
+      <UniqueIdentifier>{259a8b56-1111-4dec-8148-2401d7d8783b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Editor">
+      <UniqueIdentifier>{f85140af-10e2-4c8e-bfbb-3bb8cf4c1244}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -185,6 +191,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\MarioMaker\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorManager.cpp">
+      <Filter>ソース ファイル\MarioMaker\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorManager.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

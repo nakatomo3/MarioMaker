@@ -11,11 +11,20 @@ public:
 	void Update();
 
 private:
+
+	GameObject* editorObject;
+	GameObject* gameObject;
+
+	//ゲーム部分オブジェクト
 	GameObject* player;
 	GameObject* camera;
 
+	//編集オブジェクト
+	GameObject* editorWindow;
+	GameObject* editorCamera;
+
 	Texture* playerTexture;
 
-	bool isEditMode = false;
+	bool isEditMode = true;
 	bool beforeInputStart = false;
 };

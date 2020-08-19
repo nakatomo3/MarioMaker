@@ -178,6 +178,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EditorManager.cpp" />
     <ClCompile Include="EditScene.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="QuadCollider.cpp" />
     <ClCompile Include="RendererManager.cpp" />
@@ -218,6 +220,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="EditorManager.h" />
     <ClInclude Include="EditScene.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DXEngine.h" />
@@ -232,6 +235,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadCollider.h" />
     <ClInclude Include="RendererManager.h" />
