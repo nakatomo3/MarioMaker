@@ -136,8 +136,6 @@ void SceneManager::Load() {
 	}
 	loadScene->Load();
 	loadScene->Start();
-	ObjectManager::Awake();
-	ObjectManager::Start();
 	LogWriter::Log("%s‚Æ‚¢‚¤ƒV[ƒ“‚ð“Ç‚Ýž‚Ý‚Ü‚µ‚½", loadScene->name.c_str());
 	nowScene = loadScene;
 
