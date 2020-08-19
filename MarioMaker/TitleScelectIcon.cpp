@@ -26,8 +26,11 @@ void TitleScelectIcon::Input() {
 			isPlayMode = !isPlayMode;
 		}
 	}
+	if (Input::GetKeyDown('W') || Input::GetKeyDown('S') || Input::GetKeyDown(VK_UP) || Input::GetKeyDown(VK_DOWN)) {
+		isPlayMode = !isPlayMode;
+	}
 
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && beforeInputB == false) {
+	if ((Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKeyDown(VK_RETURN)) && beforeInputB == false) {
 		//シーン移動
 		if (isPlayMode == true) {
 			SceneManager::LoadScene("選択シーン");
