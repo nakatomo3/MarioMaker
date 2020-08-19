@@ -337,7 +337,7 @@ void RendererManager::Uninit() {
 
 void RendererManager::Begin() {
 	// バックバッファクリア
-	float ClearColor[4] = { 0.5f, 0.9f, 0.5f, 1.0f };
+	float ClearColor[4] = { 0.31f, 0.5f, 1.0f, 1.0f };
 	immediateContext->ClearRenderTargetView(renderTargetView, ClearColor);
 	immediateContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
