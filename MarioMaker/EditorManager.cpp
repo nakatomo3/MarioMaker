@@ -35,10 +35,14 @@ void EditorManager::Start() {
 void EditorManager::Update() {
 	CursorMove();
 
+	StageEdit();
+
 	camera->SetPosition(Vector3((float)cursorPosX, 0.0f, -14.0f));
 
 	beforeInputLX = Input::GetController(0).Gamepad.sThumbLX;
 	beforeInputLY = Input::GetController(0).Gamepad.sThumbLY;
+
+	beforeControllerButton = Input::GetController(0).Gamepad.wButtons;
 }
 
 void EditorManager::SetCamera(GameObject * _camera) {
@@ -102,4 +106,46 @@ void EditorManager::CursorMove() {
 	}
 
 	cursor->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, -0.01f));
+}
+
+void EditorManager::StageEdit() {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+		objectNumber--;
+	}
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_RIGHT_SHOULDER)) {
+		objectNumber++;
+	}
+	if (objectNumber > objectMax - 1) {
+		objectNumber = 0;
+	}
+	if (objectNumber < 0) {
+		objectNumber = objectMax - 1;
+	}
+
+	if (Input::GetController(0).Gamepad.bLeftTrigger > 0x80 || Input::GetController(0).Gamepad.bRightTrigger > 0x80) {
+		if (nowMode == DETAIL_MODE) {
+			//詳細設定時の終了処理
+		}
+		nowMode = AREA_MODE;
+	}
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_X) {
+		if (nowMode == AREA_MODE) {
+			//エリア編集時の終了処理
+		}
+		nowMode = DETAIL_MODE;
+	}
+
+	switch (nowMode) {
+	default:
+		break;
+	case DEFAULT_MODE:
+
+		break;
+	case AREA_MODE:
+
+		break;
+	case DETAIL_MODE:
+
+		break;
+	}
 }
