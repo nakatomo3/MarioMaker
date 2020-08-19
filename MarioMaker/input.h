@@ -1,4 +1,5 @@
 #pragma once
+#define DIRECTINPUT_VERSION 0x0800
 #include "Singleton.h"
 #include <dinput.h>
 #include <Windows.h>

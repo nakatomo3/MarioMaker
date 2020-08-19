@@ -249,7 +249,7 @@ Vector2 Input::GetCursorPosition() {
 
 	RECT lprc;
 	GetWindowRect(hWnd, &lprc);
-	return Vector2(point.x - lprc.left, point.y - lprc.top - 30);
+	return Vector2((float)(point.x - lprc.left), (float)(point.y - lprc.top - 30));
 }
 
 int Input::GetMouseWheel() {
