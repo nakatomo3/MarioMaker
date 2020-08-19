@@ -26,6 +26,9 @@ public:
 	void SetFontSize(int _size);
 	int GetFontSize();
 
+	void SetScale(float _scale);
+	float GetScale();
+
 	void OnDestroy() override;
 
 private:

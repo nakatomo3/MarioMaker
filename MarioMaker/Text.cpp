@@ -321,6 +321,14 @@ int Text::GetFontSize() {
 	return fontSize;
 }
 
+void Text::SetScale(float _scale) {
+	scale = _scale;
+}
+
+float Text::GetScale() {
+	return scale;
+}
+
 void Text::OnDestroy() {
 	vertexBuffer->Release();
 	//TODO:TCHAR*‚Ìdelete
