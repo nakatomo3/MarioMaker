@@ -200,3 +200,11 @@ void Window::Update() {
 		isDragging = false;
 	}
 }
+
+void Window::SetWidth(float width) {
+	scale = Vector2(width, SCREEN_HEIGHT * 0.05f);
+}
+
+float Window::GetWidth() {
+	return scale.GetX();
+}

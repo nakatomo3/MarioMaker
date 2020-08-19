@@ -15,6 +15,9 @@ public:
 	void Init();
 	void Draw();
 	void Update();
+
+	void SetWidth(float width);
+	float GetWidth();
 private:
 	string windowName;
 
@@ -24,10 +27,9 @@ private:
 	Texture* textureP = Texture::nullTexture;
 	ID3D11ShaderResourceView* texture = NULL;
 
-	Vector2 scale = Vector2(200, 25);
+	Vector2 scale = Vector2(SCREEN_HEIGHT / 2.7f, SCREEN_HEIGHT * 0.05f);
 
 	Criterion criterion = CENTER;
-	//Vector3 position;
 
 	D3DXVECTOR4 color = D3DXVECTOR4(0, 0.46f, 0.75f, 1);
 
