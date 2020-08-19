@@ -3,8 +3,8 @@
 enum Tag {
 	UNTAGGED,
 	PLAYER,
-	BULLET,
-	ENEMY,
+	GROUND_BLOCK,
+	BLOCK,
 	//ここにタグを追加、数字を指定しないでください
 	TAG_LAST
 };
