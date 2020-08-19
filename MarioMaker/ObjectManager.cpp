@@ -15,6 +15,10 @@ GameObject* ObjectManager::Instantiate(GameObject* instance) {
 		instance->scene = SceneManager::GetNowScene();
 	}
 	instance->Start();
+	LogWriter::Log("%sというゲームオブジェクトが生成されました", instance->name.c_str());
+	for (unsigned int i = 0; i < instance->children.size(); i++) {
+		Instantiate(instance->children[i]);
+	}
 	return instance;
 }
 
@@ -87,6 +91,18 @@ void ObjectManager::Update() {
 		if (objects[i]->GetActive() == false) {
 			continue;
 		}
+		auto obj = objects[i];
+		bool isActive = true;
+		while (obj != nullptr) {
+			if (obj->GetActive() == false) {
+				isActive = false;
+				break;
+			}
+			obj = obj->GetParent();
+		}
+		if (isActive == false) {
+			continue;
+		}
 		objects[i]->Update();
 	}
 	if (SceneManager::willLoadScene == true) {
@@ -112,6 +128,18 @@ void ObjectManager::Draw() {
 	for (int layerCount = 0; layerCount < LAYERLAST; layerCount++) {
 		for (unsigned int i = 0; i < objects.size(); i++) {
 			if (objects[i]->GetActive() == false) {
+				continue;
+			}
+			auto obj = objects[i];
+			bool isActive = true;
+			while (obj->GetParent() != nullptr) {
+				obj = obj->GetParent();
+				if (obj->GetActive() == false) {
+					isActive = false;
+					break;
+				}
+			}
+			if (isActive == false) {
 				continue;
 			}
 			for (unsigned int j = 0; j < objects[i]->GetComponentCount(); j++) {

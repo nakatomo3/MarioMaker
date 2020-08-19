@@ -68,8 +68,6 @@ public:
 	GameObject* GetChild(int index);
 	//子供オブジェクトの数を取得します
 	unsigned int GetChildCount();
-	//子供を追加します
-	void AddChild(GameObject* child);
 
 	//オブジェクトを回転させます
 	void Rotate(Vector3 angle);
@@ -206,6 +204,8 @@ public:
 	void SetDestroyOnload(bool willDestroy);
 	bool GetDestroyOnload();
 
+	void SetActive(bool _active) override;
+
 protected:
 	bool isActive;
 
@@ -219,7 +219,7 @@ protected:
 	string name;
 	Tag tag = UNTAGGED;
 
-	GameObject* parent;
+	GameObject* parent = nullptr;
 	vector<GameObject*> children{};
 
 	vector<Component*> components;
@@ -231,6 +231,9 @@ protected:
 	Scene* scene;
 
 	bool isDestroyOnLoad = true;
+
+	//子供を追加します
+	void AddChild(GameObject* child);
 
 private:
 

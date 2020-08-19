@@ -43,7 +43,6 @@ GameObject::GameObject() {
 	rotation		= Vector3(0, 0, 0);
 	velocity		= Vector3(0, 0, 0);
 	name			= "New GameObject";
-	LogWriter::Log("無名のゲームオブジェクトが生成されました");
 }
 
 GameObject::GameObject(string _name) {
@@ -54,7 +53,6 @@ GameObject::GameObject(string _name) {
 	rotation		= Vector3(0, 0, 0);
 	velocity		= Vector3(0, 0, 0);
 	name			= _name;
-	LogWriter::Log("%sというゲームオブジェクトが生成されました", name.c_str());
 }
 
 void GameObject::Start() {
@@ -119,6 +117,10 @@ void GameObject::SetDestroyOnload(bool willDestroy) {
 
 bool GameObject::GetDestroyOnload() {
 	return isDestroyOnLoad;
+}
+
+void GameObject::SetActive(bool _active) {
+	Object::SetActive(_active);
 }
 
 GameObject::~GameObject() {
@@ -208,14 +210,15 @@ bool GameObject::CompareTag(Tag target) {
 }
 
 GameObject * GameObject::GetParent() {
-	return nullptr;
+	return parent;
 }
 
 void GameObject::SetParent(GameObject * _parent) {
-	if (parent != _parent) {
-		parent = _parent;
-		parent->AddChild(this);
+	if (parent == _parent) {
+		return;
 	}
+	_parent->AddChild(this);
+	parent = _parent;
 }
 
 GameObject * GameObject::GetChild(int index) {
@@ -227,11 +230,6 @@ unsigned int GameObject::GetChildCount() {
 }
 
 void GameObject::AddChild(GameObject * _child) {
-	if (_child->GetParent() == nullptr) {
-		_child->SetParent(this);
-	} else if(_child->GetParent() == this){
-		return;
-	}
 	for (unsigned int i = 0; i < children.size(); i++) {
 		if (children[i] == _child) {
 			return;
