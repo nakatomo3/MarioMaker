@@ -5,7 +5,6 @@
 void Text::Draw() {
 
 	layer = UI;
-
 	if (_tcslen(c) == 0) {
 		SetText("NewText");
 	}
@@ -38,7 +37,7 @@ void Text::Draw() {
 		}
 
 		if (readChar[0] == (TCHAR)_T('\n')) {
-			position = Vector3(firstPos.GetX(), position.GetY() + fontY[charCount], 0);
+			position = Vector3(firstPos.GetX(), position.GetY() + fontY[charCount] * scale, 0);
 			charCount++;
 			continue;
 		}

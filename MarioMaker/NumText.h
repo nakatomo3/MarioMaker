@@ -15,6 +15,7 @@ public:
 	D3DXVECTOR4 GetColor();
 
 	void SetText(float number);
+	void SetText(int number);
 	float GetText();
 
 	void SetFontSize(int _size);
@@ -24,7 +25,12 @@ public:
 	void SetMinDigit(int maxDigit);
 	int GetMinDigit();
 
+	void SetScale(float _scale);
+	float GetScale();
+
 	void OnDestroy() override;
+
+
 
 private:
 
@@ -53,8 +59,11 @@ private:
 	int fontSize = 64;
 
 	float number = 1234.567f;
+	int numberInt = 9876;
 
 	unsigned int digit = 5;
+
+	bool isInt = false;
 
 	void CreateTexture();
 

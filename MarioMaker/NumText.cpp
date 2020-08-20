@@ -100,9 +100,6 @@ void NumText::CreateTexture() {
 		fontX.emplace_back(desc.Width);
 		fontY.emplace_back(desc.Height);
 
-		/*wh->x = (float)desc.Width;
-		wh->y = (float)desc.Height;*/
-
 		// テクスチャに書き込み
 		// テクスチャをマップ（＝ロック）すると、
 		// メモリにアクセスするための情報がD3D10_MAPPED_TEXTURE2Dに格納されます。
@@ -190,61 +187,119 @@ void NumText::Draw() {
 		// 2バイト文字のコードは[先導コード]*256 + [文字コード]です
 		
 #endif
-
-		if (charIndex * 2 > strlen(to_string(number).c_str()) || charIndex > digit) {
-			existDrawChar = false;
-			position = firstPos;
-			return;
+		if (isInt == false) {
+			if (charIndex * 2 > strlen(to_string(number).c_str()) || charIndex > digit) {
+				existDrawChar = false;
+				position = firstPos;
+				return;
+			}
+		} else {
+			if (charIndex * 2 > strlen(to_string(numberInt).c_str()) || charIndex > digit) {
+				existDrawChar = false;
+				position = firstPos;
+				return;
+			}
 		}
 
-		//何かあっても分かるように、仮のデータを入れておく
+		
+		if (isInt == false) {
+			switch (to_string(number).c_str()[charIndex]) {
+			case '0':
+				charCount = 0;
+				break;
+			case '1':
+				charCount = 1;
+				break;
+			case '2':
+				charCount = 2;
+				break;
+			case '3':
+				charCount = 3;
+				break;
+			case '4':
+				charCount = 4;
+				break;
+			case '5':
+				charCount = 5;
+				break;
+			case '6':
+				charCount = 6;
+				break;
+			case '7':
+				charCount = 7;
+				break;
+			case '8':
+				charCount = 8;
+				break;
+			case '9':
+				charCount = 9;
+				break;
+			case '.':
+				charCount = 10;
+				break;
+			case '-':
+				charCount = 11;
+				break;
+			default:
 
-		switch (to_string(number).c_str()[charIndex]) {
-		case '0':
-			charCount = 0;
-			break;
-		case '1':
-			charCount = 1;
-			break;
-		case '2':
-			charCount = 2;
-			break;
-		case '3':
-			charCount = 3;
-			break;
-		case '4':
-			charCount = 4;
-			break;
-		case '5':
-			charCount = 5;
-			break;
-		case '6':
-			charCount = 6;
-			break;
-		case '7':
-			charCount = 7;
-			break;
-		case '8':
-			charCount = 8;
-			break;
-		case '9':
-			charCount = 9;
-			break;
-		case '.':
-			charCount = 10;
-			break;
-		case '-':
-			charCount = 11;
-			break;
-		default:
+				break;
+			}
+		} else {
+			switch (to_string(numberInt).c_str()[charIndex]) {
+			case '0':
+				charCount = 0;
+				break;
+			case '1':
+				charCount = 1;
+				break;
+			case '2':
+				charCount = 2;
+				break;
+			case '3':
+				charCount = 3;
+				break;
+			case '4':
+				charCount = 4;
+				break;
+			case '5':
+				charCount = 5;
+				break;
+			case '6':
+				charCount = 6;
+				break;
+			case '7':
+				charCount = 7;
+				break;
+			case '8':
+				charCount = 8;
+				break;
+			case '9':
+				charCount = 9;
+				break;
+			case '.':
+				charCount = 10;
+				break;
+			case '-':
+				charCount = 11;
+				break;
+			default:
 
-			break;
+				break;
+			}
 		}
 
-		if ((charIndex * 2 == strlen(to_string(number).c_str()) || charIndex == digit) && charCount == 10) {
-			//ラストの桁が.だったら何もしない
-			position = firstPos;
-			return;
+		if (isInt == false) {
+			if ((charIndex * 2 == strlen(to_string(number).c_str()) || charIndex == digit) && charCount == 10) {
+				//ラストの桁が.だったら何もしない
+				position = firstPos;
+				return;
+			}
+		} else {
+			if ((charIndex * 2 == strlen(to_string(numberInt).c_str()) || charIndex == digit) && charCount == 10) {
+				//ラストの桁が.だったら何もしない
+				position = firstPos;
+				return;
+			}
 		}
 
 		Vertex vertex[4];
@@ -305,7 +360,6 @@ void NumText::Draw() {
 		wasChange = false;
 
 		vertexBuffer->Release();
-		//charCount+=2;
 		charIndex++;
 	}
 }
@@ -341,6 +395,25 @@ void NumText::SetText(float _number) {
 	if (digitCount >= digit) {
 		digit = digitCount;
 	}
+	isInt = false;
+}
+
+void NumText::SetText(int _number) {
+	numberInt = _number;
+	int num = numberInt;
+	unsigned int digitCount = 0;
+	while (true) {
+		if (round(abs(num)) > 0) {
+			num /= 10;
+			digitCount++;
+		} else {
+			break;
+		}
+	}
+	if (digitCount >= digit) {
+		digit = digitCount;
+	}
+	isInt = true;
 }
 
 float NumText::GetText() {
@@ -361,6 +434,14 @@ void NumText::SetMinDigit(int _digit) {
 
 int NumText::GetMinDigit() {
 	return digit;
+}
+
+void NumText::SetScale(float _scale) {
+	scale = _scale;
+}
+
+float NumText::GetScale() {
+	return scale;
 }
 
 void NumText::OnDestroy() {
