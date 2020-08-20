@@ -1,6 +1,9 @@
 #pragma once
 #include "ScriptBase.h"
 #include "Texture.h"
+#include "Text.h"
+#include "NumText.h"
+#include "Image.h"
 
 typedef enum {
 	DEFAULT_MODE,
@@ -28,6 +31,11 @@ private:
 
 	WORD beforeControllerButton;
 
+	NumText* posXText;
+	NumText* posYText;
+	Image* objectImage;
+	Text* nameText;
+
 	float firstTimer = 0;
 	float firstInterval = 0.5f;
 
@@ -42,4 +50,6 @@ private:
 	void CursorMove();
 
 	void StageEdit();
+
+	void InformationShow();
 };

@@ -18,6 +18,26 @@ void EditorManager::Start() {
 	window->SetScale(Vector2(SCREEN_HEIGHT / 2.7f, SCREEN_HEIGHT / 2.7f));
 	windowBackground->SetParent(editorWindow);
 
+	auto positionText = windowBackground->AddComponent<Text>();
+	positionText->SetScale(0.5f);
+	positionText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.15f));
+	positionText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+	positionText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+	positionText->SetText("座標：\n(　　　,　　　)");
+
+	posXText = windowBackground->AddComponent<NumText>();
+	posXText->SetScale(0.5f);
+	posXText->SetPosition(Vector3(SCREEN_HEIGHT * -0.1f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
+	posXText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+	posXText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+	posXText->SetMinDigit(3);
+
+	posYText = windowBackground->AddComponent<NumText>();
+	posYText->SetScale(0.5f);
+	posYText->SetPosition(Vector3(SCREEN_HEIGHT * 0.03f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
+	posYText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+	posYText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+	posYText->SetMinDigit(3);
 
 	editorWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, 50, 0));
 	editorWindow->SetParent(gameObject);
@@ -36,6 +56,8 @@ void EditorManager::Update() {
 	CursorMove();
 
 	StageEdit();
+
+	InformationShow();
 
 	camera->SetPosition(Vector3((float)cursorPosX, 0.0f, -14.0f));
 
@@ -148,4 +170,9 @@ void EditorManager::StageEdit() {
 
 		break;
 	}
+}
+
+void EditorManager::InformationShow() {
+	posXText->SetText(cursorPosX);
+	posYText->SetText(cursorPosY + 7);
 }
