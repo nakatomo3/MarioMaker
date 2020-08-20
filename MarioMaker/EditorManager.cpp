@@ -39,6 +39,12 @@ void EditorManager::Start() {
 	posYText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
 	posYText->SetMinDigit(3);
 
+	nameText = windowBackground->AddComponent<Text>();
+	nameText->SetScale(0.5f);
+	nameText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.05f));
+	nameText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+	nameText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+
 	editorWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, 50, 0));
 	editorWindow->SetParent(gameObject);
 
@@ -175,4 +181,5 @@ void EditorManager::StageEdit() {
 void EditorManager::InformationShow() {
 	posXText->SetText(cursorPosX);
 	posYText->SetText(cursorPosY + 7);
+	nameText->SetText(objectNames[objectNumber].c_str());
 }

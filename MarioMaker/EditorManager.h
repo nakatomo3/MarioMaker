@@ -43,9 +43,18 @@ private:
 	const float continuousInterval = 0.1f;
 
 	int objectNumber;
-	const int objectMax = 10;
+	const int objectMax = 6;
 
 	EditMode nowMode = DEFAULT_MODE;
+
+	string objectNames[6] = {
+		"地形ブロック",
+		"ブロック",
+		"ハテナブロック",
+		"D",
+		"E",
+		"F"
+	};
 
 	void CursorMove();
 
