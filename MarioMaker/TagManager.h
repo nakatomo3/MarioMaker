@@ -2,6 +2,7 @@
 #include <vector>
 enum Tag {
 	UNTAGGED,
+	MANAGER,
 	PLAYER,
 	GROUND_BLOCK,
 	BLOCK,
