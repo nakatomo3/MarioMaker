@@ -1,7 +1,7 @@
 #include "PlayerCamera.h"
 
 void PlayerCamera::Update() {
-	gameObject->SetPosition(Vector3(player->GetPosition().GetX(), 0, -14));
+	gameObject->SetPosition(Vector3(player->GetPosition().GetX(), 7, -14));
 }
 
 void PlayerCamera::SetPlayer(GameObject * _player) {

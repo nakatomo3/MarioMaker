@@ -23,4 +23,6 @@ private:
 	Vector3 velocity;
 
 	Quad* quad;
+
+	WORD beforeControllerButton;
 };
