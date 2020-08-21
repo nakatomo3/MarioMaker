@@ -262,6 +262,7 @@ void Text::CreateTexture() {
 
 		RendererManager::GetDevice()->CreateShaderResourceView(fontTexture, &srvDesc, &texture);
 		textures.emplace_back(texture);
+		fontTexture->Release();
 
 		// シェーダ用にサンプラを作成する
 		D3D11_SAMPLER_DESC samDesc;
@@ -293,18 +294,24 @@ D3DXVECTOR4 Text::GetColor() {
 }
 
 void Text::SetText(TCHAR * newText) {
-	c = newText;
-	CreateTexture();
+	if (c != newText) {
+		c = newText;
+		CreateTexture();
+	}
 }
 
 void Text::SetText(const char * newText) {
-	c = (TCHAR*)newText;
-	CreateTexture();
+	if (c != (TCHAR*)newText) {
+		c = (TCHAR*)newText;
+		CreateTexture();
+	}
 }
 
 void Text::SetText(string newText) {
-	c = (TCHAR*)(newText.c_str());
-	CreateTexture();
+	if (c != (TCHAR*)(newText.c_str())) {
+		c = (TCHAR*)(newText.c_str());
+		CreateTexture();
+	}
 }
 
 TCHAR * Text::GetText() {

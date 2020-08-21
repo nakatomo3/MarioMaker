@@ -150,6 +150,7 @@ void NumText::CreateTexture() {
 
 		RendererManager::GetDevice()->CreateShaderResourceView(fontTexture, &srvDesc, &texture);
 		textures.emplace_back(texture);
+		fontTexture->Release();
 
 		// シェーダ用にサンプラを作成する
 		D3D11_SAMPLER_DESC samDesc;
