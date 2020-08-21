@@ -202,6 +202,7 @@
     <ClCompile Include="ScriptBase.cpp" />
     <ClCompile Include="SelectStageScene.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="TagManager.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Setting.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="StageManager.h" />
     <ClInclude Include="TagManager.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />

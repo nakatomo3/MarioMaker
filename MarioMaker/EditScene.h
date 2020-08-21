@@ -14,6 +14,7 @@ private:
 
 	GameObject* editorObject;
 	GameObject* gameObject;
+	GameObject* stage;
 
 	//ゲーム部分オブジェクト
 	GameObject* player;

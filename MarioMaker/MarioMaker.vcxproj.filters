@@ -198,6 +198,9 @@
     <ClCompile Include="EditorManager.cpp">
       <Filter>ソース ファイル\MarioMaker\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="EditorManager.h">
       <Filter>ヘッダー ファイル\MarioMaker\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
