@@ -55,6 +55,8 @@ void EditorManager::Start() {
 	cursorQuad->SetTexture(cursorTexture);
 	cursor->SetParent(gameObject);
 
+	TextureLoad();
+
 	cursorPosX = 10;
 }
 
@@ -65,7 +67,7 @@ void EditorManager::Update() {
 
 	InformationShow();
 
-	camera->SetPosition(Vector3((float)cursorPosX, 0.0f, -14.0f));
+	camera->SetPosition(Vector3(cursorPosX, 7.0f, -14.0f));
 
 	beforeInputLX = Input::GetController(0).Gamepad.sThumbLX;
 	beforeInputLY = Input::GetController(0).Gamepad.sThumbLY;
@@ -75,6 +77,14 @@ void EditorManager::Update() {
 
 void EditorManager::SetCamera(GameObject * _camera) {
 	camera = _camera;
+}
+
+void EditorManager::SetStage(StageManager * stageManager) {
+	stage = stageManager;
+}
+
+void EditorManager::TextureLoad() {
+	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
 }
 
 void EditorManager::CursorMove() {
@@ -126,11 +136,11 @@ void EditorManager::CursorMove() {
 	if (cursorPosX < 0) {
 		cursorPosX = 0;
 	}
-	if (cursorPosY < -7) {
-		cursorPosY = -7;
+	if (cursorPosY < 0) {
+		cursorPosY = 0;
 	}
-	if (cursorPosY > 7) {
-		cursorPosY = 7;
+	if (cursorPosY > 14) {
+		cursorPosY = 14;
 	}
 
 	cursor->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, -0.01f));
@@ -167,7 +177,7 @@ void EditorManager::StageEdit() {
 	default:
 		break;
 	case DEFAULT_MODE:
-
+		DefaultModeEdit();
 		break;
 	case AREA_MODE:
 
@@ -180,6 +190,37 @@ void EditorManager::StageEdit() {
 
 void EditorManager::InformationShow() {
 	posXText->SetText(cursorPosX);
-	posYText->SetText(cursorPosY + 7);
+	posYText->SetText(cursorPosY);
 	nameText->SetText(objectNames[objectNumber].c_str());
+}
+
+void EditorManager::DefaultModeEdit() {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A && !(beforeControllerButton & XINPUT_GAMEPAD_A)) {
+		stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0))->Destroy();
+	}
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && !(beforeControllerButton & XINPUT_GAMEPAD_B)) {
+		if (stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0)) != nullptr) {
+			stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0))->Destroy();
+		}
+
+		auto stageObj = new GameObject();
+		stageObj->SetParent(stage->GetGameObject());
+		auto quad = stageObj->AddComponent<Quad>();
+		ObjectManager::Instantiate(stageObj);
+		switch (objectNumber) {
+		default:
+			break;
+		case 0:
+			stageObj->SetName("地形ブロック");
+			stageObj->SetTag(GROUND_BLOCK);
+			stageObj->SetPosition(Vector3(cursorPosX, cursorPosY, 0));
+			stageObj->AddComponent<QuadCollider>();
+			quad->SetTexture(objectTextures[0]);
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		}
+	}
 }

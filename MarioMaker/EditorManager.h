@@ -4,6 +4,7 @@
 #include "Text.h"
 #include "NumText.h"
 #include "Image.h"
+#include "StageManager.h"
 
 typedef enum {
 	DEFAULT_MODE,
@@ -17,7 +18,11 @@ public:
 	void Update();
 
 	void SetCamera(GameObject* _camera);
+	void SetStage(StageManager* stageManager);
+
 private:
+	StageManager* stage;
+
 	GameObject* camera;
 	GameObject* cursor;
 
@@ -56,9 +61,15 @@ private:
 		"F"
 	};
 
+	Texture* objectTextures[6];
+
+	void TextureLoad();
+
 	void CursorMove();
 
 	void StageEdit();
 
 	void InformationShow();
+
+	void DefaultModeEdit();
 };
