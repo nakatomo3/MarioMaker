@@ -216,6 +216,8 @@ void Update() {
 				ObjectManager::Draw();
 				RendererManager::End();
 				Input::SetMouseWheel(0);
+
+				ObjectManager::Destroy();
 			}
 		}
 	}

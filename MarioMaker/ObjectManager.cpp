@@ -8,6 +8,7 @@
 
 vector<GameObject*> ObjectManager::objects;
 bool ObjectManager::isEndUpdate;
+vector<GameObject*> ObjectManager::destroyList;
 
 GameObject* ObjectManager::Instantiate(GameObject* instance) {
 	objects.emplace_back(instance);
@@ -22,16 +23,22 @@ GameObject* ObjectManager::Instantiate(GameObject* instance) {
 	return instance;
 }
 
-void ObjectManager::Destroy(GameObject* instance) {
-	for (unsigned int i = 0; i < objects.size(); i++) {
-		if (objects[i] == instance) {
-			GameObject* removeObject = instance;
-			objects[i] = objects[objects.size() - 1];
-			objects.pop_back();
-			return;
+void ObjectManager::Destroy() {
+	for (unsigned int j = 0; j < destroyList.size(); j++) {
+		for (unsigned int i = 0; i < objects.size(); i++) {
+			auto instance = destroyList[j];
+			if (objects[i] == instance) {
+				GameObject* removeObject = instance;
+				objects[i] = objects[objects.size() - 1];
+				objects.pop_back();
+				return;
+			}
 		}
 	}
-	LogWriter::LogError("オブジェクトマネージャーに登録されていないオブジェクトがDestroyされました");
+}
+
+void ObjectManager::AddDestroyList(GameObject * instance) {
+	destroyList.emplace_back(instance);
 }
 
 bool ObjectManager::CheckInstance(GameObject* instance) {
@@ -103,7 +110,16 @@ void ObjectManager::Update() {
 		if (isActive == false) {
 			continue;
 		}
-		objects[i]->Update();
+		bool isDestroy = false;
+		for (int j = 0; j < destroyList.size(); j++) {
+			if (objects[i] == destroyList[j]) {
+				isDestroy = true;
+				break;
+			}
+		}
+		if (isDestroy == false) {
+			objects[i]->Update();
+		}
 	}
 	if (SceneManager::willLoadScene == true) {
 		SceneManager::Load();

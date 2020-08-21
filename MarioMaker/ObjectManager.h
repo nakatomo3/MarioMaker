@@ -32,13 +32,18 @@ public:
 
 	static void UnLoad(Scene* scene);
 
+	//使用禁止、フレームの最後に削除する予定のオブジェクト全てを削除する
+	static void Destroy();
+
 private:
 	
-	//管理対象から外しdeleteする。
-	static void Destroy(GameObject* instance);
+	//管理対象から外すリストに追加する
+	static void AddDestroyList(GameObject* instance);
 
 	static vector<GameObject*> objects;
 
 	static bool isEndUpdate;
+
+	static vector<GameObject*> destroyList;
 	
 };

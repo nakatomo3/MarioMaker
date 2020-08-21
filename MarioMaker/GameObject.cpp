@@ -7,7 +7,7 @@
 
 void GameObject::Destroy() {
 
-	ObjectManager::Destroy(this);
+	ObjectManager::AddDestroyList(this);
 
 	auto componentCount = components.size();
 	auto childCount = children.size();
@@ -24,8 +24,6 @@ void GameObject::Destroy() {
 			child->Destroy();
 		}
 	}
-
-	delete this;
 }
 
 void GameObject::Destroy(float time) {
@@ -236,6 +234,7 @@ void GameObject::AddChild(GameObject * _child) {
 		}
 	}
 	children.emplace_back(_child);
+	_child->SetParent(this);
 }
 
 void GameObject::Rotate(Vector3 angle) {
