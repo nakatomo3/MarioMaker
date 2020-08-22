@@ -31,6 +31,8 @@ private:
 	int cursorPosX = 0;
 	int cursorPosY = 0;
 
+	Vector2 beforeCursorPos;
+
 	SHORT beforeInputLX;
 	SHORT beforeInputLY;
 

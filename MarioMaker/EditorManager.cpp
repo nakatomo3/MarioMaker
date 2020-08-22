@@ -85,6 +85,7 @@ void EditorManager::SetStage(StageManager * stageManager) {
 
 void EditorManager::TextureLoad() {
 	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
+	objectTextures[1] = new Texture("assets/textures/MarioMaker/block.png");
 }
 
 void EditorManager::CursorMove() {
@@ -195,32 +196,64 @@ void EditorManager::InformationShow() {
 }
 
 void EditorManager::DefaultModeEdit() {
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A && !(beforeControllerButton & XINPUT_GAMEPAD_A)) {
-		stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0))->Destroy();
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+		if (stage->GetStageObject(cursorPosX, cursorPosY) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0)) != nullptr && cursorPosY == 0) {
+			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0))->Destroy();
+		}
+		if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr) {
+			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0))->Destroy();
+		}
+		stage->SetObject(cursorPosX, cursorPosY, '0');
 	}
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && !(beforeControllerButton & XINPUT_GAMEPAD_B)) {
-		if (stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0)) != nullptr) {
-			stage->GetChildGameObject(Vector3(cursorPosX, cursorPosY, 0))->Destroy();
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+		if (stage->GetStageObject(cursorPosX, cursorPosY) != objectNumber + 'A') {
+			if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr) {
+				stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0))->Destroy();
+			}
+
+			auto stageObj = new GameObject();
+			stageObj->SetParent(stage->GetGameObject());
+			auto quad = stageObj->AddComponent<Quad>();
+			ObjectManager::Instantiate(stageObj);
+			switch (objectNumber) {
+			default:
+				break;
+			case 0:
+				stageObj->SetName("地形ブロック");
+				stageObj->SetTag(GROUND_BLOCK);
+				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
+				stageObj->AddComponent<QuadCollider>();
+				quad->SetTexture(objectTextures[0]);
+				stage->SetObject(cursorPosX, cursorPosY, 'A');
+
+				if (cursorPosY == 0) {
+					auto underStageBlock = new GameObject();
+					underStageBlock->SetParent(stage->GetGameObject());
+					auto quad = underStageBlock->AddComponent<Quad>();
+					underStageBlock->SetName("地形ブロック");
+					underStageBlock->SetTag(GROUND_BLOCK);
+					underStageBlock->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0));
+					underStageBlock->AddComponent<QuadCollider>();
+					quad->SetTexture(objectTextures[0]);
+					ObjectManager::Instantiate(underStageBlock);
+				}
+				break;
+			case 1:
+				stageObj->SetName("ブロック");
+				stageObj->SetTag(BLOCK);
+				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
+				stageObj->AddComponent<QuadCollider>();
+				quad->SetTexture(objectTextures[1]);
+				stage->SetObject(cursorPosX, cursorPosY, 'B');
+				break;
+			case 2:
+				break;
+			}
+		} else {
+			LogWriter::Log("mismatch");
 		}
 
-		auto stageObj = new GameObject();
-		stageObj->SetParent(stage->GetGameObject());
-		auto quad = stageObj->AddComponent<Quad>();
-		ObjectManager::Instantiate(stageObj);
-		switch (objectNumber) {
-		default:
-			break;
-		case 0:
-			stageObj->SetName("地形ブロック");
-			stageObj->SetTag(GROUND_BLOCK);
-			stageObj->SetPosition(Vector3(cursorPosX, cursorPosY, 0));
-			stageObj->AddComponent<QuadCollider>();
-			quad->SetTexture(objectTextures[0]);
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		}
+	
 	}
+
 }
