@@ -18,6 +18,9 @@ void GameObject::Destroy() {
 			RemoveComponent(removeComponent);
 		}
 	}
+	if (parent != nullptr) {
+		parent->RemoveChild(this);
+	}
 	if (childCount >= 1) {
 		for (unsigned int i = 0; i < childCount - 1; i++) {
 			GameObject* child = children[i];
@@ -227,6 +230,15 @@ unsigned int GameObject::GetChildCount() {
 	return children.size();
 }
 
+void GameObject::RemoveChild(GameObject * child) {
+	for (unsigned int i = 0; i < children.size(); i++) {
+		if (children[i] == child) {
+			children[i] = children[children.size() - 1];
+			children.pop_back();
+		}
+	}
+}
+
 void GameObject::AddChild(GameObject * _child) {
 	for (unsigned int i = 0; i < children.size(); i++) {
 		if (children[i] == _child) {
@@ -293,7 +305,6 @@ Component* GameObject::GetComponent(unsigned int num) {
 unsigned int GameObject::GetComponentCount() {
 	return components.size();
 }
-
 
 void GameObject::AddComponent(Component* component) {
 	components.emplace_back(component);

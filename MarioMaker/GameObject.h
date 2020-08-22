@@ -69,6 +69,8 @@ public:
 	//子供オブジェクトの数を取得します
 	unsigned int GetChildCount();
 
+	void RemoveChild(GameObject* child);
+
 	//オブジェクトを回転させます
 	void Rotate(Vector3 angle);
 	void Rotate(float x, float y, float z);
@@ -105,10 +107,10 @@ public:
 	template<typename T>
 	T* GetComponent() {
 		for (unsigned int i = 0; i < components.size(); i++) {
-			Component* checkComponent = dynamic_cast<T*>(components[i]);
+			T* checkComponent = dynamic_cast<T*>(components[i]);
 			if (checkComponent != NULL) {
 				//正常に見つかった
-				return components[i];
+				return checkComponent;
 			}
 		}
 		return nullptr;
