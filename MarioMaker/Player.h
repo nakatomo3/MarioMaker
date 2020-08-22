@@ -13,7 +13,7 @@ public:
 
 	void OnCollisionStay(Collision* collision);
 private:
-	float moveSpeed = 1;
+	float moveSpeed = 0.5f;
 	float groundBrekeRate = 0.9f;
 
 	const float gravity = 2;

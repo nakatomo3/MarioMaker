@@ -47,7 +47,13 @@ void Player::KeyboardInput() {
 }
 
 void Player::ControllerInput() {
-	velocity += Vector3::Right() * Input::GetController(0).Gamepad.sThumbLX * (float)Time::GetDeltaTime() / 32768 * moveSpeed;
+	auto speed = moveSpeed;
+
+	//Bƒ_ƒbƒVƒ…
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_Y) {
+		speed *= 2;
+	}
+	velocity += Vector3::Right() * Input::GetController(0).Gamepad.sThumbLX * (float)Time::GetDeltaTime() / 32768 * speed;
 
 	if (isStand == true && Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && !(beforeControllerButton & XINPUT_GAMEPAD_B)) {
 		velocity += Vector3::Up() * 0.7f;
@@ -55,7 +61,7 @@ void Player::ControllerInput() {
 }
 
 void Player::OnCollisionStay(Collision* collision) {
-	if (collision->GetGameObject()->GetTag() == GROUND_BLOCK) {
+	if (collision->GetGameObject()->GetTag() == GROUND_BLOCK || collision->GetGameObject()->GetTag() == BLOCK) {
 		if (gameObject->GetPosition().GetY() > collision->GetGameObject()->GetPosition().GetY()) {
 			if (abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
 				gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() + 1, 0));
@@ -66,8 +72,13 @@ void Player::OnCollisionStay(Collision* collision) {
 			if (abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
 				if (collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 0.95f) {
 					gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() - 1, 0));
-					velocity = Vector3(velocity.GetX(), -abs(velocity.GetY()), 0);
+					velocity = Vector3(velocity.GetX(), -abs(velocity.GetY()) * 0.5f, 0);
+					if (collision->GetGameObject()->GetTag() == BLOCK) {
+						collision->GetGameObject()->GetComponent<Quad>()->SetActive(false);
+						collision->GetGameObject()->GetComponent<QuadCollider>()->SetActive(false);
+					}
 				}
+
 			} else {
 				if (gameObject->GetPosition().GetX() > collision->GetGameObject()->GetPosition().GetX()) {
 					if (velocity.GetX() < 0) {
