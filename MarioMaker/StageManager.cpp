@@ -1,5 +1,14 @@
 #include "StageManager.h"
 
+void StageManager::Start() {
+	for (int i = 0; i < 14; i++) {
+		stage.emplace_back();
+		for (int j = 0; j < 100; j++) {
+			stage[i].emplace_back('0');
+		}
+	}
+}
+
 GameObject * StageManager::GetChildGameObject(Vector3 pos) {
 	GameObject* obj = nullptr;
 	auto childCount = gameObject->GetChildCount();
@@ -12,4 +21,16 @@ GameObject * StageManager::GetChildGameObject(Vector3 pos) {
 		}
 	}
 	return obj;
+}
+
+void StageManager::SetStageSize(unsigned int size) {
+	stageSizeX = size;
+}
+
+void StageManager::SetObject(int x, int y, char obj) {
+	stage[y][x] = obj;
+}
+
+char StageManager::GetStageObject(int x, int y) {
+	return stage[y][x];
 }
