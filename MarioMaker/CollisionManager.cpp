@@ -23,11 +23,17 @@ void CollisionManager::RemoveCollider(Collider * collider) {
 
 void CollisionManager::Update() {
 	for (unsigned int i = 0; i < colliders.size(); i++) {
+		if (colliders[i]->GetGameObject()->GetActive() == false) {
+			continue;
+		}
 		for (unsigned int j = i + 1; j < colliders.size(); j++) {
+			if (colliders[j]->GetGameObject()->GetActive() == false) {
+				continue;
+			}
 			SphereCollider* cast_a = dynamic_cast<SphereCollider*>(colliders[i]);
 			SphereCollider* cast_b = dynamic_cast<SphereCollider*>(colliders[j]);
 			//SphereCollider“¯Žm‚ÌÕ“Ë
-			if (cast_a != NULL && cast_b != NULL) {
+			if (cast_a != NULL && cast_b != NULL && cast_a->GetActive() == true && cast_b->GetActive() == true) {
 				auto distance = (cast_a->GetGameObject()->GetPosition() - cast_b->GetGameObject()->GetPosition()).Magnitude();
 				auto radA = cast_a->GetRadius();
 				auto radB = cast_b->GetRadius();
@@ -45,7 +51,7 @@ void CollisionManager::Update() {
 			QuadCollider* cast_c = dynamic_cast<QuadCollider*>(colliders[i]);
 			QuadCollider* cast_d = dynamic_cast<QuadCollider*>(colliders[j]);
 			//QuadCollider“¯Žm‚ÌÕ“ËBŒãXBoxCollider‚Ì‚Ý‚É‚È‚é—\’è
-			if (cast_c != NULL && cast_d != NULL) {
+			if (cast_c != NULL && cast_d != NULL && cast_c->GetActive() == true && cast_d->GetActive() == true) {
 				auto distance = (cast_c->GetGameObject()->GetPosition() - cast_d->GetGameObject()->GetPosition()).Magnitude();
 				if (cast_c->GetGameObject()->GetScale().Magnitude() + cast_d->GetGameObject()->GetScale().Magnitude() >= distance) {
 					if ((cast_c->GetGameObject()->GetPosition().GetX() - cast_c->GetGameObject()->GetScale().GetX() / 2 >= cast_d->GetGameObject()->GetPosition().GetX() - cast_d->GetGameObject()->GetScale().GetX() / 2 && cast_c->GetGameObject()->GetPosition().GetX() - cast_c->GetGameObject()->GetScale().GetX() / 2 <= cast_d->GetGameObject()->GetPosition().GetX() + cast_d->GetGameObject()->GetScale().GetX() / 2) ||
