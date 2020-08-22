@@ -76,6 +76,18 @@
     <Filter Include="ソース ファイル\MarioMaker\Editor">
       <UniqueIdentifier>{f85140af-10e2-4c8e-bfbb-3bb8cf4c1244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Game\Systems">
+      <UniqueIdentifier>{5e53e81e-eff6-4972-ae2b-73bd9b2decd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\Game\Objects">
+      <UniqueIdentifier>{ab523369-c2ec-4431-8cfb-2ea50688c29a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Game\Systems">
+      <UniqueIdentifier>{f07a536d-51cc-4269-a266-a5e4a00ad898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\Game\Objects">
+      <UniqueIdentifier>{40b030de-c791-4985-a402-ab6ca0f239d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -189,17 +201,17 @@
     <ClCompile Include="SelectStageScene.cpp">
       <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\MarioMaker\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCamera.cpp">
-      <Filter>ソース ファイル\MarioMaker\Game</Filter>
-    </ClCompile>
     <ClCompile Include="EditorManager.cpp">
       <Filter>ソース ファイル\MarioMaker\Editor</Filter>
     </ClCompile>
     <ClCompile Include="StageManager.cpp">
-      <Filter>ソース ファイル\MarioMaker\Game</Filter>
+      <Filter>ソース ファイル\MarioMaker\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCamera.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,17 +341,17 @@
     <ClInclude Include="SelectStageScene.h">
       <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCamera.h">
-      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
-    </ClInclude>
     <ClInclude Include="EditorManager.h">
       <Filter>ヘッダー ファイル\MarioMaker\Editor</Filter>
     </ClInclude>
     <ClInclude Include="StageManager.h">
-      <Filter>ヘッダー ファイル\MarioMaker\Game</Filter>
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCamera.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
