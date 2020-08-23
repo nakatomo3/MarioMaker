@@ -66,6 +66,7 @@ private:
 	};
 
 	Texture* objectTextures[6];
+	Texture* usedBlockTexture;
 
 	void TextureLoad();
 

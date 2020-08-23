@@ -5,6 +5,8 @@
 #include "EditorManager.h"
 #include "StageManager.h"
 
+bool EditScene::isEditMode = true;
+
 EditScene::EditScene(string name) : Scene(name){
 
 }
@@ -31,6 +33,7 @@ void EditScene::Load() {
 
 	//ゲーム部分オブジェクト
 	player = new GameObject("プレイヤー");
+	player->SetTag(PLAYER);
 	auto playerQuad = player->AddComponent<Quad>();
 	playerQuad->SetTexture(playerTexture);
 	playerQuad->SetCull(false);
@@ -113,4 +116,8 @@ void EditScene::Update() {
 	}
 
 	beforeInputStart = Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_START;
+}
+
+bool EditScene::GetIsEditMode() {
+	return isEditMode;
 }

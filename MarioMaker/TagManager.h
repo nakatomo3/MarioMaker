@@ -6,6 +6,7 @@ enum Tag {
 	PLAYER,
 	GROUND_BLOCK,
 	BLOCK,
+	HATENA_BLOCK,
 	//ここにタグを追加、数字を指定しないでください
 	TAG_LAST
 };

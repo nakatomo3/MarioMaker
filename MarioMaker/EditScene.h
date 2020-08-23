@@ -11,6 +11,7 @@ public:
 	void Load();
 
 	void Update();
+	static bool GetIsEditMode();
 
 private:
 
@@ -32,6 +33,6 @@ private:
 
 	Texture* playerTexture;
 
-	bool isEditMode = true;
+	static bool isEditMode;
 	bool beforeInputStart = false;
 };

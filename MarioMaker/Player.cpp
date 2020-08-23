@@ -61,7 +61,7 @@ void Player::ControllerInput() {
 }
 
 void Player::OnCollisionStay(Collision* collision) {
-	if (collision->GetGameObject()->GetTag() == GROUND_BLOCK || collision->GetGameObject()->GetTag() == BLOCK) {
+	if (collision->GetGameObject()->GetTag() == GROUND_BLOCK || collision->GetGameObject()->GetTag() == BLOCK || collision->GetGameObject()->GetTag() == HATENA_BLOCK) {
 		if (gameObject->GetPosition().GetY() > collision->GetGameObject()->GetPosition().GetY()) {
 			if (abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
 				gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() + 1, 0));

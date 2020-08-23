@@ -1,5 +1,6 @@
 #include "EditorManager.h"
 #include "DXEngine.h"
+#include "QuestionBlock.h"
 
 void EditorManager::Start() {
 	auto editorWindow = new GameObject("EditorWindow");
@@ -88,8 +89,10 @@ Vector3 EditorManager::GetCursorPos() {
 }
 
 void EditorManager::TextureLoad() {
+	usedBlockTexture = new Texture("assets/textures/MarioMaker/usedBlock.png");
 	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
 	objectTextures[1] = new Texture("assets/textures/MarioMaker/block.png");
+	objectTextures[2] = new Texture("assets/textures/MarioMaker/hatenaBlock.png");
 }
 
 void EditorManager::CursorMove() {
@@ -252,6 +255,16 @@ void EditorManager::DefaultModeEdit() {
 				stage->SetObject(cursorPosX, cursorPosY, 'B');
 				break;
 			case 2:
+				stageObj->SetName("ハテナブロック");
+				stageObj->SetTag(HATENA_BLOCK);
+				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
+				stageObj->AddComponent<QuadCollider>();
+				quad->SetTexture(objectTextures[2]);
+				stage->SetObject(cursorPosX, cursorPosY, 'C'); 
+				{
+					auto hatena = stageObj->AddComponent<QuestionBlock>();
+					hatena->SetUsedBlock(usedBlockTexture);
+				}
 				break;
 			case 3:
 				break;

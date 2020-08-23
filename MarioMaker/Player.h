@@ -16,7 +16,7 @@ private:
 	float moveSpeed = 0.5f;
 	float groundBrekeRate = 0.9f;
 
-	const float gravity = 2;
+	const float gravity = 1.5f;
 
 	bool isStand = false;
 

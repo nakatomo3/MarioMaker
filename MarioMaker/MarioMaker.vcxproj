@@ -195,6 +195,7 @@
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="QuadCollider.cpp" />
+    <ClCompile Include="QuestionBlock.cpp" />
     <ClCompile Include="RendererManager.cpp" />
     <ClCompile Include="SaveManager.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadCollider.h" />
+    <ClInclude Include="QuestionBlock.h" />
     <ClInclude Include="RendererManager.h" />
     <ClInclude Include="SaveManager.h" />
     <ClInclude Include="Scene.h" />
