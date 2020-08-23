@@ -5,7 +5,9 @@
 
 typedef enum{
 	BROKEN,
-	COIN
+	BLOCK_COIN,
+	BLOCK_ITEM,
+	BLOCK_STAR
 }BlockType;
 
 class Block : public ScriptBase {
@@ -17,4 +19,9 @@ private:
 	QuadCollider* collider;
 
 	BlockType type = BROKEN;
+
+	Vector3 originPos = Vector3(0,0,-1);
+	bool isImpact = false;
+	float impactTimer = 0;
+	const float returnTimer = 0.2f;
 };

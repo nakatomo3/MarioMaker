@@ -92,3 +92,7 @@ void Player::OnCollisionStay(Collision* collision) {
 		}
 	}
 }
+
+PlayerGrowth Player::GetPlayerGrowth() {
+	return growth;
+}

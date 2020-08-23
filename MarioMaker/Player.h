@@ -2,6 +2,13 @@
 #include "ScriptBase.h"
 #include "Vector3.h"
 #include "Quad.h"
+
+typedef enum {
+	MINIMUM,
+	BIG,
+	FIRE
+}PlayerGrowth;
+
 class Player : public ScriptBase {
 public:
 	void Update();
@@ -12,6 +19,8 @@ public:
 	void ControllerInput();
 
 	void OnCollisionStay(Collision* collision);
+
+	PlayerGrowth GetPlayerGrowth();
 private:
 	float moveSpeed = 0.5f;
 	float groundBrekeRate = 0.9f;
@@ -25,4 +34,6 @@ private:
 	Quad* quad;
 
 	WORD beforeControllerButton;
+
+	PlayerGrowth growth = MINIMUM;
 };
