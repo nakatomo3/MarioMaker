@@ -83,6 +83,10 @@ void EditorManager::SetStage(StageManager * stageManager) {
 	stage = stageManager;
 }
 
+Vector3 EditorManager::GetCursorPos() {
+	return Vector3(cursorPosX, cursorPosY, 0);
+}
+
 void EditorManager::TextureLoad() {
 	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
 	objectTextures[1] = new Texture("assets/textures/MarioMaker/block.png");
@@ -197,6 +201,7 @@ void EditorManager::InformationShow() {
 
 void EditorManager::DefaultModeEdit() {
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+		//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
 		if (stage->GetStageObject(cursorPosX, cursorPosY) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0)) != nullptr && cursorPosY == 0) {
 			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0))->Destroy();
 		}
@@ -248,12 +253,9 @@ void EditorManager::DefaultModeEdit() {
 				break;
 			case 2:
 				break;
+			case 3:
+				break;
 			}
-		} else {
-			LogWriter::Log("mismatch");
 		}
-
-	
 	}
-
 }

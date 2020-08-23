@@ -20,6 +20,8 @@ public:
 	void SetCamera(GameObject* _camera);
 	void SetStage(StageManager* stageManager);
 
+	Vector3 GetCursorPos();
+
 private:
 	StageManager* stage;
 

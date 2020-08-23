@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "Texture.h"
+#include "EditorManager.h"
+#include "StageManager.h"
 class EditScene : public Scene {
 public:
 	EditScene(string name);
@@ -11,6 +13,8 @@ public:
 	void Update();
 
 private:
+
+	StageManager* stageManager;
 
 	GameObject* editorObject;
 	GameObject* gameObject;
@@ -23,6 +27,8 @@ private:
 	//編集オブジェクト
 	GameObject* editorWindow;
 	GameObject* editorCamera;
+
+	EditorManager* editorManager;
 
 	Texture* playerTexture;
 

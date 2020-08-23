@@ -19,7 +19,7 @@ void EditScene::Load() {
 	auto blockTexture = new Texture("assets/textures/MarioMaker/groundBlock.png");
 
 	stage = new GameObject("ステージ");
-	auto stageManager = stage->AddComponent<StageManager>();
+	stageManager = stage->AddComponent<StageManager>();
 	stage->SetTag(MANAGER);
 
 	editorObject = new GameObject("エディタオブジェクト");
@@ -45,7 +45,7 @@ void EditScene::Load() {
 	camera->SetParent(gameObject);
 
 	//編集オブジェクト
-	auto editorManager = editorObject->AddComponent<EditorManager>();
+	editorManager = editorObject->AddComponent<EditorManager>();
 	editorManager->SetStage(stageManager);
 
 	editorCamera = new GameObject("エディタカメラ");
@@ -104,9 +104,12 @@ void EditScene::Update() {
 		editorObject->SetActive(true);
 		player->SetActive(false);
 	} else {
+		if (player->GetActive() == false) {
+			player->SetPosition(editorManager->GetCursorPos());
+		}
+		player->SetActive(true);
 		gameObject->SetActive(true);
 		editorObject->SetActive(false);
-		player->SetActive(true);
 	}
 
 	beforeInputStart = Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_START;
