@@ -1,6 +1,7 @@
 #include "EditorManager.h"
 #include "DXEngine.h"
 #include "QuestionBlock.h"
+#include "Block.h"
 
 void EditorManager::Start() {
 	auto editorWindow = new GameObject("EditorWindow");
@@ -42,12 +43,16 @@ void EditorManager::Start() {
 
 	nameText = windowBackground->AddComponent<Text>();
 	nameText->SetScale(0.5f);
-	nameText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.05f));
+	nameText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.04f));
 	nameText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
 	nameText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
 
 	editorWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, 50, 0));
 	editorWindow->SetParent(gameObject);
+
+	objectImage = windowBackground->AddComponent<Image>();
+	objectImage->SetPosition(Vector3(SCREEN_HEIGHT * -0.07f, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.12f, 0));
+	objectImage->SetScale(Vector2(SCREEN_HEIGHT * 0.15f, SCREEN_HEIGHT * 0.15f));
 
 	cursorTexture = new Texture("assets/textures/MarioMaker/Editor/Cursor.png");
 
@@ -200,6 +205,10 @@ void EditorManager::InformationShow() {
 	posXText->SetText(cursorPosX);
 	posYText->SetText(cursorPosY);
 	nameText->SetText(objectNames[objectNumber].c_str());
+
+	if (objectTextures[objectNumber] != nullptr) {
+		objectImage->SetTexture(objectTextures[objectNumber]);
+	}
 }
 
 void EditorManager::DefaultModeEdit() {
@@ -249,6 +258,7 @@ void EditorManager::DefaultModeEdit() {
 			case 1:
 				stageObj->SetName("ƒuƒƒbƒN");
 				stageObj->SetTag(BLOCK);
+				stageObj->AddComponent<Block>();
 				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
 				stageObj->AddComponent<QuadCollider>();
 				quad->SetTexture(objectTextures[1]);

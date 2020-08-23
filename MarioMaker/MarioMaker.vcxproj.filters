@@ -216,6 +216,9 @@
     <ClCompile Include="QuestionBlock.cpp">
       <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -357,6 +360,9 @@
       <Filter>ヘッダー ファイル\MarioMaker\Game\Systems</Filter>
     </ClInclude>
     <ClInclude Include="QuestionBlock.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
       <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
