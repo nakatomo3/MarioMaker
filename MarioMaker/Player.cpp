@@ -73,10 +73,6 @@ void Player::OnCollisionStay(Collision* collision) {
 				if (collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 0.95f) {
 					gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() - 1, 0));
 					velocity = Vector3(velocity.GetX(), -abs(velocity.GetY()) * 0.5f, 0);
-					if (collision->GetGameObject()->GetTag() == BLOCK) {
-						collision->GetGameObject()->GetComponent<Quad>()->SetActive(false);
-						collision->GetGameObject()->GetComponent<QuadCollider>()->SetActive(false);
-					}
 				}
 
 			} else {
