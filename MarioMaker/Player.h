@@ -11,9 +11,9 @@ typedef enum {
 
 class Player : public ScriptBase {
 public:
-	void Update();
+	void Start();
 
-	void SetQuad(Quad* _quad);
+	void Update();
 
 	void KeyboardInput();
 	void ControllerInput();
@@ -28,6 +28,11 @@ private:
 	const float gravity = 1.5f;
 
 	bool isStand = false;
+	bool isDead = false;
+
+	float deadTimer = 0;
+	float deadTime = 1.0f;
+	float deadSpeed = 15;
 
 	Vector3 velocity;
 
@@ -36,4 +41,6 @@ private:
 	WORD beforeControllerButton;
 
 	PlayerGrowth growth = MINIMUM;
+
+	Texture* textures[4];
 };

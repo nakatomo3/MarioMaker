@@ -62,8 +62,6 @@ void EditorManager::Start() {
 	cursor->SetParent(gameObject);
 
 	TextureLoad();
-
-	cursorPosX = 10;
 }
 
 void EditorManager::Update() {
@@ -98,11 +96,12 @@ void EditorManager::TextureLoad() {
 	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
 	objectTextures[1] = new Texture("assets/textures/MarioMaker/block.png");
 	objectTextures[2] = new Texture("assets/textures/MarioMaker/hatenaBlock.png");
+	objectTextures[3] = new Texture("assets/textures/MarioMaker/standBlock.png");
 }
 
 void EditorManager::CursorMove() {
-	if (Input::GetController(0).Gamepad.sThumbLX >= 10000) {
-		if (beforeInputLX < 5000) {
+	if (Input::GetController(0).Gamepad.sThumbLX >= 10000 || Input::GetKey('D')) {
+		if ((beforeInputLX < 5000 && !Input::GetKey('D')) || Input::GetKeyDown('D')) {
 			cursorPosX++;
 		}
 		firstTimer += (float)Time::GetDeltaTime();
@@ -110,8 +109,8 @@ void EditorManager::CursorMove() {
 			cursorPosX++;
 			continuousTimer = 0;
 		}
-	} else if (Input::GetController(0).Gamepad.sThumbLX <= -10000) {
-		if (beforeInputLX > -5000) {
+	} else if (Input::GetController(0).Gamepad.sThumbLX <= -10000 || Input::GetKey('A')) {
+		if ((beforeInputLX > -5000 && !Input::GetKey('A')) || Input::GetKeyDown('A')) {
 			cursorPosX--;
 		}
 		firstTimer += (float)Time::GetDeltaTime();
@@ -119,8 +118,8 @@ void EditorManager::CursorMove() {
 			cursorPosX--;
 			continuousTimer = 0;
 		}
-	}else if (Input::GetController(0).Gamepad.sThumbLY >= 10000) {
-		if (beforeInputLY < 5000) {
+	}else if (Input::GetController(0).Gamepad.sThumbLY >= 10000 || Input::GetKey('W')) {
+		if ((beforeInputLY < 5000 && !Input::GetKey('W')) || Input::GetKeyDown('W')) {
 			cursorPosY++;
 		}
 		firstTimer += (float)Time::GetDeltaTime();
@@ -128,8 +127,8 @@ void EditorManager::CursorMove() {
 			cursorPosY++;
 			continuousTimer = 0;
 		}
-	} else if (Input::GetController(0).Gamepad.sThumbLY <= -10000) {
-		if (beforeInputLY > -5000) {
+	} else if (Input::GetController(0).Gamepad.sThumbLY <= -10000 || Input::GetKey('S')) {
+		if ((beforeInputLY > -5000 && !Input::GetKey('S')) || Input::GetKeyDown('S')) {
 			cursorPosY--;
 		}
 		firstTimer += (float)Time::GetDeltaTime();
@@ -160,10 +159,10 @@ void EditorManager::CursorMove() {
 }
 
 void EditorManager::StageEdit() {
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_LEFT_SHOULDER)) {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_LEFT_SHOULDER) || Input::GetMouseWheel() > 0) {
 		objectNumber--;
 	}
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_RIGHT_SHOULDER)) {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER && !(beforeControllerButton & XINPUT_GAMEPAD_RIGHT_SHOULDER) || Input::GetMouseWheel() < 0) {
 		objectNumber++;
 	}
 	if (objectNumber > objectMax - 1) {
@@ -212,7 +211,7 @@ void EditorManager::InformationShow() {
 }
 
 void EditorManager::DefaultModeEdit() {
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A) {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKey('K')) {
 		//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
 		if (stage->GetStageObject(cursorPosX, cursorPosY) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0)) != nullptr && cursorPosY == 0) {
 			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0))->Destroy();
@@ -222,7 +221,7 @@ void EditorManager::DefaultModeEdit() {
 		}
 		stage->SetObject(cursorPosX, cursorPosY, '0');
 	}
-	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKey('L')) {
 		if (stage->GetStageObject(cursorPosX, cursorPosY) != objectNumber + 'A') {
 			if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr) {
 				stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0))->Destroy();
@@ -277,6 +276,12 @@ void EditorManager::DefaultModeEdit() {
 				}
 				break;
 			case 3:
+				stageObj->SetName("足場ブロック");
+				stageObj->SetTag(GROUND_BLOCK);
+				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
+				stageObj->AddComponent<QuadCollider>();
+				quad->SetTexture(objectTextures[3]);
+				stage->SetObject(cursorPosX, cursorPosY, 'D');
 				break;
 			}
 		}

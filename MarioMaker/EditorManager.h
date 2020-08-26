@@ -30,8 +30,8 @@ private:
 
 	Texture* cursorTexture;
 
-	int cursorPosX = 0;
-	int cursorPosY = 0;
+	int cursorPosX = 10;
+	int cursorPosY = 5;
 
 	Vector2 beforeCursorPos;
 
@@ -60,7 +60,7 @@ private:
 		"地形ブロック",
 		"ブロック",
 		"ハテナブロック",
-		"D",
+		"足場ブロック",
 		"E",
 		"F"
 	};

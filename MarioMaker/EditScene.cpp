@@ -39,7 +39,6 @@ void EditScene::Load() {
 	playerQuad->SetCull(false);
 	player->SetPosition(Vector3(10,3,0));
 	auto playerScript = player->AddComponent<Player>();
-	playerScript->SetQuad(playerQuad);
 	player->AddComponent<QuadCollider>();
 
 	camera = new GameObject("ƒJƒƒ‰");
@@ -68,34 +67,15 @@ void EditScene::Load() {
 		ObjectManager::Instantiate(block);
 		block->SetParent(stage);
 	}
-	{
+	for (int i = 0; i < width; i++) {
 		auto block = new GameObject("Block");
 		block->SetTag(GROUND_BLOCK);
-		block->SetPosition(Vector3(3, 1, 0));
+		block->SetPosition(Vector3((float)i, -1, 0));
 		block->AddComponent<Quad>()->SetTexture(blockTexture);
 		block->AddComponent<QuadCollider>();
 		ObjectManager::Instantiate(block);
 		block->SetParent(stage);
 	}
-	{
-		auto block = new GameObject("Block");
-		block->SetTag(GROUND_BLOCK);
-		block->SetPosition(Vector3(3, 2, 0));
-		block->AddComponent<Quad>()->SetTexture(blockTexture);
-		block->AddComponent<QuadCollider>();
-		ObjectManager::Instantiate(block);
-		block->SetParent(stage);
-	}
-	{
-		auto block = new GameObject("Block");
-		block->SetTag(GROUND_BLOCK);
-		block->SetPosition(Vector3(3, 3, 0));
-		block->AddComponent<Quad>()->SetTexture(blockTexture);
-		block->AddComponent<QuadCollider>();
-		ObjectManager::Instantiate(block);
-		block->SetParent(stage);
-	}
-
 }
 
 void EditScene::Update() {

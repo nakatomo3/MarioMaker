@@ -4,19 +4,21 @@
 #include "Time.h"
 
 void Block::OnCollisionStay(Collision * collision) {
-	if (collision->GetGameObject()->GetTag() == PLAYER && abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f && collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 0.95f) {
+	if (collision->GetGameObject()->GetTag() == PLAYER && abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
 		if (quad == nullptr) {
 			quad = gameObject->GetComponent<Quad>();
 		}
 		if (collider == nullptr) {
 			collider = gameObject->GetComponent<QuadCollider>();
 		}
-		if (collision->GetGameObject()->GetComponent<Player>()->GetPlayerGrowth() >= BIG) {
+		if (collision->GetGameObject()->GetComponent<Player>()->GetPlayerGrowth() >= BIG && collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 1.45f) {
 			quad->SetActive(false);
 			collider->SetActive(false);
 		} else {
-			impactTimer = 0;
-			isImpact = true;
+			if (collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 0.95f) {
+				impactTimer = 0;
+				isImpact = true;
+			}
 		}
 	}
 }

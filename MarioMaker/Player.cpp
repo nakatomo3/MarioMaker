@@ -1,35 +1,80 @@
 #include "Player.h"
 #include "DXEngine.h"
 
+void Player::Start() {
+	quad = gameObject->GetComponent<Quad>();
+	textures[0] = quad->GetTexture();
+	textures[1] = new Texture("assets/textures/MarioMaker/marioBig.png");
+	textures[2] = new Texture("assets/textures/MarioMaker/marioDead.png");
+	textures[3] = new Texture("assets/textures/MarioMaker/marioDead.png");
+	textures[4] = new Texture("assets/textures/MarioMaker/marioDead.png");
+}
+
 void Player::Update() {
 
-	KeyboardInput();
-	ControllerInput();
+	if (isDead == false) {
+		KeyboardInput();
+		ControllerInput();
 
-	if (velocity.GetX() >= 0) {
-		gameObject->SetRotation(Vector3(0, 0, 0));
+		if (velocity.GetX() >= 0) {
+			gameObject->SetRotation(Vector3(0, 0, 0));
+		} else {
+			gameObject->SetRotation(Vector3(0, 3.14f, 0));
+		}
+
+		if (isStand == false) {
+			velocity += Vector3::Down() * gravity * (float)Time::GetDeltaTime();
+		}
+
+		if (gameObject->GetPosition().GetX() < 0 && velocity.GetX() < 0) {
+			velocity = Vector3(0, velocity.GetY(), 0);
+			gameObject->SetPosition(Vector3(0, gameObject->GetPosition().GetY(), 0));
+		}
+
+		switch (growth) {
+		case MINIMUM:
+			gameObject->SetScale(Vector3(1, 1, 1));
+			quad->SetTexture(textures[0]);
+			break;
+		case BIG:
+			gameObject->SetScale(Vector3(1, 2, 1));
+			quad->SetTexture(textures[1]);
+			break;
+		case FIRE:
+			gameObject->SetScale(Vector3(1, 2, 1));
+			quad->SetTexture(textures[2]);
+			break;
+		}
+
+		velocity *= groundBrekeRate;
+		gameObject->Move(velocity);
 	} else {
-		gameObject->SetRotation(Vector3(0, 3.14f, 0));
+		deadTimer += Time::GetDeltaTime();
+		deadSpeed -= Time::GetDeltaTime() * 50;
+		velocity = Vector3::Zero();
+		gameObject->SetRotation(Vector3(0, 0, 0));
+		gameObject->SetScale(Vector3(1, 1, 1));
+		if (deadTimer < deadTime / 3) {
+			gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
+		} else if(deadTimer < deadTime){
+			gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
+		} else {
+			isDead = false;
+			deadTimer = 0;
+			gameObject->SetPosition(Vector3(0, 5, 0));
+			growth = MINIMUM;
+			deadSpeed = 15;
+		}
+
 	}
 
-	if (isStand == false) {
-		velocity += Vector3::Down() * gravity * (float)Time::GetDeltaTime();
+	if (gameObject->GetPosition().GetY() < 0) {
+		quad->SetTexture(textures[4]);
+		isDead = true;
 	}
-
-	if (gameObject->GetPosition().GetX() < 0 && velocity.GetX() < 0) {
-		velocity = Vector3(0, velocity.GetY(), 0);
-		gameObject->SetPosition(Vector3(0, gameObject->GetPosition().GetY(), 0));
-	}
-
-	velocity *= groundBrekeRate;
-	gameObject->Move(velocity);
 
 	isStand = false;
 	beforeControllerButton = Input::GetController(0).Gamepad.wButtons;
-}
-
-void Player::SetQuad(Quad * _quad) {
-	quad = _quad;
 }
 
 void Player::KeyboardInput() {
@@ -64,15 +109,15 @@ void Player::OnCollisionStay(Collision* collision) {
 	if (collision->GetGameObject()->GetTag() == GROUND_BLOCK || collision->GetGameObject()->GetTag() == BLOCK || collision->GetGameObject()->GetTag() == HATENA_BLOCK) {
 		if (gameObject->GetPosition().GetY() > collision->GetGameObject()->GetPosition().GetY()) {
 			if (abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
-				gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() + 1, 0));
+				gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() + 0.5f + gameObject->GetScale().GetY() / 2, 0));
 				isStand = true;
 				velocity = Vector3(velocity.GetX(), 0, 0);
 			}
 		} else {
 			if (abs(gameObject->GetPosition().GetX() - collision->GetGameObject()->GetPosition().GetX()) < 0.8f) {
-				if (collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < 0.95f) {
-					gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() - 1, 0));
-					velocity = Vector3(velocity.GetX(), -abs(velocity.GetY()) * 0.5f, 0);
+				if (collision->GetGameObject()->GetPosition().GetY() - gameObject->GetPosition().GetY() < gameObject->GetScale().GetY() * 0.95f) {
+					gameObject->SetPosition(Vector3(gameObject->GetPosition().GetX(), collision->GetGameObject()->GetPosition().GetY() - 0.5f - gameObject->GetScale().GetY() / 2, 0));
+					velocity = Vector3(velocity.GetX(), -abs(velocity.GetY()) * 0.1f, 0);
 				}
 
 			} else {
