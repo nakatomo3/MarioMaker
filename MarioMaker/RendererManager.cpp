@@ -2,6 +2,7 @@
 #include "main.h"
 #include "RendererManager.h"
 #include <io.h>
+#include "LogWriter.h"
 
 
 D3D_FEATURE_LEVEL       RendererManager::featureLevel = D3D_FEATURE_LEVEL_11_0;
@@ -306,7 +307,7 @@ void RendererManager::Init() {
 	material.ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	SetMaterial(material);
 
-
+	LogWriter::Log("RendererManager‚ª‰Šú‰»‚³‚ê‚Ü‚µ‚½");
 
 
 }
