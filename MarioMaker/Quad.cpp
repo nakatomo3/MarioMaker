@@ -6,32 +6,28 @@
 
 //0.05ms~0.1ms
 void Quad::Init() {
-
-	th = 1;
-	tw = 1;
-
 	Vertex vertex[4];
 	D3D11_BUFFER_DESC bd;
 	D3D11_SUBRESOURCE_DATA sd;
 
 	vertex[0].position = D3DXVECTOR3(-0.5f, -0.5f, 0.0f);
 	vertex[0].normal = D3DXVECTOR3(0, 0, 0);
-	vertex[0].diffuse = D3DXVECTOR4(1, 1, 1, 1);
+	vertex[0].diffuse = color;
 	vertex[0].texUV = D3DXVECTOR2(0, 1);
 
 	vertex[1].position = D3DXVECTOR3(-0.5f, 0.5f, 0.0f);
 	vertex[1].normal = D3DXVECTOR3(0, 0, 0);
-	vertex[1].diffuse = D3DXVECTOR4(1, 1, 1, 1);
+	vertex[1].diffuse = color;
 	vertex[1].texUV = D3DXVECTOR2(0, 0);
 
 	vertex[2].position = D3DXVECTOR3(0.5f, -0.5f, 0.0f);
 	vertex[2].normal = D3DXVECTOR3(0, 0, 0);
-	vertex[2].diffuse = D3DXVECTOR4(1, 1, 1, 1);
+	vertex[2].diffuse = color;
 	vertex[2].texUV = D3DXVECTOR2(1, 1);
 
 	vertex[3].position = D3DXVECTOR3(0.5f, 0.5f, 0.0f);
 	vertex[3].normal = D3DXVECTOR3(0, 0, 0);
-	vertex[3].diffuse = D3DXVECTOR4(1, 1, 1, 1);
+	vertex[3].diffuse = color;
 	vertex[3].texUV = D3DXVECTOR2(1, 0);
 
 	ZeroMemory(&bd, sizeof(bd));
@@ -117,7 +113,9 @@ void Quad::SetPosition(Vector3 _position) {
 }
 
 void Quad::SetColor(D3DXVECTOR4 _color) {
+	vertexBuffer->Release();
 	color = _color;
+	Init();
 }
 
 Texture * Quad::GetTexture() {
