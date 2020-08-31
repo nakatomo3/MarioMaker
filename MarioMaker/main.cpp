@@ -100,6 +100,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 		instance,
 		NULL);
 
+	_ASSERT(_CrtCheckMemory());
 
 	// 初期化処理(ウィンドウを作成してから行う)
 	LogWriter::Init();
