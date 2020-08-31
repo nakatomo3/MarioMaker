@@ -14,6 +14,10 @@ EditScene::EditScene(string name) : Scene(name){
 void EditScene::Start() {
 	ObjectManager::Instantiate(player);
 	ObjectManager::Instantiate(stage);
+	int width = 20;
+	for (int i = 0; i < width; i++) {
+		stageManager->SetObject(i, 0, 'A');
+	}
 }
 
 void EditScene::Load() {
@@ -66,6 +70,7 @@ void EditScene::Load() {
 		block->AddComponent<QuadCollider>();
 		ObjectManager::Instantiate(block);
 		block->SetParent(stage);
+		//stageManager->SetObject(i, 0, 'A');
 	}
 	for (int i = 0; i < width; i++) {
 		auto block = new GameObject("Block");
