@@ -28,10 +28,15 @@ private:
 	GameObject* camera;
 	GameObject* cursor;
 
+	GameObject* editingArea;
+
 	Texture* cursorTexture;
 
 	int cursorPosX = 10;
 	int cursorPosY = 5;
+
+	int areaStartPosX = 0;
+	int areaStartPosY = 0;
 
 	Vector2 beforeCursorPos;
 
@@ -39,6 +44,8 @@ private:
 	SHORT beforeInputLY;
 
 	WORD beforeControllerButton;
+	BYTE beforeLTrigger;
+	BYTE beforeRTrigger;
 
 	NumText* posXText;
 	NumText* posYText;
@@ -65,7 +72,7 @@ private:
 		"F"
 	};
 
-	Texture* objectTextures[6];
+	Texture* objectTextures[4];
 	Texture* usedBlockTexture;
 
 	void TextureLoad();
@@ -76,5 +83,9 @@ private:
 
 	void InformationShow();
 
+	void DestroyObject(int x, int y);
+	void PlaceObject(int x, int y);
+
 	void DefaultModeEdit();
+	void AreaModeEdit();
 };

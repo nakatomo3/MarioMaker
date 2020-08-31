@@ -3,7 +3,11 @@
 #include "QuestionBlock.h"
 #include "Block.h"
 
+#include <crtdbg.h>
+
 void EditorManager::Start() {
+	TextureLoad();
+
 	auto editorWindow = new GameObject("EditorWindow");
 	editorWindow->AddComponent<Window>();
 
@@ -61,7 +65,10 @@ void EditorManager::Start() {
 	cursorQuad->SetTexture(cursorTexture);
 	cursor->SetParent(gameObject);
 
-	TextureLoad();
+	editingArea = new GameObject("編集エリア");
+	auto areaQuad = editingArea->AddComponent<Quad>();
+	areaQuad->SetColor(D3DXVECTOR4(1, 1, 0, 0.51f));
+	ObjectManager::Instantiate(editingArea);
 }
 
 void EditorManager::Update() {
@@ -77,6 +84,8 @@ void EditorManager::Update() {
 	beforeInputLY = Input::GetController(0).Gamepad.sThumbLY;
 
 	beforeControllerButton = Input::GetController(0).Gamepad.wButtons;
+	beforeLTrigger = Input::GetController(0).Gamepad.bLeftTrigger;
+	beforeRTrigger = Input::GetController(0).Gamepad.bRightTrigger;
 }
 
 void EditorManager::SetCamera(GameObject * _camera) {
@@ -172,11 +181,22 @@ void EditorManager::StageEdit() {
 		objectNumber = objectMax - 1;
 	}
 
-	if (Input::GetController(0).Gamepad.bLeftTrigger > 0x80 || Input::GetController(0).Gamepad.bRightTrigger > 0x80) {
+	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80 && beforeLTrigger < 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80 && beforeRTrigger < 0x80)) {
 		if (nowMode == DETAIL_MODE) {
 			//詳細設定時の終了処理
 		}
 		nowMode = AREA_MODE;
+		editingArea->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, -0.01f));
+		editingArea->SetActive(true);
+		areaStartPosX = cursorPosX;
+		areaStartPosY = cursorPosY;
+	}
+	if (Input::GetController(0).Gamepad.bLeftTrigger < 0x80 && Input::GetController(0).Gamepad.bRightTrigger < 0x80) {
+		if (nowMode == AREA_MODE) {
+
+		}
+		nowMode = DEFAULT_MODE;
+		editingArea->SetActive(false);
 	}
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_X) {
 		if (nowMode == AREA_MODE) {
@@ -192,7 +212,9 @@ void EditorManager::StageEdit() {
 		DefaultModeEdit();
 		break;
 	case AREA_MODE:
-
+		editingArea->SetPosition(Vector3(((float)cursorPosX + areaStartPosX) / 2, ((float)cursorPosY + areaStartPosY) / 2, -0.01f));
+		editingArea->SetScale(Vector3(abs(areaStartPosX - cursorPosX) + 1, abs(areaStartPosY - cursorPosY) + 1, 1));
+		AreaModeEdit();
 		break;
 	case DETAIL_MODE:
 
@@ -210,79 +232,123 @@ void EditorManager::InformationShow() {
 	}
 }
 
+void EditorManager::DestroyObject(int x, int y) {
+
+	//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
+	if (stage->GetStageObject(x, y) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0)) != nullptr && y == 0) {
+		stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0))->Destroy();
+	}
+	if (stage->GetChildGameObject(Vector3((float)x, (float)y, 0)) != nullptr) {
+		stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->Destroy();
+	}
+	stage->SetObject(x, y, '0');
+
+}
+
+void EditorManager::PlaceObject(int x, int y) {
+	auto stageObj = new GameObject();
+	stageObj->SetParent(stage->GetGameObject());
+	auto quad = stageObj->AddComponent<Quad>();
+	switch (objectNumber) {
+	default:
+		break;
+	case 0:
+		stageObj->SetName("地形ブロック");
+		stageObj->SetTag(GROUND_BLOCK);
+		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
+		stageObj->AddComponent<QuadCollider>();
+		quad->SetTexture(objectTextures[0]);
+		stage->SetObject(x, y, 'A');
+
+		if (y == 0) {
+			auto underStageBlock = new GameObject();
+			underStageBlock->SetParent(stage->GetGameObject());
+			auto quad = underStageBlock->AddComponent<Quad>();
+			underStageBlock->SetName("地形ブロック");
+			underStageBlock->SetTag(GROUND_BLOCK);
+			underStageBlock->SetPosition(Vector3((float)x, (float)y - 1, 0));
+			underStageBlock->AddComponent<QuadCollider>();
+			quad->SetTexture(objectTextures[0]);
+			ObjectManager::Instantiate(underStageBlock);
+		}
+		break;
+	case 1:
+		stageObj->SetName("ブロック");
+		stageObj->SetTag(BLOCK);
+		stageObj->AddComponent<Block>();
+		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
+		stageObj->AddComponent<QuadCollider>();
+		quad->SetTexture(objectTextures[1]);
+		stage->SetObject(x, y, 'B');
+		break;
+	case 2:
+		stageObj->SetName("ハテナブロック");
+		stageObj->SetTag(HATENA_BLOCK);
+		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
+		stageObj->AddComponent<QuadCollider>();
+		quad->SetTexture(objectTextures[2]);
+		stage->SetObject(x, y, 'C');
+		{
+			auto hatena = stageObj->AddComponent<QuestionBlock>();
+			hatena->SetUsedBlock(usedBlockTexture);
+		}
+		break;
+	case 3:
+		stageObj->SetName("足場ブロック");
+		stageObj->SetTag(GROUND_BLOCK);
+		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
+		stageObj->AddComponent<QuadCollider>();
+		quad->SetTexture(objectTextures[3]);
+		stage->SetObject(x, y, 'D');
+		break;
+	}
+	ObjectManager::Instantiate(stageObj);
+}
+
 void EditorManager::DefaultModeEdit() {
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKey('K')) {
-		//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
-		if (stage->GetStageObject(cursorPosX, cursorPosY) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0)) != nullptr && cursorPosY == 0) {
-			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0))->Destroy();
-		}
-		if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr) {
-			stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0))->Destroy();
-		}
-		stage->SetObject(cursorPosX, cursorPosY, '0');
+		DestroyObject(cursorPosX, cursorPosY);
 	}
+
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKey('L')) {
 		if (stage->GetStageObject(cursorPosX, cursorPosY) != objectNumber + 'A') {
-			if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr) {
-				stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0))->Destroy();
+			DestroyObject(cursorPosX, cursorPosY);
+			PlaceObject(cursorPosX, cursorPosY);
+		}
+	}
+}
+
+void EditorManager::AreaModeEdit() {
+	int left = 0;
+	int up = 0;
+
+	//左上の座標を求める
+	if (cursorPosX >= areaStartPosX) {
+		left = areaStartPosX;
+	} else {
+		left = cursorPosX;
+	}
+	if (cursorPosY >= areaStartPosY) {
+		up = areaStartPosY;
+	} else {
+		up = cursorPosY;
+	}
+
+	//左上から右下まで消す
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKeyDown('K')) {
+		for (int i = 0; i < abs(areaStartPosX - cursorPosX) + 1; i++) {
+			for (int j = 0; j < abs(areaStartPosY - cursorPosY) + 1; j++) {
+				DestroyObject(i + left, j + up);
 			}
+		}
+	}
 
-			auto stageObj = new GameObject();
-			stageObj->SetParent(stage->GetGameObject());
-			auto quad = stageObj->AddComponent<Quad>();
-			ObjectManager::Instantiate(stageObj);
-			switch (objectNumber) {
-			default:
-				break;
-			case 0:
-				stageObj->SetName("地形ブロック");
-				stageObj->SetTag(GROUND_BLOCK);
-				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
-				stageObj->AddComponent<QuadCollider>();
-				quad->SetTexture(objectTextures[0]);
-				stage->SetObject(cursorPosX, cursorPosY, 'A');
-
-				if (cursorPosY == 0) {
-					auto underStageBlock = new GameObject();
-					underStageBlock->SetParent(stage->GetGameObject());
-					auto quad = underStageBlock->AddComponent<Quad>();
-					underStageBlock->SetName("地形ブロック");
-					underStageBlock->SetTag(GROUND_BLOCK);
-					underStageBlock->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY - 1, 0));
-					underStageBlock->AddComponent<QuadCollider>();
-					quad->SetTexture(objectTextures[0]);
-					ObjectManager::Instantiate(underStageBlock);
-				}
-				break;
-			case 1:
-				stageObj->SetName("ブロック");
-				stageObj->SetTag(BLOCK);
-				stageObj->AddComponent<Block>();
-				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
-				stageObj->AddComponent<QuadCollider>();
-				quad->SetTexture(objectTextures[1]);
-				stage->SetObject(cursorPosX, cursorPosY, 'B');
-				break;
-			case 2:
-				stageObj->SetName("ハテナブロック");
-				stageObj->SetTag(HATENA_BLOCK);
-				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
-				stageObj->AddComponent<QuadCollider>();
-				quad->SetTexture(objectTextures[2]);
-				stage->SetObject(cursorPosX, cursorPosY, 'C'); 
-				{
-					auto hatena = stageObj->AddComponent<QuestionBlock>();
-					hatena->SetUsedBlock(usedBlockTexture);
-				}
-				break;
-			case 3:
-				stageObj->SetName("足場ブロック");
-				stageObj->SetTag(GROUND_BLOCK);
-				stageObj->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, 0));
-				stageObj->AddComponent<QuadCollider>();
-				quad->SetTexture(objectTextures[3]);
-				stage->SetObject(cursorPosX, cursorPosY, 'D');
-				break;
+	//左上から右下まで消した後に置く
+	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKey('L')) {
+		for (int i = 0; i < abs(areaStartPosX - cursorPosX) + 1; i++) {
+			for (int j = 0; j < abs(areaStartPosY - cursorPosY) + 1; j++) {
+				DestroyObject(i + left, j + up);
+				PlaceObject(i + left, j + up);
 			}
 		}
 	}
