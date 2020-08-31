@@ -57,4 +57,7 @@ void Title::Unload() {
 	modeObject->Destroy();
 
 	titleTexture->Release();
+	createTexture->Release();
+	playTexture->Release();
+	modeTexture->Release();
 }
