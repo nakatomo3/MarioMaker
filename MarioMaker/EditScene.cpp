@@ -21,8 +21,10 @@ void EditScene::Start() {
 }
 
 void EditScene::Load() {
+	LogWriter::Log("ロード！！！！！！！！！");
+
 	playerTexture = new Texture("assets/textures/MarioMaker/mario.png");
-	auto blockTexture = new Texture("assets/textures/MarioMaker/groundBlock.png");
+	blockTexture = new Texture("assets/textures/MarioMaker/groundBlock.png");
 
 	stage = new GameObject("ステージ");
 	stageManager = stage->AddComponent<StageManager>();
@@ -63,23 +65,20 @@ void EditScene::Load() {
 	//仮作成
 	int width = 20;
 	for (int i = 0; i < width; i++) {
-		auto block = new GameObject("Block");
+		auto block = new GameObject("ブロックA");
 		block->SetTag(GROUND_BLOCK);
 		block->SetPosition(Vector3((float)i, 0, 0));
 		block->AddComponent<Quad>()->SetTexture(blockTexture);
 		block->AddComponent<QuadCollider>();
 		ObjectManager::Instantiate(block);
-		block->SetParent(stage);
-		//stageManager->SetObject(i, 0, 'A');
 	}
 	for (int i = 0; i < width; i++) {
-		auto block = new GameObject("Block");
+		auto block = new GameObject("ブロックB");
 		block->SetTag(GROUND_BLOCK);
 		block->SetPosition(Vector3((float)i, -1, 0));
 		block->AddComponent<Quad>()->SetTexture(blockTexture);
 		block->AddComponent<QuadCollider>();
 		ObjectManager::Instantiate(block);
-		block->SetParent(stage);
 	}
 }
 

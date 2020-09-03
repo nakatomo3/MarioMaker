@@ -32,6 +32,7 @@ private:
 	EditorManager* editorManager;
 
 	Texture* playerTexture;
+	Texture* blockTexture;
 
 	static bool isEditMode;
 	bool beforeInputStart = false;

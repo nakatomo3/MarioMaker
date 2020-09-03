@@ -59,17 +59,15 @@ private:
 	const float continuousInterval = 0.1f;
 
 	int objectNumber;
-	const int objectMax = 6;
+	const int objectMax = 4;
 
 	EditMode nowMode = DEFAULT_MODE;
 
-	string objectNames[6] = {
+	string objectNames[4] = {
 		"地形ブロック",
 		"ブロック",
 		"ハテナブロック",
 		"足場ブロック",
-		"E",
-		"F"
 	};
 
 	Texture* objectTextures[4];

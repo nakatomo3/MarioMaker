@@ -13,7 +13,6 @@ public:
 
 private:
 	Texture* titleTexture;
-	Texture* selectIconTexture;
 
 	Texture* createTexture;
 	Texture* playTexture;

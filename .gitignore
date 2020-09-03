@@ -1040,3 +1040,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# 自作
+*.zip

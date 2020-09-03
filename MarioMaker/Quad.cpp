@@ -115,6 +115,11 @@ void Quad::SetPosition(Vector3 _position) {
 void Quad::SetColor(D3DXVECTOR4 _color) {
 	vertexBuffer->Release();
 	color = _color;
+	if (color.z < 1) {
+		layer = TRANSLUCENT;
+	} else {
+		layer = DEFAULT;
+	}
 	Init();
 }
 

@@ -19,7 +19,8 @@ typedef enum{
 typedef enum {
 	CAMERA = 0,
 	DEFAULT = 1,
-	UI		= 2, 
+	TRANSLUCENT = 2,
+	UI		= 3, 
 	LAYERLAST
 }Layer;
 

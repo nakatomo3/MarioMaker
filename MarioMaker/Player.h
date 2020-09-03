@@ -42,5 +42,5 @@ private:
 
 	PlayerGrowth growth = MINIMUM;
 
-	Texture* textures[4];
+	Texture* textures[5];
 };
