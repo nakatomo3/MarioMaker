@@ -5,10 +5,10 @@
 #include "EditorManager.h"
 #include "StageManager.h"
 
-bool EditScene::isEditMode = true;
+bool EditScene::isEditMode;
 
 EditScene::EditScene(string name) : Scene(name){
-
+	isEditMode = true;
 }
 
 void EditScene::Start() {
@@ -21,7 +21,6 @@ void EditScene::Start() {
 }
 
 void EditScene::Load() {
-	LogWriter::Log("ロード！！！！！！！！！");
 
 	playerTexture = new Texture("assets/textures/MarioMaker/mario.png");
 	blockTexture = new Texture("assets/textures/MarioMaker/groundBlock.png");
@@ -70,7 +69,7 @@ void EditScene::Load() {
 		block->SetPosition(Vector3((float)i, 0, 0));
 		block->AddComponent<Quad>()->SetTexture(blockTexture);
 		block->AddComponent<QuadCollider>();
-		ObjectManager::Instantiate(block);
+		block->SetParent(stage);
 	}
 	for (int i = 0; i < width; i++) {
 		auto block = new GameObject("ブロックB");
@@ -78,7 +77,7 @@ void EditScene::Load() {
 		block->SetPosition(Vector3((float)i, -1, 0));
 		block->AddComponent<Quad>()->SetTexture(blockTexture);
 		block->AddComponent<QuadCollider>();
-		ObjectManager::Instantiate(block);
+		block->SetParent(stage);
 	}
 }
 
@@ -88,7 +87,7 @@ void EditScene::Update() {
 	}
 	if (isEditMode == true) {
 		gameObject->SetActive(false);
-		editorObject->SetActive(true);
+		editorManager->SetEditMode(true);
 		player->SetActive(false);
 	} else {
 		if (player->GetActive() == false) {
@@ -96,7 +95,7 @@ void EditScene::Update() {
 		}
 		player->SetActive(true);
 		gameObject->SetActive(true);
-		editorObject->SetActive(false);
+		editorManager->SetEditMode(false);
 	}
 
 	beforeInputStart = Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_START;

@@ -2,8 +2,7 @@
 #include "DXEngine.h"
 #include "QuestionBlock.h"
 #include "Block.h"
-
-#include <crtdbg.h>
+#include "EditScene.h"
 
 void EditorManager::Start() {
 	TextureLoad();
@@ -69,16 +68,31 @@ void EditorManager::Start() {
 	auto areaQuad = editingArea->AddComponent<Quad>();
 	areaQuad->SetColor(D3DXVECTOR4(1, 1, 0, 0.51f));
 	ObjectManager::Instantiate(editingArea);
+
+	background = new GameObject();
+	auto bgQuad = background->AddComponent<Quad>();
+	bgQuad->SetColor(D3DXVECTOR4(1, 1, 1, 0.51f));
+	backgroundTexture = new Texture("assets/textures/MarioMaker/Editor/backGround.png");
+	bgQuad->SetTexture(backgroundTexture);
+	int bgScale = 20;
+	background->SetScale(Vector3(2 * bgScale, 2 * bgScale, 1));
+	bgQuad->SetTextureScale(bgScale, bgScale);
+	background->SetPosition(Vector3(-0.5f + 20, 0.5f, 0.1f));
+	ObjectManager::Instantiate(background);
 }
 
 void EditorManager::Update() {
-	CursorMove();
+	if (EditScene::GetIsEditMode() == true) {
+		CursorMove();
 
-	StageEdit();
+		StageEdit();
 
-	InformationShow();
+		InformationShow();
 
-	camera->SetPosition(Vector3(cursorPosX, 7.0f, -14.0f));
+		DrawBackground();
+
+		camera->SetPosition(Vector3(cursorPosX, 7.0f, -14.0f));
+	}
 
 	beforeInputLX = Input::GetController(0).Gamepad.sThumbLX;
 	beforeInputLY = Input::GetController(0).Gamepad.sThumbLY;
@@ -98,6 +112,15 @@ void EditorManager::SetStage(StageManager * stageManager) {
 
 Vector3 EditorManager::GetCursorPos() {
 	return Vector3(cursorPosX, cursorPosY, 0);
+}
+
+void EditorManager::SetEditMode(bool isEditMode) {
+	editingArea->SetActive(isEditMode);
+	background->SetActive(isEditMode);
+	cursor->SetActive(isEditMode);
+	for (int i = 0; i < gameObject->GetChildCount(); i++) {
+		gameObject->GetChild(i)->SetActive(isEditMode);
+	}
 }
 
 void EditorManager::TextureLoad() {
@@ -352,4 +375,8 @@ void EditorManager::AreaModeEdit() {
 			}
 		}
 	}
+}
+
+void EditorManager::DrawBackground() {
+	background->SetPosition(Vector3(-0.5f + 20, 0.5f, 0.1f));
 }

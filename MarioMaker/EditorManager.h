@@ -22,6 +22,8 @@ public:
 
 	Vector3 GetCursorPos();
 
+	void SetEditMode(bool isEditMode);
+
 private:
 	StageManager* stage;
 
@@ -30,7 +32,11 @@ private:
 
 	GameObject* editingArea;
 
+	GameObject* background;
+
 	Texture* cursorTexture;
+
+	Texture* backgroundTexture;
 
 	int cursorPosX = 10;
 	int cursorPosY = 5;
@@ -86,4 +92,6 @@ private:
 
 	void DefaultModeEdit();
 	void AreaModeEdit();
+
+	void DrawBackground();
 };
