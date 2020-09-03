@@ -19,10 +19,12 @@ protected:
 	D3DXVECTOR4 color = D3DXVECTOR4(1, 1, 1, 1);
 
 	//テクスチャサンプル左上座標(0~1)
-	float tx, ty;
+	float tx = 0;
+	float ty = 0;
 
 	//テクスチャサンプルの大きさ(0~1)
-	float tw, th = 1;
+	float tw = 1;
+	float th = 1;
 
 	//カリング(裏面を描画しない設定のオンオフ)
 	bool isCull = true;
