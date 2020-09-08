@@ -188,20 +188,21 @@ void NumText::Draw() {
 		// 2バイト文字のコードは[先導コード]*256 + [文字コード]です
 		
 #endif
+
+
 		if (isInt == false) {
-			if (charIndex * 2 > strlen(to_string(number).c_str()) || charIndex > digit) {
+			if (charIndex > strlen(to_string(number).c_str()) - 1 || charIndex > digit) {
 				existDrawChar = false;
 				position = firstPos;
 				return;
 			}
 		} else {
-			if (charIndex * 2 > strlen(to_string(numberInt).c_str()) || charIndex > digit) {
+			if (charIndex > strlen(to_string(numberInt).c_str()) - 1 || charIndex > digit) {
 				existDrawChar = false;
 				position = firstPos;
 				return;
 			}
 		}
-
 		
 		if (isInt == false) {
 			switch (to_string(number).c_str()[charIndex]) {
