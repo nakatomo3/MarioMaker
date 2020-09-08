@@ -3,7 +3,7 @@
 void StageManager::Start() {
 	for (int i = 0; i < 14; i++) {
 		stage.emplace_back();
-		for (int j = 0; j < 100; j++) {
+		for (int j = 0; j < stageSizeX; j++) {
 			stage[i].emplace_back('0');
 		}
 	}
@@ -25,6 +25,10 @@ GameObject * StageManager::GetChildGameObject(Vector3 pos) {
 
 void StageManager::SetStageSize(unsigned int size) {
 	stageSizeX = size;
+}
+
+int StageManager::GetStageSize() {
+	return stageSizeX;
 }
 
 void StageManager::SetObject(int x, int y, char obj) {

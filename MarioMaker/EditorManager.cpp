@@ -74,10 +74,10 @@ void EditorManager::Start() {
 	bgQuad->SetColor(D3DXVECTOR4(1, 1, 1, 0.51f));
 	backgroundTexture = new Texture("assets/textures/MarioMaker/Editor/backGround.png");
 	bgQuad->SetTexture(backgroundTexture);
-	int bgScale = 20;
-	background->SetScale(Vector3(2 * bgScale, 2 * bgScale, 1));
-	bgQuad->SetTextureScale(bgScale, bgScale);
-	background->SetPosition(Vector3(-0.5f + 20, 0.5f, 0.1f));
+	int bgScale = stage->GetStageSize();
+	background->SetScale(Vector3(bgScale, 15, 1));
+	bgQuad->SetTextureScale(bgScale / 2, 7.5f);
+	background->SetPosition(Vector3(-0.5f + stage->GetStageSize(), 0.5f, 0.1f));
 	ObjectManager::Instantiate(background);
 }
 
@@ -179,6 +179,9 @@ void EditorManager::CursorMove() {
 	//”ÍˆÍ§ŒÀ
 	if (cursorPosX < 0) {
 		cursorPosX = 0;
+	}
+	if (cursorPosX > stage->GetStageSize() - 1) {
+		cursorPosX = stage->GetStageSize() - 1;
 	}
 	if (cursorPosY < 0) {
 		cursorPosY = 0;
@@ -378,5 +381,5 @@ void EditorManager::AreaModeEdit() {
 }
 
 void EditorManager::DrawBackground() {
-	background->SetPosition(Vector3(-0.5f + 20, 0.5f, 0.1f));
+	background->SetPosition(Vector3(-0.5f + stage->GetStageSize() / 2, 7.0f, 0.1f));
 }
