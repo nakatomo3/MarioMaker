@@ -3,11 +3,10 @@
 #include "Texture.h"
 #include "Quad.h"
 
-typedef enum QuestionBlockType {
+typedef enum {
 	HATENA_COIN,
 	HATENA_ITEM,
-
-};
+}QuestionBlockType;
 
 class QuestionBlock : public ScriptBase {
 private:
@@ -23,4 +22,7 @@ public:
 	void SetUsedBlock(Texture* texture);
 
 	void Update();
+
+	void SetBlockType(QuestionBlockType type);
+	QuestionBlockType GetBlockType();
 };

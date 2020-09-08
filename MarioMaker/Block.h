@@ -14,6 +14,9 @@ class Block : public ScriptBase {
 public:
 	void OnCollisionStay(Collision* collision);
 	void Update();
+
+	void SetBlockType(BlockType _type);
+	BlockType GetBlockType();
 private:
 	Quad* quad;
 	QuadCollider* collider;

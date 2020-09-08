@@ -29,3 +29,17 @@ void QuestionBlock::Update() {
 		quad->SetTexture(hatenaBlock);
 	}
 }
+
+void QuestionBlock::SetBlockType(QuestionBlockType _type) {
+	type = _type;
+	if (type > HATENA_COIN) {
+		type = HATENA_ITEM;
+	}
+	if (type < HATENA_ITEM) {
+		type = HATENA_COIN;
+	}
+}
+
+QuestionBlockType QuestionBlock::GetBlockType() {
+	return type;
+}

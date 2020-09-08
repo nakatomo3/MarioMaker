@@ -50,3 +50,17 @@ void Block::Update() {
 		impactTimer = 0;
 	}
 }
+
+void Block::SetBlockType(BlockType _type) {
+	type = _type;
+	if (type > BLOCK_STAR) {
+		type = BROKEN;
+	}
+	if (type < BROKEN) {
+		type = BLOCK_STAR;
+	}
+}
+
+BlockType Block::GetBlockType() {
+	return type;
+}
