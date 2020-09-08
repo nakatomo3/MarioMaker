@@ -7,11 +7,67 @@
 void EditorManager::Start() {
 	TextureLoad();
 
-	auto editorWindow = new GameObject("EditorWindow");
-	editorWindow->AddComponent<Window>();
+#pragma region カーソルウィンドウの初期化
+	{
+		auto cursorWindow = new GameObject("EditorWindow");
+		cursorWindow->AddComponent<Window>();
 
-	auto windowCaption = editorWindow->AddComponent<Text>();
-	windowCaption->SetText("カーソル情報");
+		auto windowCaption = cursorWindow->AddComponent<Text>();
+		windowCaption->SetText("カーソル情報");
+		windowCaption->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+		windowCaption->SetScale(0.5f);
+		windowCaption->SetPosition(Vector3(SCREEN_HEIGHT * -0.17f, SCREEN_HEIGHT * -0.02f));
+
+		auto windowBackground = new GameObject("EditorWindowBackground");
+		auto window = windowBackground->AddComponent<Image>();
+		window->SetPosition(Vector3(0, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.025f, 0));
+		window->SetColor(D3DXVECTOR4(0.9f, 0.9f, 0.9f, 1));
+		window->SetScale(Vector2(SCREEN_HEIGHT / 2.7f, SCREEN_HEIGHT / 2.7f));
+		windowBackground->SetParent(cursorWindow);
+
+		auto positionText = windowBackground->AddComponent<Text>();
+		positionText->SetScale(0.5f);
+		positionText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.15f));
+		positionText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+		positionText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+		positionText->SetText("座標：\n(　　　,　　　)");
+
+		posXText = windowBackground->AddComponent<NumText>();
+		posXText->SetScale(0.5f);
+		posXText->SetPosition(Vector3(SCREEN_HEIGHT * -0.1f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
+		posXText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+		posXText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+		posXText->SetMinDigit(3);
+
+		posYText = windowBackground->AddComponent<NumText>();
+		posYText->SetScale(0.5f);
+		posYText->SetPosition(Vector3(SCREEN_HEIGHT * 0.03f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
+		posYText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+		posYText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+		posYText->SetMinDigit(3);
+
+		nameText = windowBackground->AddComponent<Text>();
+		nameText->SetScale(0.5f);
+		nameText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.04f));
+		nameText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+		nameText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+
+		cursorWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, SCREEN_HEIGHT * 0.08f, 0));
+		cursorWindow->SetParent(gameObject);
+
+		objectImage = windowBackground->AddComponent<Image>();
+		objectImage->SetPosition(Vector3(SCREEN_HEIGHT * -0.07f, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.12f, 0));
+		objectImage->SetScale(Vector2(SCREEN_HEIGHT * 0.15f, SCREEN_HEIGHT * 0.15f));
+	}
+#pragma endregion
+
+#pragma region 詳細編集オブジェクトの初期化
+
+	detailWindow = new GameObject();
+	detailWindow->AddComponent<Window>();
+
+	auto windowCaption = detailWindow->AddComponent<Text>();
+	windowCaption->SetText("オブジェクト情報");
 	windowCaption->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
 	windowCaption->SetScale(0.5f);
 	windowCaption->SetPosition(Vector3(SCREEN_HEIGHT * -0.17f, SCREEN_HEIGHT * -0.02f));
@@ -19,43 +75,22 @@ void EditorManager::Start() {
 	auto windowBackground = new GameObject("EditorWindowBackground");
 	auto window = windowBackground->AddComponent<Image>();
 	window->SetPosition(Vector3(0, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.025f, 0));
-	window->SetColor(D3DXVECTOR4(0.66f, 0.75f, 1, 0.9f));
+	window->SetColor(D3DXVECTOR4(0.9f, 0.9f, 0.9f, 1));
 	window->SetScale(Vector2(SCREEN_HEIGHT / 2.7f, SCREEN_HEIGHT / 2.7f));
-	windowBackground->SetParent(editorWindow);
+	windowBackground->SetParent(detailWindow);
 
-	auto positionText = windowBackground->AddComponent<Text>();
-	positionText->SetScale(0.5f);
-	positionText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.15f));
-	positionText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
-	positionText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
-	positionText->SetText("座標：\n(　　　,　　　)");
+	informationText = windowBackground->AddComponent<Text>();
+	informationText->SetScale(0.5f);
+	informationText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.15f));
+	informationText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
+	informationText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
 
-	posXText = windowBackground->AddComponent<NumText>();
-	posXText->SetScale(0.5f);
-	posXText->SetPosition(Vector3(SCREEN_HEIGHT * -0.1f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
-	posXText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
-	posXText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
-	posXText->SetMinDigit(3);
+	detailWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, SCREEN_HEIGHT * 0.55f, 0));
 
-	posYText = windowBackground->AddComponent<NumText>();
-	posYText->SetScale(0.5f);
-	posYText->SetPosition(Vector3(SCREEN_HEIGHT * 0.03f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.11f));
-	posYText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
-	posYText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
-	posYText->SetMinDigit(3);
+	ObjectManager::Instantiate(detailWindow);
 
-	nameText = windowBackground->AddComponent<Text>();
-	nameText->SetScale(0.5f);
-	nameText->SetPosition(Vector3(SCREEN_HEIGHT * -0.15f, SCREEN_HEIGHT / 5.4f - SCREEN_HEIGHT * 0.04f));
-	nameText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
-	nameText->SetFontSize((int)(SCREEN_HEIGHT * 0.08f));
+#pragma endregion
 
-	editorWindow->SetPosition(Vector3(SCREEN_WIDTH * 0.85f, 50, 0));
-	editorWindow->SetParent(gameObject);
-
-	objectImage = windowBackground->AddComponent<Image>();
-	objectImage->SetPosition(Vector3(SCREEN_HEIGHT * -0.07f, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.12f, 0));
-	objectImage->SetScale(Vector2(SCREEN_HEIGHT * 0.15f, SCREEN_HEIGHT * 0.15f));
 
 	cursorTexture = new Texture("assets/textures/MarioMaker/Editor/Cursor.png");
 
@@ -74,7 +109,7 @@ void EditorManager::Start() {
 	bgQuad->SetColor(D3DXVECTOR4(1, 1, 1, 0.51f));
 	backgroundTexture = new Texture("assets/textures/MarioMaker/Editor/backGround.png");
 	bgQuad->SetTexture(backgroundTexture);
-	int bgScale = stage->GetStageSize();
+	float bgScale = (float)stage->GetStageSize();
 	background->SetScale(Vector3(bgScale, 15, 1));
 	bgQuad->SetTextureScale(bgScale / 2, 7.5f);
 	background->SetPosition(Vector3(-0.5f + stage->GetStageSize(), 0.5f, 0.1f));
@@ -83,7 +118,6 @@ void EditorManager::Start() {
 
 void EditorManager::Update() {
 	if (EditScene::GetIsEditMode() == true) {
-		CursorMove();
 
 		StageEdit();
 
@@ -91,7 +125,7 @@ void EditorManager::Update() {
 
 		DrawBackground();
 
-		camera->SetPosition(Vector3(cursorPosX, 7.0f, -14.0f));
+		camera->SetPosition(Vector3((float)cursorPosX, 7.0f, -14.0f));
 	}
 
 	beforeInputLX = Input::GetController(0).Gamepad.sThumbLX;
@@ -111,14 +145,17 @@ void EditorManager::SetStage(StageManager * stageManager) {
 }
 
 Vector3 EditorManager::GetCursorPos() {
-	return Vector3(cursorPosX, cursorPosY, 0);
+	return Vector3((float)cursorPosX, (float)cursorPosY, 0);
 }
 
 void EditorManager::SetEditMode(bool isEditMode) {
 	editingArea->SetActive(isEditMode);
 	background->SetActive(isEditMode);
 	cursor->SetActive(isEditMode);
-	for (int i = 0; i < gameObject->GetChildCount(); i++) {
+	if (isEditMode == false) {
+		detailWindow->SetActive(false);
+	}
+	for (unsigned int i = 0; i < gameObject->GetChildCount(); i++) {
 		gameObject->GetChild(i)->SetActive(isEditMode);
 	}
 }
@@ -210,6 +247,7 @@ void EditorManager::StageEdit() {
 	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80 && beforeLTrigger < 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80 && beforeRTrigger < 0x80)) {
 		if (nowMode == DETAIL_MODE) {
 			//詳細設定時の終了処理
+			//detailWindow->SetActive(false);
 		}
 		nowMode = AREA_MODE;
 		editingArea->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, -0.01f));
@@ -220,6 +258,9 @@ void EditorManager::StageEdit() {
 	if (Input::GetController(0).Gamepad.bLeftTrigger < 0x80 && Input::GetController(0).Gamepad.bRightTrigger < 0x80) {
 		if (nowMode == AREA_MODE) {
 
+		}
+		if (nowMode == DETAIL_MODE) {
+			//detailWindow->SetActive(false);
 		}
 		nowMode = DEFAULT_MODE;
 		editingArea->SetActive(false);
@@ -236,14 +277,16 @@ void EditorManager::StageEdit() {
 		break;
 	case DEFAULT_MODE:
 		DefaultModeEdit();
+		CursorMove();
 		break;
 	case AREA_MODE:
 		editingArea->SetPosition(Vector3(((float)cursorPosX + areaStartPosX) / 2, ((float)cursorPosY + areaStartPosY) / 2, -0.01f));
-		editingArea->SetScale(Vector3(abs(areaStartPosX - cursorPosX) + 1, abs(areaStartPosY - cursorPosY) + 1, 1));
+		editingArea->SetScale(Vector3((float)abs(areaStartPosX - cursorPosX) + 1, (float)abs(areaStartPosY - cursorPosY) + 1, 1));
 		AreaModeEdit();
+		CursorMove();
 		break;
 	case DETAIL_MODE:
-
+		DetailEdit();
 		break;
 	}
 }
@@ -332,6 +375,8 @@ void EditorManager::PlaceObject(int x, int y) {
 }
 
 void EditorManager::DefaultModeEdit() {
+	detailWindow->SetActive(false);
+
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKey('K')) {
 		DestroyObject(cursorPosX, cursorPosY);
 	}
@@ -345,6 +390,8 @@ void EditorManager::DefaultModeEdit() {
 }
 
 void EditorManager::AreaModeEdit() {
+	detailWindow->SetActive(false);
+
 	int left = 0;
 	int up = 0;
 
@@ -377,6 +424,78 @@ void EditorManager::AreaModeEdit() {
 				PlaceObject(i + left, j + up);
 			}
 		}
+	}
+}
+
+void EditorManager::DetailEdit() {
+	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80 && beforeLTrigger < 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80 && beforeRTrigger < 0x80)) {
+		//まとめて編集モード
+	} else {
+		if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr && editableObjects.find(stage->GetStageObject(cursorPosX, cursorPosY) != string::npos)) {
+			//編集ウィンドウの表示
+			detailWindow->SetActive(true);
+
+			//編集
+			ObjectEdit(cursorPosX, cursorPosY);
+		}
+	
+	}
+}
+
+void EditorManager::ObjectEdit(int x, int y) {
+	switch (stage->GetStageObject(x, y)) {
+	default:
+		break;
+	case 'B': {
+		auto block = stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->GetComponent<Block>();
+		if ((Input::GetController(0).Gamepad.sThumbLX > 10000 && beforeInputLX < 5000) || Input::GetKeyDown('D')) {
+			block->SetBlockType((BlockType)(block->GetBlockType() + 1));
+		}
+		if ((Input::GetController(0).Gamepad.sThumbLX < -10000 && beforeInputLX > -5000) || Input::GetKeyDown('A')) {
+			block->SetBlockType((BlockType)(block->GetBlockType() - 1));
+		}
+		switch (block->GetBlockType()) {
+		default:
+			informationText->SetText("エラー：\n　ブロックのタイプが不正です。\n　ログと共に報告してください");
+			LogWriter::LogError("ブロックのタイプが不正でした。(%f,%f)値：%d", block->GetBlockType());
+			break;
+		case BROKEN:
+			informationText->SetText("ブロックタイプ：\n　破壊");
+			break;
+		case BLOCK_COIN:
+			informationText->SetText("ブロックタイプ：\n　コイン");
+			break;
+		case BLOCK_ITEM:
+			informationText->SetText("ブロックタイプ：\n　アイテム");
+			break;
+		case BLOCK_STAR:
+			informationText->SetText("ブロックタイプ：\n　スター");
+			break;
+		}
+	}
+		break;
+	case 'C': {
+		auto block = stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->GetComponent<QuestionBlock>();
+		if ((Input::GetController(0).Gamepad.sThumbLX > 10000 && beforeInputLX < 5000) || Input::GetKeyDown('D')) {
+			block->SetBlockType((QuestionBlockType)(block->GetBlockType() + 1));
+		}
+		if ((Input::GetController(0).Gamepad.sThumbLX < -10000 && beforeInputLX > -5000) || Input::GetKeyDown('A')) {
+			block->SetBlockType((QuestionBlockType)(block->GetBlockType() - 1));
+		}
+		switch (block->GetBlockType()) {
+		default:
+			informationText->SetText("エラー：\n　ブロックのタイプが不正です。\n　ログと共に報告してください");
+			LogWriter::LogError("ブロックのタイプが不正でした。(%f,%f)値：%d", block->GetBlockType());
+			break;
+		case HATENA_COIN:
+			informationText->SetText("ブロックタイプ：\n　コイン");
+			break;
+		case HATENA_ITEM:
+			informationText->SetText("ブロックタイプ：\n　アイテム");
+			break;
+		}
+	}
+		break;
 	}
 }
 

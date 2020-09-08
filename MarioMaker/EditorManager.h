@@ -79,6 +79,10 @@ private:
 	Texture* objectTextures[4];
 	Texture* usedBlockTexture;
 
+	string editableObjects = "BC";
+	GameObject* detailWindow;
+	Text* informationText;
+
 	void TextureLoad();
 
 	void CursorMove();
@@ -92,6 +96,9 @@ private:
 
 	void DefaultModeEdit();
 	void AreaModeEdit();
+	void DetailEdit();
+
+	void ObjectEdit(int x, int y);
 
 	void DrawBackground();
 };
