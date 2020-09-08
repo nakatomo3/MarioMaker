@@ -19,7 +19,7 @@ void EditorManager::Start() {
 	auto windowBackground = new GameObject("EditorWindowBackground");
 	auto window = windowBackground->AddComponent<Image>();
 	window->SetPosition(Vector3(0, SCREEN_HEIGHT / 5.4f + SCREEN_HEIGHT * 0.025f, 0));
-	window->SetColor(D3DXVECTOR4(1, 1, 1, 0.51f));
+	window->SetColor(D3DXVECTOR4(0.66f, 0.75f, 1, 0.9f));
 	window->SetScale(Vector2(SCREEN_HEIGHT / 2.7f, SCREEN_HEIGHT / 2.7f));
 	windowBackground->SetParent(editorWindow);
 
