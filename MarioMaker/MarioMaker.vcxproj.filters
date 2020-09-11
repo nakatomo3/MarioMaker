@@ -219,6 +219,12 @@
     <ClCompile Include="Block.cpp">
       <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="CoinEffect.cpp">
+      <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -364,6 +370,12 @@
     </ClInclude>
     <ClInclude Include="Block.h">
       <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinEffect.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushroom.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

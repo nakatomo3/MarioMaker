@@ -7,6 +7,8 @@ enum Tag {
 	GROUND_BLOCK,
 	BLOCK,
 	HATENA_BLOCK,
+	MUSHROOM,
+	FLOWER,
 	//ここにタグを追加、数字を指定しないでください
 	TAG_LAST
 };

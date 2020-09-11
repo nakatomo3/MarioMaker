@@ -247,7 +247,6 @@ void EditorManager::StageEdit() {
 	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80 && beforeLTrigger < 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80 && beforeRTrigger < 0x80)) {
 		if (nowMode == DETAIL_MODE) {
 			//詳細設定時の終了処理
-			//detailWindow->SetActive(false);
 		}
 		nowMode = AREA_MODE;
 		editingArea->SetPosition(Vector3((float)cursorPosX, (float)cursorPosY, -0.01f));
@@ -260,7 +259,7 @@ void EditorManager::StageEdit() {
 
 		}
 		if (nowMode == DETAIL_MODE) {
-			//detailWindow->SetActive(false);
+			detailWindow->SetActive(false);
 		}
 		nowMode = DEFAULT_MODE;
 		editingArea->SetActive(false);
@@ -269,7 +268,15 @@ void EditorManager::StageEdit() {
 		if (nowMode == AREA_MODE) {
 			//エリア編集時の終了処理
 		}
-		nowMode = DETAIL_MODE;
+		if (editableObjects.find(stage->GetStageObject(cursorPosX, cursorPosY) != string::npos)) {
+			nowMode = DETAIL_MODE;
+		}
+		editingArea->SetActive(false);
+	} else {
+		if (nowMode == DETAIL_MODE) {
+			nowMode = DEFAULT_MODE;
+		}
+		detailWindow->SetActive(false);
 	}
 
 	switch (nowMode) {
@@ -428,13 +435,48 @@ void EditorManager::AreaModeEdit() {
 }
 
 void EditorManager::DetailEdit() {
-	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80 && beforeLTrigger < 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80 && beforeRTrigger < 0x80)) {
+	detailWindow->SetActive(true);
+
+	if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) == nullptr) {
+		informationText->SetText("\n　オブジェクトが\nありません");
+		informationText->SetColor(D3DXVECTOR4(0.9f,0,0,1));
+	} else {
+		if (editableObjects.find(stage->GetStageObject(cursorPosX, cursorPosY) == string::npos)) {
+			informationText->SetText("\n　編集不可\nオブジェクト");
+		informationText->SetColor(D3DXVECTOR4(0.9f,0,0,1));
+		}
+	}
+
+	if ((Input::GetController(0).Gamepad.bLeftTrigger > 0x80) || (Input::GetController(0).Gamepad.bRightTrigger > 0x80)) {
 		//まとめて編集モード
+
+		/*int left = 0;
+		int up = 0;
+		if (cursorPosX >= areaStartPosX) {
+			left = areaStartPosX;
+		} else {
+			left = cursorPosX;
+		}
+		if (cursorPosY >= areaStartPosY) {
+			up = areaStartPosY;
+		} else {
+			up = cursorPosY;
+		}
+
+		detailWindow->SetActive(true);
+
+		if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKeyDown('K')) {
+			for (int i = 0; i < abs(areaStartPosX - cursorPosX) + 1; i++) {
+				for (int j = 0; j < abs(areaStartPosY - cursorPosY) + 1; j++) {
+					ObjectEdit(cursorPosX, cursorPosY);
+				}
+			}
+		}*/
+
+		ObjectEdit(cursorPosX, cursorPosY);
+
 	} else {
 		if (stage->GetChildGameObject(Vector3((float)cursorPosX, (float)cursorPosY, 0)) != nullptr && editableObjects.find(stage->GetStageObject(cursorPosX, cursorPosY) != string::npos)) {
-			//編集ウィンドウの表示
-			detailWindow->SetActive(true);
-
 			//編集
 			ObjectEdit(cursorPosX, cursorPosY);
 		}
@@ -443,8 +485,10 @@ void EditorManager::DetailEdit() {
 }
 
 void EditorManager::ObjectEdit(int x, int y) {
+	informationText->SetColor(D3DXVECTOR4(0, 0, 0, 1));
 	switch (stage->GetStageObject(x, y)) {
 	default:
+		informationText->SetColor(D3DXVECTOR4(0.9f, 0, 0, 1));
 		break;
 	case 'B': {
 		auto block = stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->GetComponent<Block>();

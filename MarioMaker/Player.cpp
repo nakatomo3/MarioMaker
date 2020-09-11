@@ -54,9 +54,7 @@ void Player::Update() {
 		velocity = Vector3::Zero();
 		gameObject->SetRotation(Vector3(0, 0, 0));
 		gameObject->SetScale(Vector3(1, 1, 1));
-		if (deadTimer < deadTime / 3) {
-			gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
-		} else if(deadTimer < deadTime){
+		if(deadTimer < deadTime){
 			gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
 		} else {
 			isDead = false;
@@ -135,6 +133,9 @@ void Player::OnCollisionStay(Collision* collision) {
 				}
 			}
 		}
+	} else if(collision->GetGameObject()->GetTag() == MUSHROOM){
+		growth = BIG;
+		collision->GetGameObject()->Destroy();
 	}
 }
 
