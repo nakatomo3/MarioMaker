@@ -24,6 +24,8 @@ public:
 
 	void SetEditMode(bool isEditMode);
 
+	void OnDestroy();
+
 private:
 	StageManager* stage;
 

@@ -223,7 +223,7 @@
       <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -375,7 +375,7 @@
       <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Mushroom.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ void TitleScelectIcon::Start() {
 	image = gameObject->AddComponent<Image>(); 
 	image->SetTexture(texture);
 	image->SetScale(Vector2(SCREEN_HEIGHT / 18, SCREEN_HEIGHT / 18));
+	beforeInputB = Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B;
 }
 
 void TitleScelectIcon::Update() {
@@ -21,6 +22,10 @@ void TitleScelectIcon::OnDestroy() {
 }
 
 void TitleScelectIcon::Input() {
+	if (Input::GetKeyDown(VK_SPACE)) {
+		SceneManager::LoadScene("ƒ^ƒCƒgƒ‹");
+	}
+
 	if (abs(Input::GetController(0).Gamepad.sThumbLY) >= 10000) {
 		if (abs(beforeInputLY) <= 5000) {
 			isPlayMode = !isPlayMode;

@@ -21,7 +21,10 @@ bool Texture::LoadTexture(string _path) {
 	if (path.size() == 0) {
 		return false;
 	}
-	D3DX11CreateShaderResourceViewFromFile(RendererManager::GetDevice(), path.c_str(), NULL, NULL, &texture, NULL);
+	auto hr = D3DX11CreateShaderResourceViewFromFile(RendererManager::GetDevice(), path.c_str(), NULL, NULL, &texture, NULL);
+	if (hr != 0) {
+		LogWriter::Log("%ld", hr);
+	}
 	if (texture == NULL) {
 		LogWriter::LogError("テクスチャの生成に失敗しました。パス：%s", path.c_str());
 	} else {

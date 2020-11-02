@@ -127,9 +127,11 @@ void Init(HINSTANCE instance, int cmdShow) {
 }
 
 void Uninit() {
+
 	RendererManager::End();
 
 	Input::Uninit();
+	LogWriter::Log("ログライターが終了しました");
 	LogWriter::Uninit();
 
 	// ウィンドウクラスの登録を解除
@@ -169,6 +171,7 @@ void Update() {
 				Input::SetMouseWheel(0);
 
 				ObjectManager::Destroy();
+				ObjectManager::Load();
 
 				_ASSERT(_CrtCheckMemory());
 			}

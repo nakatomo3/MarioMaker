@@ -8,7 +8,7 @@ public:
 	Image();
 	Image(Texture* texture);
 
-	void Uninit();
+	void OnDestroy();
 	void Draw() override;
 
 	void SetTexture(Texture* _texture);

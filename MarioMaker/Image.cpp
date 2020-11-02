@@ -63,8 +63,10 @@ void Image::Init(Texture * tex) {
 	Init();
 }
 
-void Image::Uninit() {
-
+void Image::OnDestroy() {
+	if (vertexBuffer != NULL) {
+		vertexBuffer->Release();
+	}
 }
 
 //Imageの描画
@@ -75,7 +77,16 @@ void Image::Draw() {
 		wasChange = true;
 	}
 
+	if (texture == nullptr || textureP == nullptr) {
+		textureP = Texture::nullTexture;
+		texture = textureP->GetTexture();
+	}
+
 	if (wasChange == true) {
+		if (vertexBuffer != NULL) {
+			vertexBuffer->Release();
+		}
+
 		Vector3 pos = Vector3(0, 0, 0);
 		if (gameObject == nullptr) {
 			LogWriter::Log("スプライトがGameObjectにアタッチされずに使用されました。GameObjectにアタッチしたうえで使用してください");
@@ -128,10 +139,8 @@ void Image::Draw() {
 		ZeroMemory(&sd, sizeof(sd));
 		sd.pSysMem = vertex;
 
-		vertexBuffer->Release();
 		RendererManager::GetDevice()->CreateBuffer(&bd, &sd, &vertexBuffer);
 
-		//texture->Release();
 		//マトリクス設定
 		RendererManager::SetWorldViewProjection2D();
 
@@ -150,6 +159,8 @@ void Image::Draw() {
 		RendererManager::GetDeviceContext()->Draw(4, 0);
 
 		wasChange = false;
+
+		beforePosition = gameObject->GetPosition();
 
 	} else {
 
@@ -172,8 +183,8 @@ void Image::Draw() {
 
 		wasChange = false;
 
+		beforePosition = gameObject->GetPosition();
 	}
-	beforePosition = gameObject->GetPosition();
 }
 
 void Image::SetTexture(Texture * _texture) {

@@ -31,9 +31,9 @@ void SceneManager::Update() {
 }
 
 void SceneManager::LoadScene(Scene* scene) {
+	nowScene = scene;
 	scene->Load();
 	scene->Start();
-	nowScene = scene;
 }
 
 void SceneManager::LoadScene(string name) {

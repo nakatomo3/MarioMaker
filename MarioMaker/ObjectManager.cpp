@@ -25,16 +25,18 @@ GameObject* ObjectManager::Instantiate(GameObject* instance) {
 
 void ObjectManager::Destroy() {
 	for (unsigned int j = 0; j < destroyList.size(); j++) {
+		auto instance = destroyList[j];
 		for (unsigned int i = 0; i < objects.size(); i++) {
-			auto instance = destroyList[j];
 			if (objects[i] == instance) {
 				GameObject* removeObject = instance;
 				objects[i] = objects[objects.size() - 1];
 				objects.pop_back();
-				return;
+				delete removeObject;
+				break;
 			}
 		}
 	}
+	destroyList.clear();
 }
 
 void ObjectManager::AddDestroyList(GameObject * instance) {
@@ -91,24 +93,23 @@ void ObjectManager::FirstUpdate() {
 
 void ObjectManager::Update() {
 	for (unsigned int i = 0; i < objects.size(); i++) {
-		if (isEndUpdate == true) {
-			isEndUpdate = false;
-			break;
-		}
-		if (objects[i]->GetActive() == false) {
-			continue;
-		}
-		auto obj = objects[i];
-		bool isActive = true;
-		while (obj != nullptr) {
-			if (obj->GetActive() == false) {
-				isActive = false;
-				break;
+		if (isEndUpdate == false) {
+
+			if (objects[i]->GetActive() == false) {
+				continue;
 			}
-			obj = obj->GetParent();
-		}
-		if (isActive == false) {
-			continue;
+			auto obj = objects[i];
+			bool isActive = true;
+			while (obj != nullptr) {
+				if (obj->GetActive() == false) {
+					isActive = false;
+					break;
+				}
+				obj = obj->GetParent();
+			}
+			if (isActive == false) {
+				continue;
+			}
 		}
 		bool isDestroy = false;
 		for (int j = 0; j < destroyList.size(); j++) {
@@ -120,9 +121,6 @@ void ObjectManager::Update() {
 		if (isDestroy == false) {
 			objects[i]->Update();
 		}
-	}
-	if (SceneManager::willLoadScene == true) {
-		SceneManager::Load();
 	}
 }
 
@@ -169,7 +167,7 @@ void ObjectManager::Draw() {
 						camera = cast_camera;
 					} else {
 						if (camera != cast_camera) {
-							LogWriter::LogError("カメラは二つ以上置かないでください");
+							//LogWriter::LogError("カメラは二つ以上置かないでください");
 						}
 					}
 				}
@@ -201,14 +199,17 @@ void ObjectManager::Init() {
 	LogWriter::Log("オブジェクトマネージャーが初期化されました");
 }
 
+void ObjectManager::Load() {
+	if (SceneManager::willLoadScene == true) {
+		SceneManager::Load();
+	}
+}
+
 void ObjectManager::UnLoad(Scene * scene) {
 	auto objectCount = objects.size();
 	for (unsigned int i = 0; i < objectCount; i++) {
 		if (objects[i]->scene == scene && objects[i]->isDestroyOnLoad == true) {
-			GameObject* removeObject = objects[i];
-			objects[i] = objects[objects.size() - 1];
-			objects.pop_back();
-			removeObject->Destroy();
+			objects[i]->Destroy();
 		}
 	}
 }

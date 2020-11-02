@@ -117,7 +117,7 @@ void EditorManager::Start() {
 }
 
 void EditorManager::Update() {
-	if (EditScene::GetIsEditMode() == true) {
+	if (EditScene::GetIsEditMode() == true && EditScene::GetIsPauseMode() == false) {
 
 		StageEdit();
 
@@ -126,6 +126,8 @@ void EditorManager::Update() {
 		DrawBackground();
 
 		camera->SetPosition(Vector3((float)cursorPosX, 7.0f, -14.0f));
+	} else {
+		editingArea->SetActive(false);
 	}
 
 	beforeInputLX = Input::GetController(0).Gamepad.sThumbLX;
@@ -158,6 +160,17 @@ void EditorManager::SetEditMode(bool isEditMode) {
 	for (unsigned int i = 0; i < gameObject->GetChildCount(); i++) {
 		gameObject->GetChild(i)->SetActive(isEditMode);
 	}
+}
+
+void EditorManager::OnDestroy() {
+	cursorTexture->Release();
+
+	backgroundTexture->Release();
+
+	for (int i = 0; i < 4; i++) {
+		objectTextures[i]->Release();
+	}
+	usedBlockTexture->Release();
 }
 
 void EditorManager::TextureLoad() {
@@ -313,9 +326,11 @@ void EditorManager::DestroyObject(int x, int y) {
 	//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
 	if (stage->GetStageObject(x, y) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0)) != nullptr && y == 0) {
 		stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0))->Destroy();
+		LogWriter::Log("自動削除");
 	}
 	if (stage->GetChildGameObject(Vector3((float)x, (float)y, 0)) != nullptr) {
 		stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->Destroy();
+		LogWriter::Log("普通に削除");
 	}
 	stage->SetObject(x, y, '0');
 
@@ -414,7 +429,7 @@ void EditorManager::AreaModeEdit() {
 		up = cursorPosY;
 	}
 
-	//左上から右下まで消す
+	//Aボタンなら左上から右下まで消す
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_A || Input::GetKeyDown('K')) {
 		for (int i = 0; i < abs(areaStartPosX - cursorPosX) + 1; i++) {
 			for (int j = 0; j < abs(areaStartPosY - cursorPosY) + 1; j++) {
@@ -423,7 +438,7 @@ void EditorManager::AreaModeEdit() {
 		}
 	}
 
-	//左上から右下まで消した後に置く
+	//Bボタンなら左上から右下まで消した後に置く
 	if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKey('L')) {
 		for (int i = 0; i < abs(areaStartPosX - cursorPosX) + 1; i++) {
 			for (int j = 0; j < abs(areaStartPosY - cursorPosY) + 1; j++) {
@@ -480,7 +495,6 @@ void EditorManager::DetailEdit() {
 			//編集
 			ObjectEdit(cursorPosX, cursorPosY);
 		}
-	
 	}
 }
 

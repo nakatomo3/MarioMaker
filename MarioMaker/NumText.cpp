@@ -361,7 +361,9 @@ void NumText::Draw() {
 
 		wasChange = false;
 
-		vertexBuffer->Release();
+		if (vertexBuffer != NULL) {
+			vertexBuffer->Release();
+		}
 		charIndex++;
 	}
 }

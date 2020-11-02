@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "DXEngine.h"
+#include "EditScene.h"
 
 void Player::Start() {
 	quad = gameObject->GetComponent<Quad>();
@@ -11,59 +12,60 @@ void Player::Start() {
 }
 
 void Player::Update() {
+	if (EditScene::GetIsPauseMode() == false) {
+		if (isDead == false) {
+			KeyboardInput();
+			ControllerInput();
 
-	if (isDead == false) {
-		KeyboardInput();
-		ControllerInput();
+			if (velocity.GetX() >= 0) {
+				gameObject->SetRotation(Vector3(0, 0, 0));
+			} else {
+				gameObject->SetRotation(Vector3(0, 3.14f, 0));
+			}
 
-		if (velocity.GetX() >= 0) {
+			if (isStand == false) {
+				velocity += Vector3::Down() * gravity * (float)Time::GetDeltaTime();
+			}
+
+			if (gameObject->GetPosition().GetX() < 0 && velocity.GetX() < 0) {
+				velocity = Vector3(0, velocity.GetY(), 0);
+				gameObject->SetPosition(Vector3(0, gameObject->GetPosition().GetY(), 0));
+			}
+
+			switch (growth) {
+			case MINIMUM:
+				gameObject->SetScale(Vector3(1, 1, 1));
+				quad->SetTexture(textures[0]);
+				break;
+			case BIG:
+				gameObject->SetScale(Vector3(1, 2, 1));
+				quad->SetTexture(textures[1]);
+				break;
+			case FIRE:
+				gameObject->SetScale(Vector3(1, 2, 1));
+				quad->SetTexture(textures[2]);
+				break;
+			}
+
+			velocity *= groundBrekeRate;
+			gameObject->Move(velocity);
+		} else {
+			deadTimer += Time::GetDeltaTime();
+			deadSpeed -= Time::GetDeltaTime() * 50;
+			velocity = Vector3::Zero();
 			gameObject->SetRotation(Vector3(0, 0, 0));
-		} else {
-			gameObject->SetRotation(Vector3(0, 3.14f, 0));
-		}
-
-		if (isStand == false) {
-			velocity += Vector3::Down() * gravity * (float)Time::GetDeltaTime();
-		}
-
-		if (gameObject->GetPosition().GetX() < 0 && velocity.GetX() < 0) {
-			velocity = Vector3(0, velocity.GetY(), 0);
-			gameObject->SetPosition(Vector3(0, gameObject->GetPosition().GetY(), 0));
-		}
-
-		switch (growth) {
-		case MINIMUM:
 			gameObject->SetScale(Vector3(1, 1, 1));
-			quad->SetTexture(textures[0]);
-			break;
-		case BIG:
-			gameObject->SetScale(Vector3(1, 2, 1));
-			quad->SetTexture(textures[1]);
-			break;
-		case FIRE:
-			gameObject->SetScale(Vector3(1, 2, 1));
-			quad->SetTexture(textures[2]);
-			break;
-		}
+			if (deadTimer < deadTime) {
+				gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
+			} else {
+				isDead = false;
+				deadTimer = 0;
+				gameObject->SetPosition(Vector3(0, 5, 0));
+				growth = MINIMUM;
+				deadSpeed = 15;
+			}
 
-		velocity *= groundBrekeRate;
-		gameObject->Move(velocity);
-	} else {
-		deadTimer += Time::GetDeltaTime();
-		deadSpeed -= Time::GetDeltaTime() * 50;
-		velocity = Vector3::Zero();
-		gameObject->SetRotation(Vector3(0, 0, 0));
-		gameObject->SetScale(Vector3(1, 1, 1));
-		if(deadTimer < deadTime){
-			gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
-		} else {
-			isDead = false;
-			deadTimer = 0;
-			gameObject->SetPosition(Vector3(0, 5, 0));
-			growth = MINIMUM;
-			deadSpeed = 15;
 		}
-
 	}
 
 	if (gameObject->GetPosition().GetY() < 0) {

@@ -9,11 +9,15 @@ public:
 
 	void Start();
 	void Load();
+	void Unload();
 
 	void Update();
 	static bool GetIsEditMode();
+	static bool GetIsPauseMode();
 
 private:
+
+	void PauseAction();
 
 	StageManager* stageManager;
 
@@ -31,9 +35,19 @@ private:
 
 	EditorManager* editorManager;
 
+	//ポーズウィンドウ
+	GameObject* pauseWindow;
+	GameObject* pauseCursor;
+	Texture* pauseWindowTexture;
+
 	Texture* playerTexture;
 	Texture* blockTexture;
 
 	static bool isEditMode;
-	bool beforeInputStart = false;
+	WORD beforeControllerInput;
+	SHORT beforeLY;
+
+	static bool isPauseMode;
+	int pauseCursorPos;
+
 };

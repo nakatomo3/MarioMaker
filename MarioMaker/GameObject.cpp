@@ -22,7 +22,7 @@ void GameObject::Destroy() {
 		parent->RemoveChild(this);
 	}
 	if (childCount >= 1) {
-		for (unsigned int i = 0; i < childCount - 1; i++) {
+		for (unsigned int i = 0; i < children.size(); i++) {
 			GameObject* child = children[i];
 			child->Destroy();
 		}

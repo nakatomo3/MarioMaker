@@ -51,11 +51,6 @@ void Title::Start() {
 }
 
 void Title::Unload() {
-	titleBackGround->Destroy();
-	selectIcon->Destroy();
-	camera->Destroy();
-	modeObject->Destroy();
-
 	titleTexture->Release();
 	createTexture->Release();
 	playTexture->Release();

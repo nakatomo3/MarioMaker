@@ -98,7 +98,9 @@ void Text::Draw() {
 
 		wasChange = false;
 
-		vertexBuffer->Release();
+		if (vertexBuffer != NULL) {				
+			vertexBuffer->Release();
+		}
 		charCount++;
 	}
 }
@@ -336,6 +338,8 @@ float Text::GetScale() {
 }
 
 void Text::OnDestroy() {
-	vertexBuffer->Release();
+	if (vertexBuffer != nullptr) {
+		vertexBuffer->Release();
+	}
 	//TODO:TCHAR*‚Ìdelete
 }

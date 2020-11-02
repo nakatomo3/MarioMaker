@@ -30,6 +30,7 @@ public:
 
 	static void Init();
 
+	static void Load();
 	static void UnLoad(Scene* scene);
 
 	//使用禁止、フレームの最後に削除する予定のオブジェクト全てを削除する

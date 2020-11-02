@@ -47,7 +47,9 @@ void Quad::Init() {
 }
 
 void Quad::OnDestroy() {
-	vertexBuffer->Release();
+	if (vertexBuffer != nullptr) {
+		vertexBuffer->Release();
+	}
 }
 
 //Quad‚ÌDraw
@@ -56,6 +58,11 @@ void Quad::Draw() {
 
 	if (isCull == false) {
 		RendererManager::SetCullMode(D3D11_CULL_NONE);
+	}
+
+	if (texture == nullptr || textureP == nullptr) {
+		textureP = Texture::nullTexture;
+		texture = textureP->GetTexture();
 	}
 
 	Vector3 pos = Vector3(0, 0, 0);
