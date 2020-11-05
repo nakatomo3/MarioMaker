@@ -3,6 +3,8 @@
 #include "Texture.h"
 #include "EditorManager.h"
 #include "StageManager.h"
+
+class Player;
 class EditScene : public Scene {
 public:
 	EditScene(string name);
@@ -28,6 +30,7 @@ private:
 	//ゲーム部分オブジェクト
 	GameObject* player;
 	GameObject* camera;
+	Player* playerScript;
 
 	//編集オブジェクト
 	GameObject* editorWindow;

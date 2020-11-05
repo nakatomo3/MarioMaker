@@ -326,11 +326,9 @@ void EditorManager::DestroyObject(int x, int y) {
 	//地形ブロックを置いたとき、一番下層部なら自動的に地面も消す
 	if (stage->GetStageObject(x, y) == objectNumber + 'A' && stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0)) != nullptr && y == 0) {
 		stage->GetChildGameObject(Vector3((float)x, (float)y - 1, 0))->Destroy();
-		LogWriter::Log("自動削除");
 	}
 	if (stage->GetChildGameObject(Vector3((float)x, (float)y, 0)) != nullptr) {
 		stage->GetChildGameObject(Vector3((float)x, (float)y, 0))->Destroy();
-		LogWriter::Log("普通に削除");
 	}
 	stage->SetObject(x, y, '0');
 

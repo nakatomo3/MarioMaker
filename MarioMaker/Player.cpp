@@ -12,7 +12,7 @@ void Player::Start() {
 }
 
 void Player::Update() {
-	if (EditScene::GetIsPauseMode() == false) {
+	if (EditScene::GetIsPauseMode() == false && EditScene::GetIsEditMode() == false) {
 		if (isDead == false) {
 			KeyboardInput();
 			ControllerInput();
@@ -64,14 +64,15 @@ void Player::Update() {
 				growth = MINIMUM;
 				deadSpeed = 15;
 			}
+		}
 
+		if (gameObject->GetPosition().GetY() < 0) {
+			quad->SetTexture(textures[4]);
+			isDead = true;
 		}
 	}
 
-	if (gameObject->GetPosition().GetY() < 0) {
-		quad->SetTexture(textures[4]);
-		isDead = true;
-	}
+
 
 	isStand = false;
 	beforeControllerButton = Input::GetController(0).Gamepad.wButtons;

@@ -48,7 +48,7 @@ void EditScene::Load() {
 	playerQuad->SetTexture(playerTexture);
 	playerQuad->SetCull(false);
 	player->SetPosition(Vector3(10,3,0));
-	auto playerScript = player->AddComponent<Player>();
+	playerScript = player->AddComponent<Player>();
 	player->AddComponent<QuadCollider>();
 
 	camera = new GameObject("ƒJƒƒ‰");
