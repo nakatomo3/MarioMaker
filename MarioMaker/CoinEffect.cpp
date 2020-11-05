@@ -4,13 +4,13 @@
 Texture* CoinEffect::coinTexture;
 
 void CoinEffect::Update() {
-	timer += Time::GetDeltaTime();
-	speed -= Time::GetDeltaTime() * 50;
+	timer += (float)Time::GetDeltaTime();
+	speed -= (float)Time::GetDeltaTime() * 50;
 
 	if (timer < time / 3) {
-		gameObject->Move(Vector3(0, speed * Time::GetDeltaTime(), 0));
+		gameObject->Move(Vector3(0, speed * (float)Time::GetDeltaTime(), 0));
 	} else if (timer < time) {
-		gameObject->Move(Vector3(0, speed * Time::GetDeltaTime(), 0));
+		gameObject->Move(Vector3(0, speed * (float)Time::GetDeltaTime(), 0));
 	} else {
 		gameObject->Destroy();
 	}

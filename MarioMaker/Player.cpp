@@ -50,13 +50,13 @@ void Player::Update() {
 			velocity *= groundBrekeRate;
 			gameObject->Move(velocity);
 		} else {
-			deadTimer += Time::GetDeltaTime();
-			deadSpeed -= Time::GetDeltaTime() * 50;
+			deadTimer += (float)Time::GetDeltaTime();
+			deadSpeed -= (float)Time::GetDeltaTime() * 50;
 			velocity = Vector3::Zero();
 			gameObject->SetRotation(Vector3(0, 0, 0));
 			gameObject->SetScale(Vector3(1, 1, 1));
 			if (deadTimer < deadTime) {
-				gameObject->Move(Vector3(0, deadSpeed * Time::GetDeltaTime(), 0));
+				gameObject->Move(Vector3(0, deadSpeed * (float)Time::GetDeltaTime(), 0));
 			} else {
 				isDead = false;
 				deadTimer = 0;
@@ -71,8 +71,6 @@ void Player::Update() {
 			isDead = true;
 		}
 	}
-
-
 
 	isStand = false;
 	beforeControllerButton = Input::GetController(0).Gamepad.wButtons;

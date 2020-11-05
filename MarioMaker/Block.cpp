@@ -39,7 +39,7 @@ void Block::Update() {
 	}
 
 	if (isImpact == true) {
-		impactTimer += Time::GetDeltaTime();
+		impactTimer += (float)Time::GetDeltaTime();
 	}
 	if (impactTimer <= returnTimer / 2) {
 		gameObject->SetPosition(Vector3(0, impactTimer, 0) + originPos);

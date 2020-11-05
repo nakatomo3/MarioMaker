@@ -112,7 +112,7 @@ void ObjectManager::Update() {
 			}
 		}
 		bool isDestroy = false;
-		for (int j = 0; j < destroyList.size(); j++) {
+		for (unsigned int j = 0; j < destroyList.size(); j++) {
 			if (objects[i] == destroyList[j]) {
 				isDestroy = true;
 				break;
