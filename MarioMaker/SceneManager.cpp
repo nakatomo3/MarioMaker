@@ -45,7 +45,7 @@ void SceneManager::LoadScene(string name) {
 			return;
 		}
 	}
-	LogWriter::LogWorning("%sというシーンは存在しませんでした", name);
+	LogWriter::LogWorning("%sというシーンは存在しませんでした", name.c_str());
 }
 
 void SceneManager::LoadScene(unsigned int num) {
@@ -69,7 +69,7 @@ void SceneManager::BackLoad(string name) {
 			sceneList[i]->Load();
 		}
 	}
-	LogWriter::LogWorning("%sというシーンは存在しませんでした", name);
+	LogWriter::LogWorning("%sというシーンは存在しませんでした", name.c_str());
 	return;
 }
 
@@ -111,7 +111,7 @@ Scene* SceneManager::GetScene(string name) {
 			return sceneList[i];
 		}
 	}
-	LogWriter::LogWorning("%sというシーンは存在しませんでした", name);
+	LogWriter::LogWorning("%sというシーンは存在しませんでした", name.c_str());
 	return nullptr;
 }
 
