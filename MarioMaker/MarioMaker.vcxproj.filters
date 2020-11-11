@@ -88,6 +88,12 @@
     <Filter Include="ヘッダー ファイル\MarioMaker\Game\Objects">
       <UniqueIdentifier>{40b030de-c791-4985-a402-ab6ca0f239d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\MarioMaker\StageSelect">
+      <UniqueIdentifier>{ba0c96ab-c3fd-4c4b-9a20-bc2d3b55c03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MarioMaker\StageSelect">
+      <UniqueIdentifier>{93817dad-ead5-4b3e-a4ca-b81b589ee9c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -224,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="Mushroom.cpp">
       <Filter>ソース ファイル\MarioMaker\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectManager.cpp">
+      <Filter>ソース ファイル\MarioMaker\StageSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="Mushroom.h">
       <Filter>ヘッダー ファイル\MarioMaker\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectManager.h">
+      <Filter>ヘッダー ファイル\MarioMaker\StageSelect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

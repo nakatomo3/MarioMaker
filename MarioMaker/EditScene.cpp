@@ -164,6 +164,9 @@ void EditScene::PauseAction() {
 		break;
 	case 1:
 		pauseCursor->SetPosition(Vector3(-140, -8, 0));
+		if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && !(beforeControllerInput & XINPUT_GAMEPAD_BACK)) {
+			stageManager->SaveStage("Stages/Stage.txt");
+		}
 		break;
 	case 2:
 		if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B || Input::GetKeyDown('P')) {

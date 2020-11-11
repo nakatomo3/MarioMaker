@@ -6,8 +6,9 @@ public:
 
 	void Start();
 	void Load();
+	void Update();
 
 private:
-
+	GameObject* manager;
 };
 

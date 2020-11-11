@@ -133,7 +133,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions);CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -207,6 +207,7 @@
     <ClCompile Include="SelectStageScene.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="StageManager.cpp" />
+    <ClCompile Include="StageSelectManager.cpp" />
     <ClCompile Include="TagManager.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="StageManager.h" />
+    <ClInclude Include="StageSelectManager.h" />
     <ClInclude Include="TagManager.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
