@@ -106,9 +106,6 @@ void Text::Draw() {
 }
 
 void Text::CreateTexture() {
-	Vector3 firstPos = position;
-
-
 	for (unsigned int i = 0; i < textures.size(); i++) {
 		if (textures[i] != nullptr) {
 			textures[i]->Release();
@@ -155,10 +152,8 @@ void Text::CreateTexture() {
 			charCount++;
 		}
 #endif
-
 		if (charCount > strlen(c)) {
 			existDrawChar = false;
-			position = firstPos;
 			return;
 		}
 
@@ -299,20 +294,19 @@ void Text::SetText(TCHAR * newText) {
 	if (c != newText) {
 		c = newText;
 		CreateTexture();
+		LogWriter::Log("Set:%x", c);
 	}
 }
 
 void Text::SetText(const char * newText) {
 	if (c != (TCHAR*)newText) {
-		c = (TCHAR*)newText;
-		CreateTexture();
+		SetText((TCHAR*)newText);
 	}
 }
 
 void Text::SetText(string newText) {
 	if (c != (TCHAR*)(newText.c_str())) {
-		c = (TCHAR*)(newText.c_str());
-		CreateTexture();
+		SetText((TCHAR*)(newText.c_str()));
 	}
 }
 
@@ -341,5 +335,9 @@ void Text::OnDestroy() {
 	if (vertexBuffer != nullptr) {
 		vertexBuffer->Release();
 	}
-	//TODO:TCHAR*‚Ìdelete
+	for (unsigned int i = 0; i < textures.size(); i++) {
+		if (textures[i] != nullptr) {
+			textures[i]->Release();
+		}
+	}
 }
