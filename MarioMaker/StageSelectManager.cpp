@@ -130,6 +130,8 @@ void StageSelectManager::SetStageFiles() {
 		stageSizeText->SetPosition(Vector3(Vector3(SCREEN_CENTER_X * 1.2, -SCREEN_WIDTH / 60, 0)));
 		
 		stage->SetPosition(Vector3(SCREEN_CENTER_X / 4.0, i * SCREEN_WIDTH / 9.6 + SCREEN_WIDTH * 0.05));
+
+		fclose(stageFile);
 		ObjectManager::Instantiate(stage);
 	}
 }
@@ -199,6 +201,11 @@ void StageSelectManager::ControllerMode() {
 	}
 	if (cursorPos > fileNames.size() - 2) {
 		cursorPos = fileNames.size() - 2;
+	}
+
+	if (!(beforeController.wButtons & XINPUT_GAMEPAD_B) && Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B){
+		StageManager::SetStagePath(folderPath + fileNames[cursorPos] + ".stage");
+		SceneManager::LoadScene("プレイシーン");
 	}
 	//Drag();
 }

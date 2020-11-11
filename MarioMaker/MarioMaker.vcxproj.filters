@@ -234,6 +234,9 @@
     <ClCompile Include="StageSelectManager.cpp">
       <Filter>ソース ファイル\MarioMaker\StageSelect</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>ソース ファイル\MarioMaker\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="StageSelectManager.h">
       <Filter>ヘッダー ファイル\MarioMaker\StageSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>ヘッダー ファイル\MarioMaker\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

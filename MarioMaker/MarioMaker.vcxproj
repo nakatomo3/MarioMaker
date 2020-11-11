@@ -196,6 +196,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Quad.cpp" />
     <ClCompile Include="QuadCollider.cpp" />
     <ClCompile Include="QuestionBlock.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCamera.h" />
+    <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Quad.h" />
     <ClInclude Include="QuadCollider.h" />
     <ClInclude Include="QuestionBlock.h" />

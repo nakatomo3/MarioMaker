@@ -4,13 +4,20 @@
 #include <Windows.h>
 FILE* stageFile;
 
+string StageManager::path;
+
 void StageManager::Start() {
-	for (int i = 0; i < 14; i++) {
-		stage.emplace_back();
-		for (int j = 0; j < stageSizeX; j++) {
-			stage[i].emplace_back('0');
+	if (path == "") {
+		for (int i = 0; i < 14; i++) {
+			stage.emplace_back();
+			for (int j = 0; j < stageSizeX; j++) {
+				stage[i].emplace_back('0');
+			}
 		}
+	} else {
+		ReadStage(path);
 	}
+
 }
 
 GameObject * StageManager::GetChildGameObject(Vector3 pos) {
@@ -59,6 +66,20 @@ void StageManager::SaveStage(string path) {
 void StageManager::ReadStage(string path) {
 	auto file = fopen((path).c_str(), "r");
 
+	char typeBuf;
+	fread(&typeBuf, sizeof(char), 1, file);
+	stageType = (StageType)(typeBuf - '0');
+	fread(&typeBuf, sizeof(char), 1, file);//改行文字を空読みする
+	stageSizeX = 0;
+	char sizeBuf = 0;
+	fread(&typeBuf, sizeof(char), 1, file);	//この位置に改行コードが入っているので一回空読みする
+	while (sizeBuf != '\n') {
+		fread(&sizeBuf, sizeof(char), 1, file);
+		if (sizeBuf >= '0' && sizeBuf < '9') {
+			stageSizeX = stageSizeX * 10 + (sizeBuf - '0');
+		}
+	}
+
 	for (unsigned int i = 0; i < 14; i++) {
 		string line;
 		while (true) {
@@ -72,4 +93,8 @@ void StageManager::ReadStage(string path) {
 			}
 		}
 	}
+}
+
+void StageManager::SetStagePath(string _path) {
+	path = _path;
 }

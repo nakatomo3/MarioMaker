@@ -4,6 +4,7 @@
 #include "Title.h"
 #include "EditScene.h"
 #include "SelectStageScene.h"
+#include "PlayScene.h"
 
 #include <crtdbg.h>
 
@@ -120,6 +121,7 @@ void Init(HINSTANCE instance, int cmdShow) {
 
 	Scene* editScene = new EditScene("編集シーン");
 	Scene* selectScene = new SelectStageScene("選択シーン");
+	Scene* playScene = new PlayScene("プレイシーン");
 
 	// ウインドウの表示(初期化処理の後に行う)
 	ShowWindow(window, cmdShow);

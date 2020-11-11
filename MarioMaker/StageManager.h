@@ -22,6 +22,8 @@ public:
 	void SaveStage(string path);
 	void ReadStage(string path);
 
+	static void SetStagePath(string _path);
+
 private:
 	StageType stageType = NORMAL;
 
@@ -29,5 +31,6 @@ private:
 
 	int stageSizeX = 100;
 
+	static string path;
 };
 
