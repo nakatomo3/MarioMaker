@@ -294,7 +294,6 @@ void Text::SetText(TCHAR * newText) {
 	if (c != newText) {
 		c = newText;
 		CreateTexture();
-		LogWriter::Log("Set:%x", c);
 	}
 }
 
