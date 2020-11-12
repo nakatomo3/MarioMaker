@@ -134,10 +134,10 @@ void SceneManager::Load() {
 		nowScene->Unload();
 		LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
 	}
+	nowScene = loadScene;
 	loadScene->Load();
 	loadScene->Start();
 	LogWriter::Log("%sというシーンを読み込みました", loadScene->name.c_str());
-	nowScene = loadScene;
 
 	willLoadScene = false;
 	loadScene = nullptr;
