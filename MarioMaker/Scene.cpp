@@ -25,6 +25,10 @@ void Scene::Destroy() {
 	delete this;
 }
 
+string Scene::GetName() {
+	return name;
+}
+
 void Scene::Unload() {
 }
 

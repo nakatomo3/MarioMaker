@@ -21,6 +21,8 @@ public:
 
 	void Destroy();
 
+	string GetName();
+
 protected:
 
 	~Scene();
