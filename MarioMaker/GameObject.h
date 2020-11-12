@@ -83,6 +83,8 @@ public:
 	void Move(Vector3 range);
 	void Move(float x, float y, float z);
 
+	Scene* GetScene();
+
 	template<typename T>
 	Component* GetComponent(T* t) {
 		//そもそもComponent型なのかをチェックする

@@ -294,6 +294,10 @@ void GameObject::Move(float x, float y, float z) {
 	SetPosition(Vector3(position.GetX() + range.GetX(), position.GetY() + range.GetY(), position.GetZ() + range.GetZ()));
 }
 
+Scene * GameObject::GetScene() {
+	return scene;
+}
+
 Component* GameObject::GetComponent(unsigned int num) {
 	if (num >= components.size() || num < 0) {
 		LogWriter::LogWorning("コンポーネントの取得に失敗しました。\nゲームオブジェクト名：%s\nコンポーネント引数：%d", name, num);
