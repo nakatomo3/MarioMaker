@@ -176,7 +176,7 @@ void ObjectManager::Draw() {
 		}
 	}
 	if (camera == nullptr) {
-		LogWriter::LogError("カメラは一つ以上置いてください");
+		//LogWriter::LogError("カメラは一つ以上置いてください");
 	}
 	
 }

@@ -89,7 +89,6 @@ public:
 	Component* GetComponent(T* t) {
 		//そもそもComponent型なのかをチェックする
 		Component* cast_t = dynamic_cast<Component*>(t);
-		//引数はコンポーネントである
 		if (cast_t != NULL) {
 			for (unsigned int i = 0; i < components.size(); i++) {
 				Component* checkComponent = dynamic_cast<T*>(components[i]);
