@@ -166,19 +166,10 @@ void EditorManager::OnDestroy() {
 	cursorTexture->Release();
 
 	backgroundTexture->Release();
-
-	for (int i = 0; i < 4; i++) {
-		objectTextures[i]->Release();
-	}
-	usedBlockTexture->Release();
 }
 
 void EditorManager::TextureLoad() {
-	usedBlockTexture = new Texture("assets/textures/MarioMaker/usedBlock.png");
-	objectTextures[0] = new Texture("assets/textures/MarioMaker/groundBlock.png");
-	objectTextures[1] = new Texture("assets/textures/MarioMaker/block.png");
-	objectTextures[2] = new Texture("assets/textures/MarioMaker/hatenaBlock.png");
-	objectTextures[3] = new Texture("assets/textures/MarioMaker/standBlock.png");
+	
 }
 
 void EditorManager::CursorMove() {
@@ -316,8 +307,8 @@ void EditorManager::InformationShow() {
 	posYText->SetText(cursorPosY);
 	nameText->SetText(objectNames[objectNumber].c_str());
 
-	if (objectTextures[objectNumber] != nullptr) {
-		objectImage->SetTexture(objectTextures[objectNumber]);
+	if (stage->GetObjectTexture(objectNumber) != nullptr) {
+		objectImage->SetTexture(stage->GetObjectTexture(objectNumber));
 	}
 }
 
@@ -335,63 +326,8 @@ void EditorManager::DestroyObject(int x, int y) {
 }
 
 void EditorManager::PlaceObject(int x, int y) {
-	auto stageObj = new GameObject();
-	stageObj->SetParent(stage->GetGameObject());
-	auto quad = stageObj->AddComponent<Quad>();
-	switch (objectNumber) {
-	default:
-		break;
-	case 0:
-		stageObj->SetName("地形ブロック");
-		stageObj->SetTag(GROUND_BLOCK);
-		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
-		stageObj->AddComponent<QuadCollider>();
-		quad->SetTexture(objectTextures[0]);
-		stage->SetObject(x, y, 'A');
-
-		if (y == 0) {
-			auto underStageBlock = new GameObject();
-			underStageBlock->SetParent(stage->GetGameObject());
-			auto quad = underStageBlock->AddComponent<Quad>();
-			underStageBlock->SetName("地形ブロック");
-			underStageBlock->SetTag(GROUND_BLOCK);
-			underStageBlock->SetPosition(Vector3((float)x, (float)y - 1, 0));
-			underStageBlock->AddComponent<QuadCollider>();
-			quad->SetTexture(objectTextures[0]);
-			ObjectManager::Instantiate(underStageBlock);
-		}
-		break;
-	case 1:
-		stageObj->SetName("ブロック");
-		stageObj->SetTag(BLOCK);
-		stageObj->AddComponent<Block>();
-		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
-		stageObj->AddComponent<QuadCollider>();
-		quad->SetTexture(objectTextures[1]);
-		stage->SetObject(x, y, 'B');
-		break;
-	case 2:
-		stageObj->SetName("ハテナブロック");
-		stageObj->SetTag(HATENA_BLOCK);
-		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
-		stageObj->AddComponent<QuadCollider>();
-		quad->SetTexture(objectTextures[2]);
-		stage->SetObject(x, y, 'C');
-		{
-			auto hatena = stageObj->AddComponent<QuestionBlock>();
-			hatena->SetUsedBlock(usedBlockTexture);
-		}
-		break;
-	case 3:
-		stageObj->SetName("足場ブロック");
-		stageObj->SetTag(GROUND_BLOCK);
-		stageObj->SetPosition(Vector3((float)x, (float)y, 0));
-		stageObj->AddComponent<QuadCollider>();
-		quad->SetTexture(objectTextures[3]);
-		stage->SetObject(x, y, 'D');
-		break;
-	}
-	ObjectManager::Instantiate(stageObj);
+	LogWriter::Log("Place:%c", objectNumber + 'A');
+	stage->SetObject(x, y, objectNumber + 'A');
 }
 
 void EditorManager::DefaultModeEdit() {

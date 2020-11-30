@@ -32,8 +32,10 @@ void SceneManager::Update() {
 
 void SceneManager::LoadScene(Scene* scene) {
 	nowScene = scene;
+	LogWriter::Log("%sというシーンの読み込みを開始しました", scene->name.c_str());
 	scene->Load();
 	scene->Start();
+	LogWriter::Log("%sというシーンを読み込みました", scene->name.c_str());
 }
 
 void SceneManager::LoadScene(string name) {
@@ -135,6 +137,7 @@ void SceneManager::Load() {
 		LogWriter::Log("%sというシーンをアンロードしました", nowScene->name.c_str());
 	}
 	nowScene = loadScene;
+	LogWriter::Log("%sというシーンの読み込みを開始しました", loadScene->name.c_str());
 	loadScene->Load();
 	loadScene->Start();
 	LogWriter::Log("%sというシーンを読み込みました", loadScene->name.c_str());

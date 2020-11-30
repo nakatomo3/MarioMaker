@@ -78,9 +78,6 @@ private:
 		"‘«êƒuƒƒbƒN",
 	};
 
-	Texture* objectTextures[4];
-	Texture* usedBlockTexture;
-
 	string editableObjects = "BC";
 	GameObject* detailWindow;
 	Text* informationText;

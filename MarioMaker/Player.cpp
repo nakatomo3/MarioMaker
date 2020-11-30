@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "DXEngine.h"
 #include "EditScene.h"
+#include "PlayScene.h"
 
 void Player::Start() {
 	quad = gameObject->GetComponent<Quad>();
@@ -12,7 +13,7 @@ void Player::Start() {
 }
 
 void Player::Update() {
-	if (EditScene::GetIsPauseMode() == false && EditScene::GetIsEditMode() == false) {
+	if (EditScene::GetIsPauseMode() == false && EditScene::GetIsEditMode() == false || PlayScene::isPlayScene() == true) {
 		if (isDead == false) {
 			KeyboardInput();
 			ControllerInput();

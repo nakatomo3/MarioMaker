@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "EditScene.h"
 #include "DXEngine.h"
 #include "Player.h"
@@ -15,6 +16,8 @@ EditScene::EditScene(string name) : Scene(name){
 void EditScene::Start() {
 	ObjectManager::Instantiate(player);
 	ObjectManager::Instantiate(stage);
+
+	//デフォルトで最低限のブロックを置いておく
 	int width = 20;
 	for (int i = 0; i < width; i++) {
 		stageManager->SetObject(i, 0, 'A');
@@ -80,25 +83,6 @@ void EditScene::Load() {
 	pauseCursorImage->SetScale(Vector2(SCREEN_WIDTH * 0.03f, SCREEN_WIDTH * 0.03f));
 	pauseCursorImage->SetTexture(playerTexture);
 	pauseCursor->SetParent(pauseWindow);
-
-	//デフォルトで最低限のブロックを置いておく
-	int width = 20;
-	for (int i = 0; i < width; i++) {
-		auto block = new GameObject("地形ブロック");
-		block->SetTag(GROUND_BLOCK);
-		block->SetPosition(Vector3((float)i, 0, 0));
-		block->AddComponent<Quad>()->SetTexture(blockTexture);
-		block->AddComponent<QuadCollider>();
-		block->SetParent(stage);
-	}
-	for (int i = 0; i < width; i++) {
-		auto block = new GameObject("地形ブロック");
-		block->SetTag(GROUND_BLOCK);
-		block->SetPosition(Vector3((float)i, -1, 0));
-		block->AddComponent<Quad>()->SetTexture(blockTexture);
-		block->AddComponent<QuadCollider>();
-		block->SetParent(stage);
-	}
 }
 
 void EditScene::Unload() {
@@ -165,7 +149,12 @@ void EditScene::PauseAction() {
 	case 1:
 		pauseCursor->SetPosition(Vector3(-140, -8, 0));
 		if (Input::GetController(0).Gamepad.wButtons & XINPUT_GAMEPAD_B && !(beforeControllerInput & XINPUT_GAMEPAD_BACK)) {
-			stageManager->SaveStage("Stages/Stage.txt");
+			char path[23];
+			time_t timer = time(NULL); //時刻を取得する
+			struct tm *local = localtime(&timer); //現在地時刻に変換する
+			sprintf(path, "Stages/%02d_%02d_%02d.stage", local->tm_hour, local->tm_min, local->tm_sec); //パス込みのファイル名を設定する
+			stageManager->SaveStage(path);
+			isPauseMode = false;
 		}
 		break;
 	case 2:

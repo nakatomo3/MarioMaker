@@ -1,5 +1,6 @@
 #pragma once
 #include "ScriptBase.h"
+#include "Texture.h"
 typedef enum {
 	NORMAL,
 	UNDER_GROUND,
@@ -10,6 +11,7 @@ typedef enum {
 class StageManager : public ScriptBase {
 public:
 	void Start();
+	void OnDestroy();
 
 	GameObject* GetChildGameObject(Vector3 pos);
 
@@ -24,6 +26,8 @@ public:
 
 	static void SetStagePath(string _path);
 
+	Texture* GetObjectTexture(int index);
+
 private:
 	StageType stageType = NORMAL;
 
@@ -32,5 +36,8 @@ private:
 	int stageSizeX = 100;
 
 	static string path;
+
+	Texture* objectTextures[4];
+	Texture* usedBlockTexture;
 };
 

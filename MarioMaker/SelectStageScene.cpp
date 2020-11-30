@@ -6,7 +6,7 @@ SelectStageScene::SelectStageScene(string name) : Scene(name) {
 }
 
 void SelectStageScene::Start() {
-	manager = new GameObject("StageManager");
+	manager = new GameObject("StageSelectManager");
 	manager->AddComponent<StageSelectManager>();
 	ObjectManager::Instantiate(manager);
 }
